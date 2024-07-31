@@ -18,6 +18,8 @@ function App(props) {
   return (
     <BrowserRouter>
       <MainTitleText>임시페이지</MainTitleText>
+        <div>도커실행테스트 12345</div>
+        <div>도커실행테스트 12345</div>
       <Routes>
         <Route index element={<MainPage />} />
       </Routes>
