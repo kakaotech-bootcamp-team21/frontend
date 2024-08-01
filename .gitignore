@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/webstorm+all,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=webstorm+all,macos
 
+### env 파일
+.env
+
 ### macOS ###
 # General
 .DS_Store
