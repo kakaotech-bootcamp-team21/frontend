@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, Button, Row, Col} from 'react-bootstrap';
 import styled from "styled-components";
+
 const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
 const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 const kakaolink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+
 const StyledContainer = styled(Container)`
   background-color: #FFFFFF;
   padding: 2rem;
@@ -31,20 +35,29 @@ const KakaoButton = styled(Button)`
 
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Login attempt with:', { email, password });
+        e.preventDefault(); // 추가: 폼 제출 기본 동작 방지
+        // 로컬 스토리지에서 사용자 정보 가져오기, 추후 서버구현 해야함
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+        if (storedUserInfo && storedUserInfo.name === name && storedUserInfo.password === password) {
+            console.log('Login successful');
+            // 수정: 전체 사용자 정보를 그대로 유지
+            localStorage.setItem('userInfo', JSON.stringify(storedUserInfo));
+            navigate('/');
+        } else {
+            alert('로그인 정보가 일치하지 않습니다.');
+        }
     };
 
     const handleKakaoLogin = () => {
-        // 여기에 카카오 로그인 API 호출 로직을 구현합니다.
-        window.location.href = kakaolink
+        window.location.href = kakaolink;
         console.log('Kakao login attempted');
     };
-
 
     return (
         <div className="min-vh-100 d-flex align-items-center" style={{ backgroundColor: '#F0F8FF' }}>
@@ -52,19 +65,19 @@ const LoginPage = () => {
                 <h2 className="text-center mb-4" style={{ color: '#4682B4' }}>로그인</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>이메일 주소</Form.Label>
+
+                        <Form.Label>아이디</Form.Label>
                         <Form.Control
-                            type="email"
-                            placeholder="이메일을 입력하세요"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            placeholder="아이디 입력하세요"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+
                             required
                         />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-
-
                         <Form.Label>비밀번호</Form.Label>
                         <Form.Control
                             type="password"
@@ -90,7 +103,7 @@ const LoginPage = () => {
 
 
                     <div className="text-center mt-3">
-                        <a href="/signup">회원가입</a> | <a href="/privacy-policy">개인정보 취급방침</a>
+                        <a href="/privacy-policy">회원가입</a>
                     </div>
 
                 </Form>
