@@ -42,12 +42,13 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault(); // 추가: 폼 제출 기본 동작 방지
         // 로컬 스토리지에서 사용자 정보 가져오기, 추후 서버구현 해야함
-        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        const storedUserInfo = JSON.parse(localStorage.getItem('tempUserInfo'));
 
         if (storedUserInfo && storedUserInfo.name === name && storedUserInfo.password === password) {
             console.log('Login successful');
             // 수정: 전체 사용자 정보를 그대로 유지
             localStorage.setItem('userInfo', JSON.stringify(storedUserInfo));
+            localStorage.removeItem('tempUserInfo');
             navigate('/');
         } else {
             alert('로그인 정보가 일치하지 않습니다.');
