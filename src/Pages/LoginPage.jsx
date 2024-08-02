@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, Button, Row, Col} from 'react-bootstrap';
@@ -32,6 +33,7 @@ const KakaoButton = styled(Button)`
   }
 `;
 
+
 const LoginPage = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -63,12 +65,14 @@ const LoginPage = () => {
                 <h2 className="text-center mb-4" style={{ color: '#4682B4' }}>로그인</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+
                         <Form.Label>아이디</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="아이디 입력하세요"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+
                             required
                         />
                     </Form.Group>
@@ -97,9 +101,11 @@ const LoginPage = () => {
                         </Col>
                     </Row>
 
+
                     <div className="text-center mt-3">
                         <a href="/privacy-policy">회원가입</a>
                     </div>
+
                 </Form>
                 <div className="text-center mt-3">
                     <a href="#" style={{color: '#87CEFA'}}>비밀번호를 잊으셨나요?</a>

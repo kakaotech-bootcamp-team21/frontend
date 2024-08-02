@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Form, Button } from "react-bootstrap";
@@ -166,6 +167,7 @@ const PrivacyPolicyPage = () => {
                 </Card.Body>
             </Card>
         </div>
+
     );
 };
 

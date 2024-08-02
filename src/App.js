@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {
     Routes,
+
     Route, Link, useNavigate
+
 } from "react-router-dom";
 import styled from "styled-components";
 //Pages
@@ -12,9 +14,9 @@ import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage";
 
 import Button from "react-bootstrap/Button";
 import RedirectPage from "./Pages/RedirectPage";
+
 import AuthVerificationPage from "./Pages/AuthVerificationPage";
 import UserInfoPage from "./Pages/UserInfoPage";
-
 
 const MainTitleText = styled.p`
     font-size: 24px;
@@ -101,8 +103,10 @@ function App(props) {
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
               <Route path="/auth" element={<RedirectPage />} />
+
               <Route path="/auth-verification-page" element={<AuthVerificationPage />} />
               <Route path="/user-info" element={<UserInfoPage />} />
+
 
           </Routes>
      </div>
