@@ -47,7 +47,7 @@ git push origin feature/new-feature
 
 피드백 하고 Pull Request 승인 및 거부
 
-Pull Request 승인하면 main 브랜치로 병합
+Pull Request 승인하면 main 브랜치로 병합 (squash and merge 가 깔끔함, 실무에서도 주로 사용)
 
 
 
