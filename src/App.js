@@ -74,7 +74,7 @@ function App(props) {
          {user ? (
              <>
                  <MainTitleText>
-                     안녕하세요, {getUserTypeKorean(user.type)} {user.name}님!
+                     안녕하세요 {getUserTypeKorean(user.type)} {user.name}님!
                  </MainTitleText>
                  <nav>
                      <Link to="/">
