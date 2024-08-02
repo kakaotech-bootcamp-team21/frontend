@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {
     Routes,
 
-    Route, Link, useNavigate
+    Route, Link, useNavigate, useLocation
 
 } from "react-router-dom";
 import styled from "styled-components";
@@ -38,14 +38,17 @@ const StyledButton = styled.button`
 function App(props) {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userInfo');
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
             setUser(foundUser);
+        } else {
+            setUser(null);
         }
-    }, [localStorage.getItem('userInfo')]);
+    }, [location]);
 
     const handleLogout = () => {
         localStorage.removeItem('userInfo');
@@ -71,7 +74,7 @@ function App(props) {
          {user ? (
              <>
                  <MainTitleText>
-                     안녕하세요, {getUserTypeKorean(user.type)} {user.name}님!
+                     안녕하세요 {getUserTypeKorean(user.type)} {user.name}님!
                  </MainTitleText>
                  <nav>
                      <Link to="/">

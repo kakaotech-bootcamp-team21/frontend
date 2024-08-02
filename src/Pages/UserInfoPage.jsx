@@ -29,9 +29,9 @@ const UserInfoPage = () => {
             return;
         }
         // 실제로는 여기서 서버에 사용자 정보를 전송해야 합니다.
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        localStorage.setItem('tempUserInfo', JSON.stringify(userInfo));
         console.log('사용자 정보:', userInfo);
-        alert('회원가입이 완료되었습니다.');
+        alert('회원가입이 완료되었습니다. 다시 로그인해주세요.');
         navigate('/login'); // 로그인 페이지로 이동
     };
 
