@@ -95,7 +95,7 @@ function App() {
       <div className="App">
         <Header />
         <Navbar />
-        <Routes> {/* Switch 대신 Routes 사용 */}
+        <Routes> 
           <Route path="/info" element={<InfoPage />} />
           <Route path="/submit" element={<SubmitPage />} />
           <Route path="/Mypage" element={<Mypage />} />

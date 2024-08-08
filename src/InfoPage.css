@@ -40,8 +40,8 @@
 }
 .form-field label {
     font-weight: bold;
-    display: block; /* 레이블을 블록 요소로 변경 */
-    margin-bottom: 0px; /* 레이블과 텍스트 에어리어 사이의 간격 */
+    display: block; 
+    margin-bottom: 0px; 
 }
 .form-field input,
 .form-field button {
