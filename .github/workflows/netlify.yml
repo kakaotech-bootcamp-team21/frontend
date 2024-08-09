@@ -2,6 +2,8 @@
 name: Build and Deploy to Netlify
 on:
   push:
+    branches:
+      - main  # main 브랜치에 푸시가 발생했을 때만 실행
 jobs:
   build:
     runs-on: ubuntu-22.04

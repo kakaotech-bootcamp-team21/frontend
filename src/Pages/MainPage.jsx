@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../ui/Button";
+import Button from "../components/ui/Button";
 //import NavBar from "../ui/Navbar";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
-import Card from "../ui/Card";
-import { handleLogin, handleLogout } from '../../utils/auth';
+import Card from "../components/ui/Card";
+import { handleLogin, handleLogout } from '../utils/auth';
 
 
 

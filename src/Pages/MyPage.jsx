@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../ui/Button";
-import { handleLogin, handleLogout, getUserType } from '../../utils/auth';
+import Button from "../components/ui/Button";
+import { handleLogin, handleLogout, getUserType } from '../utils/auth';
 
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

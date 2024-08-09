@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 //Pages
-import MainPage from './components/page/MainPage';
+import MainPage from './Pages/MainPage';
 import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
 import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage";
-
+import MyPage from "./Pages/MyPage";
 import Button from "react-bootstrap/Button";
 import RedirectPage from "./Pages/RedirectPage";
 
@@ -19,6 +19,7 @@ import AuthVerificationPage from "./Pages/AuthVerificationPage";
 import UserInfoPage from "./Pages/UserInfoPage";
 
 const MainTitleText = styled.p`
+    top-padding: 100px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -85,7 +86,6 @@ function App(props) {
              </>
          ) : (
              <>
-                 <MainTitleText>임시 페이지</MainTitleText>
                  <nav>
                      <Link to="/login">
                          <StyledButton variant="primary">로그인 페이지로 이동</StyledButton>
@@ -110,7 +110,7 @@ function App(props) {
               <Route path="/auth-verification-page" element={<AuthVerificationPage />} />
               <Route path="/user-info" element={<UserInfoPage />} />
 
-
+              <Route path="/mypage" element={<MyPage/>} />
           </Routes>
      </div>
   );
