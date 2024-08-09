@@ -7,6 +7,8 @@ import {
 import styled from "styled-components";
 //Pages
 import MainPage from './components/page/MainPage';
+import LoginPage from './components/page/LoginPage';
+import MyPage from "./components/page/MyPage";
 
 const MainTitleText = styled.p`
     top-padding: 100px;
@@ -20,7 +22,11 @@ function App(props) {
     <BrowserRouter>
       <MainTitleText>프로젝트 제목</MainTitleText>
       <Routes>
-        <Route index element={<MainPage />} />
+        <Route path="/" element={<MainPage/>} />
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/mypage" element={<MyPage/>} />
+        
+        
       </Routes>
 
 
