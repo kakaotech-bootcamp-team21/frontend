@@ -6,6 +6,7 @@ import {
 
 } from "react-router-dom";
 import styled from "styled-components";
+import './AI_Main.css';
 //Pages
 import MainPage from './Pages/MainPage';
 import LoginPage from "./Pages/LoginPage";
@@ -17,9 +18,11 @@ import RedirectPage from "./Pages/RedirectPage";
 
 import AuthVerificationPage from "./Pages/AuthVerificationPage";
 import UserInfoPage from "./Pages/UserInfoPage";
+import InfoPage from './InfoPage';
+import SubmitPage from './SubmitPage';
+import Mypage from './Mypage';
 
 const MainTitleText = styled.p`
-    top-padding: 100px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -110,7 +113,9 @@ function App(props) {
               <Route path="/auth-verification-page" element={<AuthVerificationPage />} />
               <Route path="/user-info" element={<UserInfoPage />} />
 
-              <Route path="/mypage" element={<MyPage/>} />
+              <Route path="/info" element={<InfoPage />} />
+              <Route path="/submit" element={<SubmitPage />} />
+              <Route path="/Mypage" element={<Mypage />} />
           </Routes>
      </div>
   );
