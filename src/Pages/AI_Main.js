@@ -2,18 +2,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BellIcon, UserIcon } from '@heroicons/react/24/outline'; 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import './App.css'; 
+import './AI_Main.css';
 import InfoPage from './InfoPage';
 import SubmitPage from './SubmitPage';
 import Mypage from './Mypage';
 
-
-function Header() {
+function AI_Header() {
   return (
     <header className="header">
       <div className="icons">
         <BellIcon className="icon" />
-        <Link to ="/Mypage">
+        <Link to="/Mypage">
           <UserIcon className="icon" />
         </Link>
       </div>
@@ -24,7 +23,7 @@ function Header() {
   );
 }
 
-function Navbar() {
+function AI_Navbar() {
   const [active, setActive] = useState('');
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [subMenuStyle, setSubMenuStyle] = useState({});
@@ -93,8 +92,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
-        <Navbar />
+        <AI_Header />
+        <AI_Navbar />
         <Routes> 
           <Route path="/info" element={<InfoPage />} />
           <Route path="/submit" element={<SubmitPage />} />
