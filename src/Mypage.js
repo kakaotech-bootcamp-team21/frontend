@@ -29,10 +29,10 @@ function Mypage() {
       setProfileImage(URL.createObjectURL(file));
     }
   };
-  const handleFileChange = (event) => { // 포트폴리오 파일 변경 핸들러
+  const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setPortfolioFile(file); // 파일 상태 업데이트
+      setPortfolioFile(file);
     }
   };
   const toggleSubmenu = () => {
@@ -74,33 +74,33 @@ function Mypage() {
         <form onSubmit={handleSubmit}>
         <h1 className='title'>마이페이지</h1>
           <label>
-            이름:
+            이름
             <input type="text" name="name" value={user.name} onChange={handleChange} />
           </label>
           <label>
-            나이:
+            나이
             <input type="text" name="age" value={user.age} onChange={handleChange} />
           </label>
           <label>
-            비밀번호:
+            비밀번호
             <input type="password" name="bio" value={user.bio} onChange={handleChange} />
           </label>
           <div className="example">
             <label>
-              희망 직무 또는 분야(예시1):
+              희망 직무 또는 분야(예시1)
               <input type="text" name="example1" value={user.example1} onChange={handleChange} />
             </label>
             <label>
-              희망 기업(예시2):
+              희망 기업(예시2)
               <input type="text" name="example2" value={user.example2} onChange={handleChange} />
             </label>
             <label>
-              학점(예시3):
+              학점(예시3)
               <input type="text" name="example3" value={user.example3} onChange={handleChange} />
             </label>
           </div>
           <label>
-            포트폴리오(첨부):
+            포트폴리오(첨부)
             <input type="file" name="profileLink" onChange={handleChange} accept=".pdf,.doc,.docx" />
           </label>
             <button type="submit">저장</button>

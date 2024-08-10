@@ -15,9 +15,9 @@ function SubmitPage() {
         event.preventDefault(); // 폼 제출 시 페이지 리로드 방지
         if (file) {
             console.log("제출된 파일:", file.name); // 콘솔에 파일 이름 로깅
-            alert(`제출되었습니다: ${file.name}`); // 제출 알림
+            alert(`제출되었습니다: ${file.name}`); 
         } else {
-            alert("파일을 선택해주세요"); // 파일 미선택 시 경고
+            alert("파일을 선택해주세요"); 
         }
     };
 
