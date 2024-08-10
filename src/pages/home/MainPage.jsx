@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../components/ui/Button";
+import Button from "../../components/buttons/Button";
 //import NavBar from "../ui/Navbar";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
-import Card from "../components/ui/Card";
-import { handleLogin, handleLogout } from '../utils/auth';
-
+import Card from "../../components/Card";
+import { handleLogin, handleLogout } from '../../utils/auth';
+import { Link } from 'react-router-dom';
 
 
 const Wrapper = styled.div`
@@ -90,9 +90,13 @@ function MainPage(props) {
             return (
                 <>
                     <Nav.Link href="#home">전문가에게 첨삭요청하기</Nav.Link>
-                    <Nav.Link href="#features">AI에게 첨삭요청하기</Nav.Link>
+                    {/*이 버튼 누르면 앨리스가 만든 페이지로 이동 가능하게함*/}
+                    <Nav.Link as={Link} to="/ai-main">AI에게 첨삭요청하기</Nav.Link>
                     <Nav.Link href="#pricing">합격자소서 모아보기</Nav.Link>
                     <Nav.Link href="#pricing2">보낸 첨삭요청 목록 확인</Nav.Link>
+                    {/*일단 임시로 만든 항목이니 나중에 지워도 되니까 신경 안써도 됌*/}
+                    <Nav.Link as={Link} to="/Mypage">마이페이지</Nav.Link>
+                    <Nav.Link as={Link} to="/login">로그인하기</Nav.Link>
                 </>
             );
         } else if (userType === 'expert') {
@@ -128,6 +132,7 @@ function MainPage(props) {
                     </>
                 ) : userType === 'regular' ? (
                     <>
+                        {/*이 버튼을 어떻게 처리할지 생각해야 할듯 이 버튼때문에 상단바가 깔끔하게 안보이고 위에 공백이 생김*/}
                         <Button
                             title="마이페이지" // 마이페이지에서 로그아웃 하게 해야하는게 좋을듯? 
                             onClick={() => {
