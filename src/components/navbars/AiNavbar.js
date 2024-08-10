@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import './AI_Main.css'; 
-import InfoPage from './InfoPage';
-import SubmitPage from './SubmitPage';
-import Mypage from './Mypage';
+import '../../pages/AI_Main.css';
+import '../../App.css';
+import InfoPage from '../../pages/InfoPage';
+import SubmitPage from '../../pages/SubmitPage';
+import Mypage from '../../pages/Mypage';
 
 function AI_Navbar() {
     const [active, setActive] = useState('');
@@ -69,3 +70,5 @@ function AI_Navbar() {
       </nav>
     );
   }
+
+  export default AI_Navbar;

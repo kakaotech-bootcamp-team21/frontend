@@ -6,22 +6,27 @@ import {
 
 } from "react-router-dom";
 import styled from "styled-components";
-import './AI_Main.css';
-//Pages
-import MainPage from './Pages/MainPage';
-import LoginPage from "./Pages/LoginPage";
-import SignUpPage from "./Pages/SignUpPage";
-import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage";
-import MyPage from "./Pages/MyPage";
+//css
+import './pages/AI_Main.css';
+
+
+//pages
+import MainPage from './pages/home/MainPage';
+import LoginPage from "./pages/login/LoginPage";
+import SignUpPage from "./pages/login/SignUpPage";
+import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
 import Button from "react-bootstrap/Button";
-import RedirectPage from "./Pages/RedirectPage";
+import RedirectPage from "./pages/login/RedirectPage";
 
-import AuthVerificationPage from "./Pages/AuthVerificationPage";
-import UserInfoPage from "./Pages/UserInfoPage";
-import InfoPage from './InfoPage';
-import SubmitPage from './SubmitPage';
-import Mypage from './Mypage';
+import AuthVerificationPage from "./pages/login/AuthVerificationPage";
+import UserInfoPage from "./pages/login/UserInfoPage";
+import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 
+// 앨리스가 만든 페이지들
+import AI_Main from "./pages/AI_Main";
+import Mypage from './pages/Mypage';
+import InfoPage from './pages/InfoPage';
+import SubmitPage from './pages/SubmitPage';
 const MainTitleText = styled.p`
     font-size: 24px;
     font-weight: bold;
@@ -75,27 +80,7 @@ function App(props) {
 
   return (
      <div>
-         {user ? (
-             <>
-                 <MainTitleText>
-                     안녕하세요 {getUserTypeKorean(user.type)} {user.name}님!
-                 </MainTitleText>
-                 <nav>
-                     <Link to="/">
-                         <StyledButton variant="primary">메인 페이지</StyledButton>
-                     </Link>
-                     <StyledButton variant="secondary" onClick={handleLogout}>로그아웃</StyledButton>
-                 </nav>
-             </>
-         ) : (
-             <>
-                 <nav>
-                     <Link to="/login">
-                         <StyledButton variant="primary">로그인 페이지로 이동</StyledButton>
-                     </Link>
-                 </nav>
-             </>
-         )}
+
 
 
           <Routes>
@@ -116,6 +101,7 @@ function App(props) {
               <Route path="/info" element={<InfoPage />} />
               <Route path="/submit" element={<SubmitPage />} />
               <Route path="/Mypage" element={<Mypage />} />
+              <Route path="/ai-main" element={<AI_Main />} />
           </Routes>
      </div>
   );

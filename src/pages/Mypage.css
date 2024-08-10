@@ -1,0 +1,121 @@
+.mypage-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.title {
+    margin-top: 20px; /* 메뉴바 아래 간격 추가 */
+    margin-bottom: 20px; /* 폼 위에 간격 추가 */
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center; /* 중앙 정렬 */
+}  
+.sidebar {
+    width: 400px;
+    border-right: 2px solid #ccc;
+    padding: 20px;
+    font-size: 17px;
+}
+  
+.menu-item {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+.menu-subitem {
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: left;
+    margin-left: 20px; 
+  }
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+}
+.profile-picture {
+    position: left; /* Fixed position on the right side */ /* Right margin */
+    top: 20px; 
+    margin-right:-50px;
+    margin-left:-20px;
+}
+  
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px; 
+    object-fit: cover;
+    margin-bottom: 10%;
+}
+
+/* .profile-picture input {
+    display: block;
+}   */
+.profile-container {
+    flex-grow: 1;
+    padding: 0 200px;
+    text-align: center;
+    gap:20%;
+}
+.profile-form {
+    display: flex;
+    flex-direction: column; 
+    width: 80%; 
+    margin-top: 100px;
+}
+.profile-form label {
+    display: block;
+    margin-bottom: 10px;
+} 
+.profile-form input,
+.profile-form textarea {
+  width: 100%; 
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.profile-container h1 {
+    margin-bottom: 20px;
+}
+  
+.profile-container form label {
+    display: block;
+    margin-bottom: 10px;
+}
+  
+.profile-container form input,
+.profile-container form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom:30px;
+    margin-top: 5px;
+}
+  
+.profile-container form .example label, label {
+    margin-right: 10px;
+    text-align: left;
+}
+  
+.profile-container form button {
+    padding: 10px 20px;
+    background-color: #5b8cb7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+  
+.profile-container form button:hover {
+    background-color: #242d42;
+}
+input[type="file"] {
+    border: 1px solid #ccc; 
+    padding: 5px;
+    margin-bottom: 20px; 
+}
