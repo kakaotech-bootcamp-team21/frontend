@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './InfoPage.css'; 
+import '../css_ai/InfoPage.css'; 
 function InfoPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({

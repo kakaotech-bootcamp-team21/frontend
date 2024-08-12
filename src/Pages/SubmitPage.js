@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SubmitPage.css'; 
+import '../css_ai/SubmitPage.css'; 
 
 function SubmitPage() {
     const [file, setFile] = useState(null); // 파일 상태 관리

@@ -73,6 +73,7 @@ header div:first-child {
   height: 80px; 
 }
 .nav-button {
+  text-decoration: none;
   font-family: 'Gowun Batang', serif;
   background: none;
   border: none;

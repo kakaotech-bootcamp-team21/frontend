@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Mypage.css';
+import '../css_ai/Mypage.css';
 
 function Mypage() {
   const [user, setUser] = useState({
