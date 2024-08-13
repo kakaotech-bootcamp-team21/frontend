@@ -30,7 +30,7 @@ function AI_Navbar() {
   const [subMenuStyle, setSubMenuStyle] = useState({});
   const menuRef = useRef(null);  // 메인 메뉴 아이템에 대한 ref
 
-  const menus = ['메뉴1', 'AI 기반 자소서 첨삭하기', '합격 자소서 모아보기', '메뉴4', '메뉴5', '메뉴6'];
+  const menus = ['전문가에게 첨삭 요청하기', 'AI 기반 자소서 첨삭하기', '합격 자소서 모아보기', '메뉴4', '메뉴5', '메뉴6'];
 
   const handleMenuMouseOver = (menu) => {
     setActive(menu);
