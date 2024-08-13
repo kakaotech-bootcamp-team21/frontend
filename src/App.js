@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Routes,
 
@@ -15,8 +15,10 @@ import MainPage from './pages/home/MainPage';
 import LoginPage from "./pages/login/LoginPage";
 import SignUpPage from "./pages/login/SignUpPage";
 import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
-import Button from "react-bootstrap/Button";
 import RedirectPage from "./pages/login/RedirectPage";
+
+import RequestExpert from "./pages/expert/RequestExpert";
+import HowToEdit from "./pages/expert/HowToEdit";
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
@@ -70,7 +72,7 @@ function App(props) {
     };
 
     const getUserTypeKorean = (type) => {
-        switch(type) {
+        switch (type) {
             case 'user': return '사용자';
             case 'pro': return '전문가';
             case 'admin': return '관리자';
@@ -78,33 +80,31 @@ function App(props) {
         }
     };
 
-  return (
-     <div>
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<MainPage />} />
 
+                {/*로그인 및 회원가입*/}
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/auth" element={<RedirectPage />} />
 
+                <Route path="/auth-verification-page" element={<AuthVerificationPage />} />
+                <Route path="/user-info" element={<UserInfoPage />} />
 
-          <Routes>
-              <Route index element={<MainPage/>}/>
+                {/*전문가 첨삭*/}
+                <Route path="/request-expert" element={<RequestExpert />} />
+                <Route path="/how-to-edit" element={<HowToEdit />} />
 
-
-
-
-              {/*로그인 및 회원가입*/}
-              <Route path="/login" element={<LoginPage/>}/>
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/auth" element={<RedirectPage />} />
-
-              <Route path="/auth-verification-page" element={<AuthVerificationPage />} />
-              <Route path="/user-info" element={<UserInfoPage />} />
-
-              <Route path="/info" element={<InfoPage />} />
-              <Route path="/submit" element={<SubmitPage />} />
-              <Route path="/Mypage" element={<Mypage />} />
-              <Route path="/ai-main" element={<AI_Main />} />
-          </Routes>
-     </div>
-  );
+                <Route path="/info" element={<InfoPage />} />
+                <Route path="/submit" element={<SubmitPage />} />
+                <Route path="/Mypage" element={<Mypage />} />
+                <Route path="/ai-main" element={<AI_Main />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

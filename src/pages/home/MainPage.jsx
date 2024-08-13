@@ -22,7 +22,26 @@ const Wrapper = styled.div`
 
 const ContainerTmp = styled.div`
     width: 100%;
-    max-width: 720px;
+    
+    @media (min-width: 576px) {
+        max-width: 540px;
+    }
+    
+    @media (min-width: 768px) {
+        max-width: 720px;
+    }
+    
+    @media (min-width: 992px) {
+        max-width: 960px;
+    }
+    
+    @media (min-width: 1200px) {
+        max-width: 1140px;
+    }
+
+    @media (min-width: 1400px) {
+        max-width: 1320px;
+    }
     
     & > * {
         :not(:last-child) {
@@ -41,7 +60,7 @@ const ButtonWrapper = styled.div`
 
 
 const districts = [
-    { name: 'IT/인터넷', content: 'IT/인터넷의 정보입니다.' },
+    { name: 'IT/인ss터넷', content: 'IT/인터넷의 정보입니다.' },
     { name: '연구개발/설계', content: '연구개발/설계의 정보입니다.' },
     { name: '의료', content: '의료의 정보입니다.' },
     { name: '전문/특수직', content: '전문/특수직의 정보입니다.' },
@@ -50,18 +69,7 @@ const districts = [
 function MainPage(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
-    }); // 회원(일반 회원, 전문가), 비회원을 구분하기 위함
-
-    // const handleLogin = (type) => {
-    //     setUserType(type); // 회원(일반, 전문가)를 설정(상태 업데이트)
-    //     localStorage.setItem('userType', type); // 로컬 스토리지에 사용자 유형 저장
-    // };
-
-    // const handleLogout = () => {
-    //     setUserType(null); // 로그아웃 상태로 전환
-    //     localStorage.removeItem('userType'); // 로컬 스토리지에서 사용자 유형 제거 
-    // };
-
+    });
 
     const [selectedDistricts, setSelectedDistricts] = useState([]);
 
@@ -89,7 +97,7 @@ function MainPage(props) {
         if (userType === 'regular') {
             return (
                 <>
-                    <Nav.Link href="#home">전문가에게 첨삭요청하기</Nav.Link>
+                    <Nav.Link as={Link} to="/request-expert">전문가에게 첨삭요청하기</Nav.Link>
                     {/*이 버튼 누르면 앨리스가 만든 페이지로 이동 가능하게함*/}
                     <Nav.Link as={Link} to="/ai-main">AI에게 첨삭요청하기</Nav.Link>
                     <Nav.Link href="#pricing">합격자소서 모아보기</Nav.Link>
@@ -158,7 +166,7 @@ function MainPage(props) {
             <ContainerTmp>
                 <Navbar bg="light" expand="lg">
                     <Container>
-                        <Navbar.Brand href="#">메뉴</Navbar.Brand>
+                        <Navbar.Brand as={Link} to="/">홈</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto" >
@@ -190,7 +198,7 @@ function MainPage(props) {
                     </div>
                 </Container>
                 <Container className="py-5">
-                    <h3>보유 멘토 현황</h3>
+                    <h3>첨삭 가능 멘토 현황</h3>
                     <Card>
 
                     </Card>
