@@ -29,6 +29,7 @@ import AI_Main from "./pages/AI_Main";
 import Mypage from './pages/Mypage';
 import InfoPage from './pages/InfoPage';
 import SubmitPage from './pages/SubmitPage';
+import VideoChat from "./pages/VideoChat";
 const MainTitleText = styled.p`
     font-size: 24px;
     font-weight: bold;
@@ -102,9 +103,12 @@ function App(props) {
                 <Route path="/submit" element={<SubmitPage />} />
                 <Route path="/Mypage" element={<Mypage />} />
                 <Route path="/ai-main" element={<AI_Main />} />
-            </Routes>
-        </div>
-    );
+
+                <Route path="/video-chat" element={<VideoChat />} />
+
+          </Routes>
+     </div>
+  );
 }
 
 export default App;
