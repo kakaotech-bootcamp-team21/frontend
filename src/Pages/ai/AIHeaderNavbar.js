@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import './AI_Main.css';
+import '../../css_ai/AI_Main.css';
 
 function AI_Header() {
     return (
@@ -91,7 +91,7 @@ function AI_Navbar() {
                 <div className="sub-menu" style={subMenuStyle}>
                     <Link to="/post" className="nav-button">게시글</Link>
                     <Link to="/Chatting" className="nav-button">채팅</Link>
-                    <Link to="/video" className="nav-button">영상 통화</Link>
+                    <Link to="/video-chat" className="nav-button">영상 통화</Link>
                 </div>
             )}
         </nav>

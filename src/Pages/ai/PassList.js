@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import '../css_ai/PassList.css';
+import '../../css_ai/PassList.css';
 import { sampleEssays } from './sampleEssayData';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 
 const PassList = () => {
   const essays = useMemo(() => sampleEssays, []);
@@ -84,6 +85,8 @@ const PassList = () => {
   };
 
   return (
+      <div>
+        <AIHeaderNavbar></AIHeaderNavbar>
     <div className="pass-essays-container">
       <h1 className="page-title">합격자소서 모아보기</h1>
       
@@ -110,6 +113,7 @@ const PassList = () => {
 
       {isModalOpen && <Modal essay={selectedEssay} onClose={closeModal} />}
     </div>
+      </div>
   );
 };
 

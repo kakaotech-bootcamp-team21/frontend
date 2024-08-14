@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../css_ai/Chatting.css';
-import chatImage1 from '../img/chat_img1.png'; 
-import chatImage2 from '../img/chat_img2.png'; 
-import Chatroom from '../Pages/Chatroom';
+import '../../css_ai/Chatting.css';
+import chatImage1 from '../../img/chat_img1.png';
+import chatImage2 from '../../img/chat_img2.png';
+import Chatroom from './Chatroom';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 
 const Chatting = () => {
   const [showAnimation, setShowAnimation] = useState(false);
@@ -13,6 +14,8 @@ const Chatting = () => {
   }, []);
 
   return (
+      <div>
+        <AIHeaderNavbar></AIHeaderNavbar>
     <div className="chatting-container">
       <div className="chatting-info">
         <h1 className="chatting-title">전문가에게 첨삭요청하기(채팅)</h1>
@@ -38,6 +41,7 @@ const Chatting = () => {
         <img src={chatImage2} alt="Chat Example 2" className="chat-img2" />
       </div>
     </div>
+      </div>
   );
 };
 

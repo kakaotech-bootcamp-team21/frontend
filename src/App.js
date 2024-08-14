@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 // import styled from "styled-components";
 //css
-import AIHeaderNavbar from "./AIHeaderNavbar";
+import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
 //pages
 import MainPage from './pages/home/MainPage';
@@ -23,12 +23,15 @@ import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
 
 // 앨리스가 만든 페이지들
-import AI_Main from "./pages/AI_Main";
-import Mypage from './pages/Mypage';
-import InfoPage from './pages/InfoPage';
-import SubmitPage from './pages/SubmitPage';
-import VideoChat from "./pages/VideoChat";
-import AILayout from "./AILayout";
+import AI_Main from "./pages/ai/AI_Main";
+import Mypage from './pages/ai/Mypage';
+import InfoPage from './pages/ai/InfoPage';
+import SubmitPage from './pages/ai/SubmitPage';
+import VideoChat from "./pages/ai/VideoChat";
+import AILayout from "./pages/ai/AILayout";
+import Chatroom from "./pages/ai/Chatroom";
+import Chatting from "./pages/ai/Chatting";
+import PassList from "./pages/ai/PassList";
 
 function App(props) {
     const [user, setUser] = useState(null);
@@ -86,13 +89,18 @@ function App(props) {
                 <Route path="/how-to-edit" element={<HowToEdit />} />
 
                 {/*ai 패이지*/}
-                <Route path="/ai" element={<AILayout />}>
-                    <Route index element={<AI_Main />} />
+
+                {/*이 밑에 있는 페이지들은 return 문 들어가서 제일 처음에 <AIHeaderNavbar></AIHeaderNavbar> 컴포넌트를 집어넣음.(앨리스가 만든 상단바)*/}
+                <Route path="ai-main" element={<AI_Main />} />
                     <Route path="info" element={<InfoPage />} />
+
                     <Route path="submit" element={<SubmitPage />} />
-                    <Route path="mypage" element={<Mypage />} />
+                    <Route path="Mypage" element={<Mypage />} />
+                    <Route path="PassList" element={<PassList />} />
+                    <Route path="Chatting" element={<Chatting />} />
+                    <Route path="Chatroom" element={<Chatroom />} />
                     <Route path="video-chat" element={<VideoChat />} />
-                </Route>
+
           </Routes>
 
   );
