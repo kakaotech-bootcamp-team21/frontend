@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BellIcon, UserIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import '../../App.css';
+// import '../../App.css';
 import InfoPage from '../../pages/InfoPage';
 import SubmitPage from '../../pages/SubmitPage';
 import Mypage from '../../pages/Mypage';

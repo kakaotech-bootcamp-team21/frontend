@@ -11,44 +11,44 @@ import { handleLogin, handleLogout } from '../../utils/auth';
 import { Link } from 'react-router-dom';
 
 
-const Wrapper = styled.div`
-    padding: 16px;
-    width: calc(100% - 32px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
+// const Wrapper = styled.div`
+//     padding: 16px;
+//     width: calc(100% - 32px);
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+// `;
 
-const ContainerTmp = styled.div`
-    width: 100%;
-    
-    @media (min-width: 576px) {
-        max-width: 540px;
-    }
-    
-    @media (min-width: 768px) {
-        max-width: 720px;
-    }
-    
-    @media (min-width: 992px) {
-        max-width: 960px;
-    }
-    
-    @media (min-width: 1200px) {
-        max-width: 1140px;
-    }
-
-    @media (min-width: 1400px) {
-        max-width: 1320px;
-    }
-    
-    & > * {
-        :not(:last-child) {
-            margin-bottom: 16px;
-        }
-    }
-`;
+// const ContainerTmp = styled.div`
+//     width: 100%;
+//
+//     @media (min-width: 576px) {
+//         max-width: 540px;
+//     }
+//
+//     @media (min-width: 768px) {
+//         max-width: 720px;
+//     }
+//
+//     @media (min-width: 992px) {
+//         max-width: 960px;
+//     }
+//
+//     @media (min-width: 1200px) {
+//         max-width: 1140px;
+//     }
+//
+//     @media (min-width: 1400px) {
+//         max-width: 1320px;
+//     }
+//
+//     & > * {
+//         :not(:last-child) {
+//             margin-bottom: 16px;
+//         }
+//     }
+// `;
 
 
 const ButtonWrapper = styled.div`
@@ -126,7 +126,8 @@ function MainPage(props) {
     const navigate = useNavigate();
 
     return (
-        <Wrapper>
+        // <Wrapper>
+        <div>
             <ButtonWrapper>
                 {userType === null ? (
                     <>
@@ -163,7 +164,7 @@ function MainPage(props) {
                     </>
                 )}
             </ButtonWrapper>
-            <ContainerTmp>
+            {/*<ContainerTmp>*/}
                 <Navbar bg="light" expand="lg">
                     <Container>
                         <Navbar.Brand as={Link} to="/">홈</Navbar.Brand>
@@ -214,8 +215,9 @@ function MainPage(props) {
 
 
 
-            </ContainerTmp>
-        </Wrapper>
+        {/*    </ContainerTmp>*/}
+        {/*// </Wrapper>*/}
+</div>
     );
 }
 

@@ -5,10 +5,9 @@ import {
     Route, Link, useNavigate, useLocation
 
 } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 //css
-import './pages/AI_Main.css';
-
+import AIHeaderNavbar from "./AIHeaderNavbar";
 
 //pages
 import MainPage from './pages/home/MainPage';
@@ -22,7 +21,6 @@ import HowToEdit from "./pages/expert/HowToEdit";
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
-import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 
 // 앨리스가 만든 페이지들
 import AI_Main from "./pages/AI_Main";
@@ -30,22 +28,7 @@ import Mypage from './pages/Mypage';
 import InfoPage from './pages/InfoPage';
 import SubmitPage from './pages/SubmitPage';
 import VideoChat from "./pages/VideoChat";
-const MainTitleText = styled.p`
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-`;
-
-const StyledButton = styled.button`
-    background-color: #4682B4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px 5px;
-`;
+import AILayout from "./AILayout";
 
 function App(props) {
     const [user, setUser] = useState(null);
@@ -82,8 +65,11 @@ function App(props) {
     };
 
     return (
-        <div>
+
+
+
             <Routes>
+
                 <Route path="/" element={<MainPage />} />
 
                 {/*로그인 및 회원가입*/}
@@ -99,15 +85,16 @@ function App(props) {
                 <Route path="/request-expert" element={<RequestExpert />} />
                 <Route path="/how-to-edit" element={<HowToEdit />} />
 
-                <Route path="/info" element={<InfoPage />} />
-                <Route path="/submit" element={<SubmitPage />} />
-                <Route path="/Mypage" element={<Mypage />} />
-                <Route path="/ai-main" element={<AI_Main />} />
-
-                <Route path="/video-chat" element={<VideoChat />} />
-
+                {/*ai 패이지*/}
+                <Route path="/ai" element={<AILayout />}>
+                    <Route index element={<AI_Main />} />
+                    <Route path="info" element={<InfoPage />} />
+                    <Route path="submit" element={<SubmitPage />} />
+                    <Route path="mypage" element={<Mypage />} />
+                    <Route path="video-chat" element={<VideoChat />} />
+                </Route>
           </Routes>
-     </div>
+
   );
 }
 
