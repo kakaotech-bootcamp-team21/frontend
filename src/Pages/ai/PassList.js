@@ -46,19 +46,19 @@ const PassList = () => {
     const repeatedEssays = Array(100).fill(essays).flat(); 
     return (
       <div 
-        className="carousel-track" 
+        className="passlist-carousel-track" 
         style={{ 
           transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
           transition: 'transform 0.5s ease-in-out'
         }}
       >
         {repeatedEssays.map((essay, index) => (
-          <div key={`${essay.id}-${index}`} className="carousel-item">
-            <div className="essay-card">
-              <h2 className="essay-title">{essay.title}</h2>
-              <p className="essay-company">{essay.company}</p>
-              <p className="essay-preview">{essay.content.substring(0,50)}...</p>
-              <button className ="read-more-btn" onClick={() => handleEssayClick(essay)}>자세히보기</button>
+          <div key={`${essay.id}-${index}`} className="passlist-carousel-item">
+            <div className="passlist-essay-card">
+              <h2 className="passlist-essay-title">{essay.title}</h2>
+              <p className="passlist-essay-company">{essay.company}</p>
+              <p className="passlist-essay-preview">{essay.content.substring(0,50)}...</p>
+              <button className ="passlist-read-more-btn" onClick={() => handleEssayClick(essay)}>자세히보기</button>
             </div>
           </div>
         ))}
@@ -69,16 +69,16 @@ const PassList = () => {
   const Modal = ({ essay, onClose }) => {
     if (!essay) return null;
     return (
-      <div className="modal-overlay" onClick={onClose}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <h2 className="modal-title">{essay.title}</h2>
-          <p className="modal-company"><strong>{essay.company}</strong></p>
-          <div className="modal-essay-content">
+      <div className="passlist-modal-overlay" onClick={onClose}>
+        <div className="passlist-modal-content" onClick={(e) => e.stopPropagation()}>
+          <h2 className="passlist-modal-title">{essay.title}</h2>
+          <p className="passlist-modal-company"><strong>{essay.company}</strong></p>
+          <div className="passlist-modal-essay-content">
             {essay.content.split('\n').map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
-          <button className="modal-close-btn" onClick={onClose}>닫기</button>
+          <button className="passlist-modal-close-btn" onClick={onClose}>닫기</button>
         </div>
       </div>
     );
@@ -87,25 +87,25 @@ const PassList = () => {
   return (
       <div>
         <AIHeaderNavbar></AIHeaderNavbar>
-    <div className="pass-essays-container">
-      <h1 className="page-title">합격자소서 모아보기</h1>
+    <div className="passlist-essays-container">
+      <h1 className="passlist-page-title">합격자소서 모아보기</h1>
       
-      <div className="carousel-container">
-        <button className="carousel-button carousel-button-prev" onClick={handlePrev}>&lt;</button>
-        <div className="carousel">
+      <div className="passlist-carousel-container">
+        <button className="passlist-carousel-button passlist-carousel-button-prev" onClick={handlePrev}>&lt;</button>
+        <div className="passlist-carousel">
           {renderEssaySet()}
         </div>
-        <button className="carousel-button carousel-button-next" onClick={handleNext}>&gt;</button>
+        <button className="passlist-carousel-button passlist-carousel-button-next" onClick={handleNext}>&gt;</button>
       </div>
 
-      <div className="review-section">
-        <h2 className="review-title">AI 기반 자소서 첨삭 리뷰</h2>
-        <div className="review-list">
+      <div className="passlist-review-section">
+        <h2 className="passlist-review-title">AI 기반 자소서 첨삭 리뷰</h2>
+        <div className="passlist-review-list">
           {reviews.map((review, index) => (
-            <div key={index} className="review-item">
-              <blockquote className="review-quote">"{review.revie}"</blockquote>
-              <p className="essay-preview-in-review">{review.content.substring(0, 100)}...</p>
-              <p className="review-author">- {review.person} -</p>
+            <div key={index} className="passlist-review-item">
+              <blockquote className="passlist-review-quote">"{review.revie}"</blockquote>
+              <p className="passlist-essay-preview-in-review">{review.content.substring(0, 100)}...</p>
+              <p className="passlist-review-author">- {review.person} -</p>
             </div>
           ))}
         </div>

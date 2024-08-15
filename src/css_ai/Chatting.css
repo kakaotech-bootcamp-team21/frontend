@@ -1,4 +1,5 @@
 .chatting-container {
+    font-family: 'Gowun Batang', serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,38 +14,41 @@
 }
   
 .chatting-title {
+    font-weight: bold;
     font-size: 2.5rem;
+    margin-top: 5rem;
     margin-bottom: 2rem;
     color: #333;
 }
   
-.description {
+.chatting-description {
     font-size: 1rem;
     color: #666;
     margin-bottom: 1.5rem;
     text-align: left;
 }
   
-.benefits {
+.chatting-benefits {
+    font-weight: bold;
     list-style-type: none;
     padding: 0;
     margin-bottom: 2rem;
     text-align: left;
 }
   
-.benefits li {
+.chatting-benefits li {
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     color: #444;
 }
   
-.benefits li::before {
+.chatting-benefits li::before {
     content: "✓";
     color: #4CAF50;
     margin-right: 0.5rem;
 }
   
-.chat-button {
+.chatting-chat-button {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     background-color: #4c56af;
@@ -57,11 +61,11 @@
     margin-top: 30px;
 }
   
-.chat-button:hover {
+.chatting-chat-button:hover {
     background-color: #45a049;
 }
   
-.chat-examples {
+.chatting-chat-examples {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -71,12 +75,12 @@
     transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
   
-.chat-examples.show {
+.chatting-chat-examples.show {
     opacity: 1;
     transform: translateX(0);
 }
   
-.chat-img1, .chat-img2 {
+.chatting-chat-img1, .chatting-chat-img2 {
     position: absolute;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -85,22 +89,22 @@
     transform: translateX(50px);
   }
 
-.chat-img1 {
+.chatting-chat-img1 {
     top: 10%;
     right: 5%;
     width: 60%;
     z-index: 2;
  }
   
-.chat-img2 {
+.chatting-chat-img2 {
     bottom: 15%;
     left: 10%;
     width: 40%; 
     z-index: 1;
 }
 
-.chat-examples.show .chat-img1,
-.chat-examples.show .chat-img2 {
+.chatting-chat-examples.show .chatting-chat-img1,
+.chatting-chat-examples.show .chatting-chat-img2 {
   opacity: 0.8;
   transform: translateX(0);
 }
@@ -116,11 +120,11 @@
     }
 }
   
-.chat-examples.show .chat-img1 {
+.chatting-chat-examples.show .chatting-chat-img1 {
     animation: slideIn 1s ease-in-out 0.2s forwards;
 }
   
-.chat-examples.show .chat-img2 {
+.chatting-chat-examples.show .chatting-chat-img2 {
     animation: slideIn 1s ease-in-out 0.5s forwards;
 }
   

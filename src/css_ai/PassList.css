@@ -1,41 +1,42 @@
-.pass-essays-container {
+.passlist-essays-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
     font-family: 'Gowun Batang', serif;
 }
   
-.page-title {
+.passlist-page-title {
     margin-top:2rem;
-    font-size: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 2%;
     color: #000000;
 }
   
-.carousel-container {
+.passlist-carousel-container {
     position: relative;
     margin-bottom: 2rem;
     overflow: hidden;
 }
   
-.carousel {
+.passlist-carousel {
     overflow: hidden;
     width: calc(100% - 5rem);
     width: 100%;
 }
 
-.carousel-track {
+.passlist-carousel-track {
     display: flex;
     will-change: transform;
 }
   
-.carousel-item {
+.passlist-carousel-item {
     flex: 0 0 calc(100% / 3);
     padding: 0 0.5rem;
 }
 
-.essay-card {
+.passlist-essay-card {
     border: 1px solid #e0e0e0;
     border-radius: 0.25rem;
     padding: 1rem;
@@ -47,29 +48,29 @@
     transition: transform 0.3s ease;
 }
 
-.essay-card:hover {
+.passlist-essay-card:hover {
     transform: sclae(1.05);
 }
   
-.essay-title {
+.passlist-essay-title {
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #000000;
 }
   
-.essay-company {
+.passlist-essay-company {
     font-size: 0.875rem;
     color: #000000;
     margin-bottom: 0.5rem;
 }
   
-.essay-preview {
+.passlist-essay-preview {
     font-size: 0.875rem;
     color: #000000;
 }
   
-.carousel-button {
+.passlist-carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -88,36 +89,36 @@
     transition: background-color 0.3s ease-in-out;
 }
   
-.carousel-button:hover {
+.passlist-carousel-button:hover {
     background-color: rgba(255, 255, 255, 1);
 }
 
-.carousel-button-prev {
+.passlist-carousel-button-prev {
     left: 0;
 }
   
-.carousel-button-next {
+.passlist-carousel-button-next {
     right: 0;
 }
   
-.review-section {
+.passlist-review-section {
     margin-top: 2rem;
 }
   
-.review-title {
+.passlist-review-title {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
     color: #000000;
 }
   
-.review-list {
+.passlist-review-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
   
-.review-item {
+.passlist-review-item {
     border: 1px solid #ffffff;
     border-radius: 0.25rem;
     padding: 1rem;
@@ -125,11 +126,11 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.review-item:hover {
+.passlist-review-item:hover {
     transform: translateY(-3px);
 }
   
-.review-quote {
+.passlist-review-quote {
     font-size: 1.0rem;
     font-weight: bold;
     font-style: italic;
@@ -137,41 +138,41 @@
     color: #000000;
 }
   
-.review-author {
+.passlist-review-author {
     text-align: right;
     font-size: 0.875rem;
     color: #333333;
     margin-bottom: 0.5rem;
 }
 
-.essay-preview-in-review {
+.passlist-essay-preview-in-review {
     font-size: 0.8rem;
     color: #333333;
     margin-top: 0.5rem;
 }
   
 @media (max-width: 1024px) {
-    .carousel-item {
+    .passlist-carousel-item {
         flex: 0 0 50%;
     }
 }
   
 @media (max-width: 768px) {
-    .carousel-item {
+    .passlist-carousel-item {
         flex: 0 0 100%;
     }
-    .essay-title {
+    .passlist-essay-title {
         font-size: 1rem;
     }
-    .essay-preview {
+    .passlist-essay-preview {
         font-size: 0.75rem;
     }
-    .review-quote {
+    .passlist-review-quote {
         font-size: 0.875rem;
     }
 }
 
-.modal-overlay{
+.passlist-modal-overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -184,7 +185,7 @@
     z-index: 1000;
 }
 
-.modal-content {
+.passlist-modal-content {
     background-color: rgb(246, 246, 255);
     padding: 20px;
     border-radius: 5px;
@@ -194,23 +195,23 @@
     z-index: 1001;
 }
 
-.modal-title {
+.passlist-modal-title {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
-.modal-company {
+.passlist-modal-company {
     font-size: 1rem;
     margin-bottom: 15px;
 }
 
-.modal-essay-content {
+.passlist-modal-essay-content {
     font-size: 0.9rem;
     line-height: 1.6;
     text-align: left;
 }
 
-.read-more-btn {
+.passlist-read-more-btn {
     background-color: #c0dfff;
     color: rgb(0, 0, 0);
     border: none;
@@ -220,11 +221,11 @@
     margin-top: 10px;
 }
   
-.read-more-btn:hover {
+.passlist-read-more-btn:hover {
     background-color: #3d85d2;
 }
 
-.modal-close-btn {
+.passlist-modal-close-btn {
     background-color: #c0dfff;
     color: rgb(0, 0, 0);
     border: none;
@@ -234,7 +235,7 @@
     margin-top: 20px;
 }
   
-.modal-close-btn:hover {
+.passlist-modal-close-btn:hover {
     background-color: #3d85d2;
     color: white;
 }
