@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './SubmitPage.css'; 
+import '../../css_ai/SubmitPage.css';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 
 function SubmitPage() {
     const [file, setFile] = useState(null); // 파일 상태 관리
@@ -22,17 +23,20 @@ function SubmitPage() {
     };
 
     return (
+        <div>
+            <AIHeaderNavbar></AIHeaderNavbar>
         <div className="submit-page-container">
-            <h1 className="submit-title">자기소개서 제출</h1>
-            <p className="submit-description">**작성한 자기소개서 파일을 제출해주세요**</p>
+            <h1 className="submit-page-submit-title">자기소개서 제출</h1>
+            <p className="submit-page-description">**작성한 자기소개서 파일을 제출해주세요**</p>
             <form onSubmit={handleSubmit}>
-                <div className="file-input-container">
-                    <input type="file" className="file-input" onChange={handleFileChange} />
+                <div className="submit-page-file-input-container">
+                    <input type="file" className="submit-page-file-input" onChange={handleFileChange} />
                 </div>
-                <div className="button-container">
-                    <button type="submit" className="submit-button">제출</button>
+                <div className="submit-page-button-container">
+                    <button type="submit" className="submit-page-submit-button">제출</button>
                 </div>
             </form>
+        </div>
         </div>
     );
 }

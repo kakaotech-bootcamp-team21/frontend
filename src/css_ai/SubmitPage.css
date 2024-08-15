@@ -1,26 +1,28 @@
-.submit-page-container h1
+.submit-page-container
 {
+    font-family: 'Gowun Batang', serif;
     margin-top:50px;
 }
-.submit-page-container p {
-    text-align: center; 
-    color: #333; 
-}
 
-.submit-description{
-    color:#303030;
+.submit-page-submit-title{
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+.submit-page-description{
+    color:#ff0000;
     font-weight:bold;
     text-align: center;
     margin-bottom: 20px;
 }
-.file-input-container {
+.submit-page-file-input-container {
+    text-align: center;
     margin: 20px auto;
     width: 90%;
-    display: flex;
-    justify-content: center;
     margin-bottom: 20px;
 }
-.file-input{
+.submit-page-file-input{
     text-align: center;
     width: 50%;
     padding: 12px 10px;
@@ -29,28 +31,28 @@
     cursor: pointer;
     height: 100px;
 } 
-.file-name {
+.submit-page-file-name {
     margin-top: 10px;
     color: #666;
 }
 
-.button-container {
+.submit-page-button-container {
     text-align: center;
     margin-top: 20px;
     width:100%;
     justify-self: center;
 }
 
-.submit-button {
+.submit-page-submit-button {
     background-color: #5b8cb7;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 7px 20px;
+    font-size: 18px;
 }
-.submit-button:hover {
+.submit-page-submit-button:hover {
     background-color: #242d42;
     color : white;
 }

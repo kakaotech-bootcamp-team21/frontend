@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './VideoChat.css';
 import { useNavigate } from 'react-router-dom';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 
 const VideoChat = () => {
     const [isMuted, setIsMuted] = useState(true);
@@ -119,6 +120,8 @@ const VideoChat = () => {
     };
 
     return (
+        <div>
+            <AIHeaderNavbar></AIHeaderNavbar>
         <div className="video-chat-container">
             <div className="video-area">
                 <video ref={videoRef} autoPlay playsInline muted={isMuted} className={isVideoOff ? 'video-off' : ''}></video>
@@ -169,6 +172,7 @@ const VideoChat = () => {
                     />
                 </div>
             )}
+        </div>
         </div>
     );
 };

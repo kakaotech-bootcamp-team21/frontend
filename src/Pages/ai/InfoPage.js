@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './InfoPage.css'; 
+import '../../css_ai/InfoPage.css';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 function InfoPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -48,12 +49,15 @@ function InfoPage() {
   }
 
   return (
-    <div className="container">
-      <h1>주요 정보 입력하기</h1>
-      <p className="alert-message">**모든 질문에 최대한 상세하게 답변해주세요.**</p>
+<div>
+  <AIHeaderNavbar/>
+    <div className="infopage-container">
+
+      <h1 className="infopage-title">주요 정보 입력하기</h1>
+      <p className="infopage-alert-message">**모든 질문에 최대한 상세하게 답변해주세요.**</p>
       <form onSubmit={handleSubmit}>
         {["q1", "q2", "q3", "q4", "q5"].map((question, index) => (
-          <div className="form-field" key={index}>
+          <div className="infopage-form-field" key={index}>
             <label htmlFor={question}>스펙(또는 기업)에 대한 질문{index + 1}:</label>
             <textarea
               id={question}
@@ -65,18 +69,19 @@ function InfoPage() {
             />
             </div>
         ))}
-        <p className="portfolio-text">포트폴리오(선택):</p>
-        <div className="portfolio-field">
-          <input type="file" id="portfolio" name="portfolio" onChange={handleInputChange} />
+        <p className="infopage-portfolio-text">포트폴리오(선택):</p>
+        <div className="infopage-portfolio-field">
+          <input type="file" id="infopage-portfolio" name="infopage-portfolio" onChange={handleInputChange} />
         </div>
 
-        <div className="buttons">
-          <button type="button" className="save-button" onClick={handleSaveDraft}>임시 저장</button>
-          <button type="button" className="submit-button">제출</button>
+        <div className="infopage-buttons">
+          <button type="infopage-button" className="infopage-save-button" onClick={handleSaveDraft}>임시 저장</button>
+          <button type="infopage-button" className="infopage-submit-button">제출</button>
         </div>
       </form>
       {formSubmitted && <p>정보가 성공적으로 제출되었습니다!</p>}
     </div>
+</div>
   );
 }
 
