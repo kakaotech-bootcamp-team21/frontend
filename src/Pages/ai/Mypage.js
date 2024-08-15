@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../css_ai/Mypage.css';
 import AIHeaderNavbar from "./AIHeaderNavbar";
 
@@ -12,6 +13,7 @@ function Mypage() {
     example3: '',
     profileLink: ''
   });
+  const navigate = useNavigate();
   const [profileImage, setProfileImage] = useState(null);
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [portfolioFile, setPortfolioFile] = useState(null);
@@ -52,14 +54,13 @@ function Mypage() {
       <div>
         <AIHeaderNavbar></AIHeaderNavbar>
     <div className="mypage-container">
-        
       <div className="mypage-sidebar">
         <div className="mypage-menu-item">∙ 홈</div>
         <div className="mypage-menu-item" onClick={toggleSubmenu}>∙ 나의 자기소개서</div>
         {showSubmenu && (
           <>
-            <div className="mypage-menu-subitem">∙ 자기소개서[채점중]</div>
-            <div className="mypage-menu-subitem">∙ 자기소개서[채점 완료]</div>
+            <div className="mypage-menu-subitem" onClick={() => navigate('/EditingList')}>∙ 자기소개서[첨삭 중]</div>
+            <div className="mypage-menu-subitem" onClick={() => navigate('/EditedList')}>∙ 자기소개서[첨삭 완료]</div>
           </>
         )}
         <div className="mypage-menu-item">∙ 메뉴 추가1</div>
@@ -67,7 +68,6 @@ function Mypage() {
       </div>
       
       <div className="mypage-profile-container">
-        
         <div className="mypage-profile-picture">
           <img src={profileImage || "default-profile.png"} alt="image" className="mypage-profile-img"/>
           <input id="file-input" type="file" onChange={handleImageChange} accept="image/*" hidden />
@@ -75,7 +75,7 @@ function Mypage() {
         </div>
         
         <form onSubmit={handleSubmit}>
-        <h1 className='mypage-vtitle'>마이페이지</h1>
+        <h1 className='mypage-title'>마이페이지</h1>
           <label>
             이름
             <input type="text" name="name" value={user.name} onChange={handleChange} />

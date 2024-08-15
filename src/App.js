@@ -25,6 +25,8 @@ import UserInfoPage from "./pages/login/UserInfoPage";
 // 앨리스가 만든 페이지들
 import AI_Main from "./pages/ai/AI_Main";
 import Mypage from './pages/ai/Mypage';
+import EditingList from "./pages/ai/EditingList";
+import EditedList from "./pages/ai/EditedList";
 import InfoPage from './pages/ai/InfoPage';
 import SubmitPage from './pages/ai/SubmitPage';
 import VideoChat from "./pages/ai/VideoChat";
@@ -96,6 +98,8 @@ function App(props) {
 
                     <Route path="submit" element={<SubmitPage />} />
                     <Route path="Mypage" element={<Mypage />} />
+                    <Route path="EditingList" element={<EditingList />} />
+                    <Route path="EditedList" element={<EditedList />} />
                     <Route path="PassList" element={<PassList />} />
                     <Route path="Chatting" element={<Chatting />} />
                     <Route path="Chatroom" element={<Chatroom />} />
