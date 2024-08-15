@@ -50,20 +50,20 @@ function AI_Navbar() {
 
     const handleMenuMouseOut = () => {
         setTimeout(() => {
-            if (!document.querySelector('.sub-menu:hover')) {
+            if (!document.querySelector('.ai-sub-menu:hover')) {
                 setShowSubMenu('');
             }
         }, 100);
     };
 
     return (
-        <nav className="navbar">
+        <nav className="ai-navbar">
             {menus.map((menu) => (
                 menu === '합격 자소서 모아보기' ? (
                     <Link
                         key={menu}
                         to="/PassList"
-                        className={`nav-button ${active === menu ? 'active' : ''}`}
+                        className={`ai-nav-button ${active === menu ? 'active' : ''}`}
                         onMouseOver={() => setActive(menu)}
                         onMouseOut={handleMenuMouseOut}
                     >
@@ -73,7 +73,7 @@ function AI_Navbar() {
                     <button
                         key={menu}
                         ref={menu === 'AI 기반 자소서 첨삭하기' ? menuRef : (menu === '전문가에게 첨삭 요청하기' ? expertMenuRef : null)}
-                        className={`nav-button ${active === menu ? 'active' : ''}`}
+                        className={`ai-nav-button ${active === menu ? 'active' : ''}`}
                         onMouseOver={() => handleMenuMouseOver(menu)}
                         onMouseOut={handleMenuMouseOut}
                     >
@@ -82,16 +82,16 @@ function AI_Navbar() {
                 )
             ))}
             {showSubMenu === 'AI' && (
-                <div className="sub-menu" style={subMenuStyle}>
-                    <Link to="/info" className="nav-button">주요 정보 입력</Link>
-                    <Link to="/submit" className="nav-button">자기소개서 제출</Link>
+                <div className="ai-sub-menu" style={subMenuStyle}>
+                    <Link to="/info" className="ai-nav-button">주요 정보 입력</Link>
+                    <Link to="/submit" className="ai-nav-button">자기소개서 제출</Link>
                 </div>
             )}
             {showSubMenu === 'expert' && (
-                <div className="sub-menu" style={subMenuStyle}>
-                    <Link to="/post" className="nav-button">게시글</Link>
-                    <Link to="/Chatting" className="nav-button">채팅</Link>
-                    <Link to="/video-chat" className="nav-button">영상 통화</Link>
+                <div className="ai-sub-menu" style={subMenuStyle}>
+                    <Link to="/post" className="ai-nav-button">게시글</Link>
+                    <Link to="/Chatting" className="ai-nav-button">채팅</Link>
+                    <Link to="/video-chat" className="ai-nav-button">영상 통화</Link>
                 </div>
             )}
         </nav>

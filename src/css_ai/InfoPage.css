@@ -1,4 +1,5 @@
-.container {
+.infopage-container {
+    font-family: 'Gowun Batang', serif;
     margin: 0px auto;
     padding: 30px;
     /* border: 1px solid #ccc;
@@ -6,30 +7,38 @@
     position: relative;
     width: 90%;
   }
-.alert-message {
+.infopage-title{
+    font-family: 'Gowun Batang', serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+.infopage-alert-message {
     color:red;
     font-weight: bold;
     text-align: left;
 }
-.portfolio-field {
+.infopage-portfolio-field {
     margin: 5fpx;
-    padding: 13%;
+    padding: 5%;
     border: 1px solid #000000;
     border-radius: 8px;
+    text-align: center;
 }
-.portfolio-text {
+.infopage-portfolio-text {
     margin-top:50px;
     color:#000000;
     font-weight: bold;
     text-align: left;;
 }
-.form-field {
+.infopage-form-field {
     color:#000000;
     width:flex;
     margin-bottom: 30px;
     text-align: left;
 }
-.form-field textarea {
+.infopage-form-field textarea {
     margin-top: 10px;
     width: 100%;
     height: 100px; 
@@ -38,18 +47,18 @@
     resize: none;
     min-height: 100px;
 }
-.form-field label {
+.infopage-form-field label {
     font-weight: bold;
     display: block; 
     margin-bottom: 0px; 
 }
-.form-field input,
-.form-field button {
+.infopage-form-field input,
+.infopage-form-field button {
     width: 100%;
     padding: 8px;
     margin-top: 2px;
 }
-.buttons {
+.infopage-buttons {
     position: flex; 
     justify-content: center;
     display: flex;
@@ -57,7 +66,7 @@
     margin-top:20px;
     gap: 5px;
   }
-.submit-button {
+.infopage-submit-button {
     background-color: #5b8cb7;
     color: white;
     border: black;
@@ -67,7 +76,7 @@
     height: 40px;
     font-size: 20px;
 }
-.save-button{
+.infopage-save-button{
     font-family: 'Gowun Batang', serif;
     font-weight: bold;
     background-color: #ffffff;
@@ -79,11 +88,11 @@
     height: 40px;
     font-size: 18px;
 }
-.save-button:hover, .submit-button:hover {
+.infopage-save-button:hover, .submit-button:hover {
     background-color: #242d42;
     color : white;
 }
 
-.form-field label {
+.infopage-form-field label {
     font-weight: bold;
 }

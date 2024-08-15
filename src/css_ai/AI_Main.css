@@ -47,7 +47,7 @@ header div:first-child {
   right: 10px;
   top: 10px;
 }
-.submit-button {
+.ai-submit-button {
   font-family: 'Gowun Batang', serif;
   font-weight: bold;
   font-size: 30px;
@@ -64,7 +64,7 @@ header div:first-child {
   text-align: left; 
 }
 
-.navbar {
+.ai-navbar {
   background-color: #f4fbff;
   padding: 10px 0;
   display: flex;
@@ -73,7 +73,7 @@ header div:first-child {
   height: 80px;
 }
 
-.nav-button {
+.ai-nav-button {
   text-decoration: none;
   font-family: 'Gowun Batang', serif;
   background: none;
@@ -86,10 +86,10 @@ header div:first-child {
   white-space: nowrap;
 }
 
-.menu-item{
+.ai-menu-item{
   position: relative;
 }
-.sub-menu {
+.ai-sub-menu {
   position: absolute; 
   z-index: 9999; 
   /* border: 1px solid #ccc; 
@@ -98,7 +98,7 @@ header div:first-child {
   /* top: 100%; 
   /* left: 0;  */
 }
-.sub-menu .nav-button {
+.ai-sub-menu .ai-nav-button {
   text-decoration: none;
   position: relative;
   display: block;
@@ -110,23 +110,23 @@ header div:first-child {
   cursor: pointer;
   transition: color 0.3s ease;
 }
-.sub-menu .nav-button:hover, .sub-menu .nav-button:focus {
+.ai-sub-menu .nav-button:hover, .ai-sub-menu .nav-button:focus {
   font-weight: bold; 
   color: #464646; 
   border-bottom: none;
 }
-.nav-button:hover {
+.ai-nav-button:hover {
   font-weight: bold;
   color: #5074c1;
   border-bottom: 2px solid #333;
 }
-.sub-menu .nav-button:hover 
+.ai-sub-menu .ai-nav-button:hover 
 {
   font-weight: bold;
   color: #000000;
   border-bottom: 2px solid #333;
 }
-.sub-menu .nav-button::after {
+.ai-sub-menu .ai-nav-button::after {
   content: '';
   position: absolute;
   left: 0;
@@ -136,15 +136,15 @@ header div:first-child {
   background-color: transparent; 
   transition: width 0.3s ease;
 }
-.nav-button.active {
+.ai-nav-button.active {
   color: #007bff;
   font-weight: bold;
 }
-.nav-button:hover::after, .sub-menu .nav-button:hover::after {
+.ai-nav-button:hover::after, .ai-sub-menu .nav-button:hover::after {
   width: 100%;
 }
 
-.sub-menu {
+.ai-sub-menu {
   position: absolute;
   background-color: #e1ecef;
   display: flex;
