@@ -69,10 +69,12 @@ header div:first-child {
   padding: 10px 0;
   display: flex;
   justify-content: center; 
-  align-items: flex-end; 
-  height: 80px; 
+  align-items: flex-end;
+  height: 80px;
 }
+
 .nav-button {
+  text-decoration: none;
   font-family: 'Gowun Batang', serif;
   background: none;
   border: none;
@@ -81,6 +83,11 @@ header div:first-child {
   cursor: pointer;
   transition: color 0.3s ease;
   color: #000000; 
+  white-space: nowrap;
+}
+
+.menu-item{
+  position: relative;
 }
 .sub-menu {
   position: absolute; 
@@ -129,7 +136,10 @@ header div:first-child {
   background-color: transparent; 
   transition: width 0.3s ease;
 }
-
+.nav-button.active {
+  color: #007bff;
+  font-weight: bold;
+}
 .nav-button:hover::after, .sub-menu .nav-button:hover::after {
   width: 100%;
 }
@@ -149,10 +159,9 @@ header div:first-child {
   font-family:"Playfair Display", serif; font-weight:400;
 }
 .nine h1 span {
-  margin-top: 5px;
+    margin-top: 5px;
     font-size:15px; color:#444; word-spacing:1px; font-weight:normal; letter-spacing:2px;
     text-transform: uppercase; font-family:"Raleway", sans-serif; font-weight:500;
-
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     grid-template-rows: 27px 0;
@@ -166,6 +175,6 @@ header div:first-child {
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
     height: 5px;
-  background-color:#f8f8f8;
+    background-color:#f8f8f8;
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './InfoPage.css'; 
+import '../../css_ai/InfoPage.css';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 function InfoPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -48,7 +49,10 @@ function InfoPage() {
   }
 
   return (
+<div>
+  <AIHeaderNavbar/>
     <div className="container">
+
       <h1>주요 정보 입력하기</h1>
       <p className="alert-message">**모든 질문에 최대한 상세하게 답변해주세요.**</p>
       <form onSubmit={handleSubmit}>
@@ -77,6 +81,7 @@ function InfoPage() {
       </form>
       {formSubmitted && <p>정보가 성공적으로 제출되었습니다!</p>}
     </div>
+</div>
   );
 }
 

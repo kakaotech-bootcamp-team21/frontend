@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Mypage.css';
+import '../../css_ai/Mypage.css';
+import AIHeaderNavbar from "./AIHeaderNavbar";
 
 function Mypage() {
   const [user, setUser] = useState({
@@ -48,6 +49,8 @@ function Mypage() {
   };
 
   return (
+      <div>
+        <AIHeaderNavbar></AIHeaderNavbar>
     <div className="mypage-container">
         
       <div className="sidebar">
@@ -107,6 +110,7 @@ function Mypage() {
         </form>
       </div>
     </div>
+      </div>
   );
 }
 

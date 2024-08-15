@@ -5,10 +5,9 @@ import {
     Route, Link, useNavigate, useLocation
 
 } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 //css
-import './pages/AI_Main.css';
-
+import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
 //pages
 import MainPage from './pages/home/MainPage';
@@ -22,30 +21,17 @@ import HowToEdit from "./pages/expert/HowToEdit";
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
-import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 
 // 앨리스가 만든 페이지들
-import AI_Main from "./pages/AI_Main";
-import Mypage from './pages/Mypage';
-import InfoPage from './pages/InfoPage';
-import SubmitPage from './pages/SubmitPage';
-import VideoChat from "./pages/VideoChat";
-const MainTitleText = styled.p`
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-`;
-
-const StyledButton = styled.button`
-    background-color: #4682B4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px 5px;
-`;
+import AI_Main from "./pages/ai/AI_Main";
+import Mypage from './pages/ai/Mypage';
+import InfoPage from './pages/ai/InfoPage';
+import SubmitPage from './pages/ai/SubmitPage';
+import VideoChat from "./pages/ai/VideoChat";
+import AILayout from "./pages/ai/AILayout";
+import Chatroom from "./pages/ai/Chatroom";
+import Chatting from "./pages/ai/Chatting";
+import PassList from "./pages/ai/PassList";
 
 function App(props) {
     const [user, setUser] = useState(null);
@@ -82,8 +68,11 @@ function App(props) {
     };
 
     return (
-        <div>
+
+
+
             <Routes>
+
                 <Route path="/" element={<MainPage />} />
 
                 {/*로그인 및 회원가입*/}
@@ -99,15 +88,21 @@ function App(props) {
                 <Route path="/request-expert" element={<RequestExpert />} />
                 <Route path="/how-to-edit" element={<HowToEdit />} />
 
-                <Route path="/info" element={<InfoPage />} />
-                <Route path="/submit" element={<SubmitPage />} />
-                <Route path="/Mypage" element={<Mypage />} />
-                <Route path="/ai-main" element={<AI_Main />} />
+                {/*ai 패이지*/}
 
-                <Route path="/video-chat" element={<VideoChat />} />
+                {/*이 밑에 있는 페이지들은 return 문 들어가서 제일 처음에 <AIHeaderNavbar></AIHeaderNavbar> 컴포넌트를 집어넣음.(앨리스가 만든 상단바)*/}
+                <Route path="ai-main" element={<AI_Main />} />
+                    <Route path="info" element={<InfoPage />} />
+
+                    <Route path="submit" element={<SubmitPage />} />
+                    <Route path="Mypage" element={<Mypage />} />
+                    <Route path="PassList" element={<PassList />} />
+                    <Route path="Chatting" element={<Chatting />} />
+                    <Route path="Chatroom" element={<Chatroom />} />
+                    <Route path="video-chat" element={<VideoChat />} />
 
           </Routes>
-     </div>
+
   );
 }
 
