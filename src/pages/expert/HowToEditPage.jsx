@@ -5,12 +5,13 @@ import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // 캘린더 기본 스타일
 import Modal from 'react-bootstrap/Modal';
-
 import Button from "../../components/buttons/Button";
+//import ButtonSample from "../../components/buttons/ButtonSample";
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Message, notification, Radio } from "antd";
+
 
 import styled from "styled-components";
-
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -64,6 +65,9 @@ function HowToEdit(props) {
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [value, setValue] = useState(1);
+
+    const navigate = useNavigate();
 
     const renderNavLinks = () => {
         if (userType === 'regular') {
@@ -95,10 +99,6 @@ function HowToEdit(props) {
         }
     }
 
-    const handleButtonClick = () => {
-        setShowCalendar(!showCalendar);
-    };
-
     const handleDateChange = (date) => {
         setSelectedDate(date);
         setShowModal(true);
@@ -106,7 +106,35 @@ function HowToEdit(props) {
 
     const handleClose = () => setShowModal(false);
 
-    const navigate = useNavigate();
+    const handleYes = () => {
+        notification.success({
+            message: '선택되었습니다',
+            placement: 'topRight',
+            duration: 5,
+        });
+
+        setShowModal(false);
+    };
+
+    const handleNo = () => {
+        notification.error({
+            message: '날짜를 다시 선택해주세요',
+            placement: 'topRight',
+            duration: 5,
+        });
+        setShowModal(false);
+    };
+
+    const onChange = (e) => {
+        setValue(e.target.value);
+        if (value === 1) {
+            setShowCalendar(true);
+        } else {
+            setShowCalendar(false);
+        }
+
+    };
+
 
     return (
         <Wrapper>
@@ -127,39 +155,32 @@ function HowToEdit(props) {
             </ContainerTmp>
             <Heading>전문가에게 첨삭 요청하기</Heading>
             <ContainerTmp>
-                <p>선택하신 전문가는 채팅/영상통화, 게시글 첨삭을 제공합니다.</p>
+                <p>선택하신 전문가는 게시글, 채팅/영상통화 첨삭을 제공합니다.</p>
             </ContainerTmp>
             <ContainerTmp>
                 <>
-                    <Button
-                        title="채팅/영상통화를 통해 첨삭받기"
-                        onClick={() => {
-
-                            handleButtonClick();
-                        }}
-                    />
-                    <Button
-                        title="게시글을 통해 첨삭 받기"
-                        onClick={() => {
-                            navigate("/expert");
-                        }}
-                    />
+                    <br />
+                    <br />
+                    <p>어떤 방식을 선호하시나요?</p>
+                    <Radio.Group onChange={onChange} value={value}>
+                        <Radio value={1}>
+                            게시글을 통해 첨삭 받기
+                        </Radio>
+                        <Radio value={2}>
+                            채팅/영상통화를 통해 첨삭받기
+                        </Radio>
+                    </Radio.Group>
+                    <br />
                 </>
             </ContainerTmp>
             {showCalendar && (
                 <ContainerTmp>
-                    <p>전문가와 채팅/영상통화 첨삭을 원하는 날짜를 선택하세요. </p>
                     <br />
                     <br />
+                    <p>아래의 캘린더에서 전문가와 채팅/영상통화 첨삭을 원하는 날짜를 선택하세요. </p>
+
                     <Calendar onChange={handleDateChange} />
-
-
-
-
-
-
                 </ContainerTmp>
-
             )}
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -170,18 +191,32 @@ function HowToEdit(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button
-                        variant="secondary"
-                        title="아니요"
-                        onClick={handleClose}
-                    />
-                    <Button
-                        variant="primary"
-                        title="네"
-                        onClick={handleClose}
-                    />
+                    <Button title="예" onClick={() => {
+                        handleYes();
+                        navigate("/submit");
+                    }} />
+                    <Button title="아니오" onClick={handleNo} />
                 </Modal.Footer>
             </Modal>
+
+            <br />
+            <br />
+
+            <ContainerTmp>
+                <p>자소서 제출 방식을 선택해주세요.  </p>
+                <Button title="직접 작성할래요" onClick={() => {
+                    navigate("/expert-info");
+                }} />
+
+                <Button title="이미 작성해둔 파일이 있어요" onClick={() => {
+                    navigate("/expert-submit");
+                }} />
+            </ContainerTmp>
+            <br />
+            <br />
+
+
+
 
         </Wrapper>
 

@@ -8,6 +8,7 @@ import {
 import styled from "styled-components";
 //css
 import './pages/AI_Main.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 //pages
@@ -17,8 +18,10 @@ import SignUpPage from "./pages/login/SignUpPage";
 import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
 import RedirectPage from "./pages/login/RedirectPage";
 
-import RequestExpert from "./pages/expert/RequestExpert";
-import HowToEdit from "./pages/expert/HowToEdit";
+import RequestExpert from "./pages/expert/RequestExpertPage";
+import HowToEdit from "./pages/expert/HowToEditPage";
+import ExpertInfoPage from "./pages/expert/ExpertInfoPage";
+import ExpertSubmitPage from "./pages/expert/ExpertSubmitPage";
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
@@ -30,6 +33,7 @@ import Mypage from './pages/Mypage';
 import InfoPage from './pages/InfoPage';
 import SubmitPage from './pages/SubmitPage';
 import VideoChat from "./pages/VideoChat";
+
 const MainTitleText = styled.p`
     font-size: 24px;
     font-weight: bold;
@@ -98,6 +102,8 @@ function App(props) {
                 {/*전문가 첨삭*/}
                 <Route path="/request-expert" element={<RequestExpert />} />
                 <Route path="/how-to-edit" element={<HowToEdit />} />
+                <Route path="/expert-info" element={<ExpertInfoPage />} />
+                <Route path="/expert-submit" element={<ExpertSubmitPage />} />
 
                 <Route path="/info" element={<InfoPage />} />
                 <Route path="/submit" element={<SubmitPage />} />
