@@ -51,8 +51,8 @@ function EditingList() {
           <div className="mypage-menu-item"onClick={() => setShowSubmenu(!showSubmenu)}>∙ 나의 자기소개서</div>
           {showSubmenu && (
             <>
-              <div className={`mypage-menu-subitem ${isActive('/EditingList')}`} onClick={() => navigate('/EditingList')}>∙ 자기소개서[첨삭 중]</div>
-              <div className={`mypage-menu-subitem ${isActive('/EditedList')}`} onClick={() => navigate('/EditedList')}>∙ 자기소개서[첨삭 완료]</div>
+              <div className={`mypage-menu-subitem ${isActive('/editing-list')}`} onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>
+              <div className={`mypage-menu-subitem ${isActive('/edited-list')}`} onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>
             </>
           )}
           <div className="mypage-menu-item">∙ 메뉴 추가1</div>

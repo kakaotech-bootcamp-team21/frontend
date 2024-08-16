@@ -24,7 +24,7 @@
 }
   
 .editedlist-correction-table {
-    width: 70%;
+    width: 80%;
     border-collapse: collapse;
     margin-top: 20px;
     margin: 20px auto;
@@ -55,12 +55,12 @@
 
 .editedlist-correction-table th:nth-child(3),
 .editedlist-correction-table td:nth-child(3) {
-  width: 15%; 
+  width: 20%; 
 }
 
 .editedlist-correction-table th:nth-child(4),
 .editedlist-correction-table td:nth-child(4) {
-  width: 8%;
+  width: 10%;
 }
 
 .editedlist-correction-table th:nth-child(5),

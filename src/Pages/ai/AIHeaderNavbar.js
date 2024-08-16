@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import '../../css_ai/AI_Main.css';
+import '../../css_ai/AIMain.css';
 
 function AI_Header() {
     return (
@@ -62,7 +62,7 @@ function AI_Navbar() {
                 menu === '합격 자소서 모아보기' ? (
                     <Link
                         key={menu}
-                        to="/PassList"
+                        to="/pass-list"
                         className={`ai-nav-button ${active === menu ? 'active' : ''}`}
                         onMouseOver={() => setActive(menu)}
                         onMouseOut={handleMenuMouseOut}
