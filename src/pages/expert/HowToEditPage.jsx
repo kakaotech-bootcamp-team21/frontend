@@ -5,10 +5,12 @@ import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // 캘린더 기본 스타일
 import Modal from 'react-bootstrap/Modal';
-import Button from "../../components/buttons/Button";
+import Button1 from "../../components/buttons/Button";
 //import ButtonSample from "../../components/buttons/ButtonSample";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Message, notification, Radio } from "antd";
+import { Input, Flex, Button, Form } from 'antd';
+
 
 
 import styled from "styled-components";
@@ -55,19 +57,43 @@ const Heading = styled.h1`
     margin-bottom: 40px;
 `;
 
+const Row = styled.div`
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: space-between; /* 필요에 따라 공간을 조절 */
+    gap: 16px; /* 요소 사이의 간격 조절 */
+    margin-top: 25px;
+    margin-bottom: 25px;
+`;
+
+const OnlyRow = styled.div`
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-bottom: 25px;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+`;
+
 
 
 function HowToEdit(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
     });
-
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [value, setValue] = useState(1);
+    const [items, setItems] = useState([{ id: 1 }]); // 기본적으로 하나의 항목을 포함함 
+    const [formData, setFormData] = useState({
+        numberOfCharacters: 500,
+    });
 
     const navigate = useNavigate();
+    const { TextArea } = Input;
 
     const renderNavLinks = () => {
         if (userType === 'regular') {
@@ -135,6 +161,19 @@ function HowToEdit(props) {
 
     };
 
+    const handleAddItem = () => {
+        setItems([...items, { id: items.length + 1 }]); // 새로운 항목 추가 
+    }
+
+    const handleRemoveItem = (id) => {
+        setItems(items.filter(item => item.id !== id)); // 항목 배열에서 선택한 ID를 제외하고 새로운 배열로 업데이트
+
+    }
+
+    const handleSubmit = (values) => {
+        setFormData(values);
+    };
+
 
     return (
         <Wrapper>
@@ -191,24 +230,70 @@ function HowToEdit(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button title="예" onClick={() => {
+                    <Button1 title="예" onClick={() => {
                         handleYes();
                         navigate("/submit");
                     }} />
-                    <Button title="아니오" onClick={handleNo} />
+                    <Button1 title="아니오" onClick={handleNo} />
                 </Modal.Footer>
             </Modal>
 
             <br />
-            <br />
 
             <ContainerTmp>
-                <p>자소서 제출 방식을 선택해주세요.  </p>
-                <Button title="직접 작성할래요" onClick={() => {
+                <p>전문가에게 첨삭받을 자소서 항목을 입력해주세요.  </p>
+                <ButtonContainer>
+                    <Button justify-content='flex-end' onClick={handleAddItem}>항목 추가</Button>
+                </ButtonContainer>
+
+                <ContainerTmp>
+
+                    {items.map((item, index) => (
+                        <Flex key={item.id} vertical gap={5}>
+                            <Row>
+                                <p>항목 {index + 1}</p>
+                                <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
+                            </Row>
+                            <Input placeholder="질문을 입력해주세요." />
+                            <TextArea showCount maxLength={formData.numberOfCharacters} placeholder="내용을 입력해주세요." rows={6} />
+
+                            <Form
+                                layout="inline"
+                                style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
+                                onFinish={handleSubmit} // 폼 제출 시 호출
+                            >
+                                <p>글자수: </p>
+                                <Form.Item
+                                    name="numberOfCharacters"
+                                    rules={[{ required: true, message: '올바른 글자수를 입력해주세요!' }]}
+                                >
+                                    <Input
+                                        name="numberOfCharacters"
+                                        value={formData.numberOfCharacters}
+                                        style={{ width: 70 }}
+                                        placeholder="500" />
+                                </Form.Item>
+                                <Form.Item label=" " colon={false}>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                    //value={formData.numberOfCharacters}
+                                    >
+                                        변경
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </Flex>
+
+                    ))}
+                </ContainerTmp>
+
+
+                <Button1 title="직접 작성할래요" onClick={() => {
                     navigate("/expert-info");
                 }} />
 
-                <Button title="이미 작성해둔 파일이 있어요" onClick={() => {
+                <Button1 title="이미 작성해둔 파일이 있어요" onClick={() => {
                     navigate("/expert-submit");
                 }} />
             </ContainerTmp>
