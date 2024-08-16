@@ -7,31 +7,31 @@ import {
 } from "react-router-dom";
 // import styled from "styled-components";
 //css
-// import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
+// import AIHeaderNavbar from "./Pages/ai/AIHeaderNavbar";
 
-//pages
-import MainPage from './pages/home/MainPage';
-import LoginPage from "./pages/login/LoginPage";
-import SignUpPage from "./pages/login/SignUpPage";
-import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
-import RedirectPage from "./pages/login/RedirectPage";
+//Pages
+import MainPage from './Pages/home/MainPage';
+import LoginPage from "./Pages/login/LoginPage";
+import SignUpPage from "./Pages/login/SignUpPage";
+import PrivacyPolicyPage from "./Pages/login/PrivacyPolicyPage";
+import RedirectPage from "./Pages/login/RedirectPage";
 
-import RequestExpert from "./pages/expert/RequestExpert";
-import HowToEdit from "./pages/expert/HowToEdit";
+import RequestExpert from "./Pages/expert/RequestExpert";
+import HowToEdit from "./Pages/expert/HowToEdit";
 
-import AuthVerificationPage from "./pages/login/AuthVerificationPage";
-import UserInfoPage from "./pages/login/UserInfoPage";
+import AuthVerificationPage from "./Pages/login/AuthVerificationPage";
+import UserInfoPage from "./Pages/login/UserInfoPage";
 
 // 앨리스가 만든 페이지들
-import AI_Main from "./pages/ai/AI_Main";
-import Mypage from './pages/ai/Mypage';
-import InfoPage from './pages/ai/InfoPage';
-import SubmitPage from './pages/ai/SubmitPage';
-import VideoChat from "./pages/ai/VideoChat";
-// import AILayout from "./pages/ai/AILayout";
-import Chatroom from "./pages/ai/Chatroom";
-import Chatting from "./pages/ai/Chatting";
-import PassList from "./pages/ai/PassList";
+import AI_Main from "./Pages/ai/AI_Main";
+import Mypage from './Pages/ai/Mypage';
+import InfoPage from './Pages/ai/InfoPage';
+import SubmitPage from './Pages/ai/SubmitPage';
+import VideoChat from "./Pages/ai/VideoChat";
+// import AILayout from "./Pages/ai/AILayout";
+import Chatroom from "./Pages/ai/Chatroom";
+import Chatting from "./Pages/ai/Chatting";
+import PassList from "./Pages/ai/PassList";
 
 function App(props) {
     const [user, setUser] = useState(null);
