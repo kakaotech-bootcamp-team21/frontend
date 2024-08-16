@@ -1,0 +1,110 @@
+.mypage-container {
+    display: flex;
+    width: 100%;
+}
+.mypage-menu-subitem.active {
+    font-weight: bold;
+    color: #007bff; 
+}
+.editedlist-content{
+    flex-grow: 1;
+    padding: 20px;
+    font-family: 'Gowun Batang', serif; 
+}
+.editedlist-table-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+.editedlist-correction-subtitle {
+    font-size: 20x;
+    font-weight: bold;
+    margin-top: 2.8%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+  
+.editedlist-correction-table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin: 20px auto;
+}
+  
+.editedlist-correction-table th,
+.editedlist-correction-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 17px;
+}
+  
+.editedlist-correction-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+  
+.editedlist-correction-table th:nth-child(1),
+.editedlist-correction-table td:nth-child(1) {
+  width: 2%; 
+}
+
+.editedlist-correction-table th:nth-child(2),
+.editedlist-correction-table td:nth-child(2) {
+  width: 8%; 
+}
+
+.editedlist-correction-table th:nth-child(3),
+.editedlist-correction-table td:nth-child(3) {
+  width: 15%; 
+}
+
+.editedlist-correction-table th:nth-child(4),
+.editedlist-correction-table td:nth-child(4) {
+  width: 8%;
+}
+
+.editedlist-correction-table th:nth-child(5),
+.editedlist-correction-table td:nth-child(5) {
+  width: 10%; 
+}
+  
+.editedlist-correction-table tr:hover {
+    background-color: #f5f5f5;
+}
+  
+.editedlist-correction-table button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+  
+.editedlist-correction-table button:hover {
+    background-color: #45a049;
+}
+  
+@media screen and (max-width: 600px) {
+    .editedlist-correction-table {
+      width:95%;
+      font-size: 14px;
+}
+  
+    .editedlist-correction-table th,
+    .editedlist-correction-table td {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .editedlist-correction-table button {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+}
