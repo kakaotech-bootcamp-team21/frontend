@@ -1,10 +1,10 @@
 
 /* eslint-disable */ //warning 메세지 없애는 용도
 import React, { useState, useRef  } from 'react';
-import '../../css_ai/AI_Main.css';
+import '../../css_ai/AIMain.css';
 import AIHeaderNavbar from "./AIHeaderNavbar";
 
-function AI_Main() {
+function AIMain() {
   return (
     <div>
 <AIHeaderNavbar></AIHeaderNavbar>
@@ -12,4 +12,4 @@ function AI_Main() {
   );
 }
 
-export default AI_Main;
+export default AIMain;

@@ -59,8 +59,8 @@ function Mypage() {
         <div className="mypage-menu-item" onClick={toggleSubmenu}>∙ 나의 자기소개서</div>
         {showSubmenu && (
           <>
-            <div className="mypage-menu-subitem" onClick={() => navigate('/EditingList')}>∙ 자기소개서[첨삭 중]</div>
-            <div className="mypage-menu-subitem" onClick={() => navigate('/EditedList')}>∙ 자기소개서[첨삭 완료]</div>
+            <div className="mypage-menu-subitem" onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>
+            <div className="mypage-menu-subitem" onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>
           </>
         )}
         <div className="mypage-menu-item">∙ 메뉴 추가1</div>
