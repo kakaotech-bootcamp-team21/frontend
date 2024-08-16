@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../css_ai/Chatting.css';
 import chatImage1 from '../../img/chat_img1.png';
 import chatImage2 from '../../img/chat_img2.png';
-import Chatroom from './Chatroom';
+import Chatroom from '../ai/Chatroom';
 import AIHeaderNavbar from "./AIHeaderNavbar";
 
 const Chatting = () => {
@@ -32,7 +32,7 @@ const Chatting = () => {
           <li>전문가의 개인화된 조언</li>
           <li>질문과 답변을 통한 깊이 있는 개선</li>
         </ul>
-        <Link to="../Chatroom" className="chatting-chat-button">
+        <Link to="../chat-room" className="chatting-chat-button">
           채팅하기 →
         </Link>
       </div>
