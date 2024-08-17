@@ -12,6 +12,10 @@ import { Message, notification, Radio } from "antd";
 import { Input, Flex, Button, Form } from 'antd';
 
 
+import AI_Header from "../../components/headers/Header";
+import AI_Navbar from '../../components/navbars/AiNavbar';
+
+
 
 import styled from "styled-components";
 const Wrapper = styled.div`
@@ -54,6 +58,7 @@ const ContainerTmp = styled.div`
 `;
 
 const Heading = styled.h1`
+    margin-top: 40px;
     margin-bottom: 40px;
 `;
 
@@ -228,178 +233,183 @@ function HowToEdit(props) {
 
 
     return (
-        <Wrapper>
-            <ContainerTmp>
-                <Navbar bg="light" expand="lg">
-                    <Container>
-                        <Navbar.Brand as={Link} to="/">홈</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto" >
-                                {renderNavLinks()}
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-                <br />
-                <br />
-            </ContainerTmp>
-            <Heading>전문가에게 첨삭 요청하기</Heading>
-            <ContainerTmp>
-                <p>선택하신 전문가는 게시글, 채팅/영상통화 첨삭을 제공합니다.</p>
-            </ContainerTmp>
-            <ContainerTmp>
-                <>
+
+        <>
+            <AI_Header />
+            <AI_Navbar />
+            <Wrapper>
+                {/* <ContainerTmp>
+                    <Navbar bg="light" expand="lg">
+                        <Container>
+                            <Navbar.Brand as={Link} to="/">홈</Navbar.Brand>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto" >
+                                    {renderNavLinks()}
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar>
                     <br />
                     <br />
-                    <p>어떤 방식을 선호하시나요?</p>
-                    <Radio.Group onChange={onChange} value={value}>
-                        <Radio value={1}>
-                            게시글을 통해 첨삭 받기
-                        </Radio>
-                        <Radio value={2}>
-                            채팅/영상통화를 통해 첨삭받기
-                        </Radio>
-                    </Radio.Group>
-                    <br />
-                </>
-            </ContainerTmp>
-            {showCalendar && (
+                </ContainerTmp> */}
+                <Heading>전문가에게 첨삭 요청하기</Heading>
                 <ContainerTmp>
-                    <br />
-                    <br />
-                    <p>아래의 캘린더에서 전문가와 채팅/영상통화 첨삭을 원하는 날짜를 선택하세요. </p>
-
-                    <Calendar onChange={handleDateChange} />
+                    <p>선택하신 전문가는 게시글, 채팅/영상통화 첨삭을 제공합니다.</p>
                 </ContainerTmp>
-            )}
-            <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>선택한 날짜 확인</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {selectedDate ? `선택한 날짜는 ${selectedDate.toLocaleDateString()}입니다. 맞습니까?` : ''}
-                </Modal.Body>
+                <ContainerTmp>
+                    <>
+                        <br />
+                        <br />
+                        <p>어떤 방식을 선호하시나요?</p>
+                        <Radio.Group onChange={onChange} value={value}>
+                            <Radio value={1}>
+                                게시글을 통해 첨삭 받기
+                            </Radio>
+                            <Radio value={2}>
+                                채팅/영상통화를 통해 첨삭받기
+                            </Radio>
+                        </Radio.Group>
+                        <br />
+                    </>
+                </ContainerTmp>
+                {showCalendar && (
+                    <ContainerTmp>
+                        <br />
+                        <br />
+                        <p>아래의 캘린더에서 전문가와 채팅/영상통화 첨삭을 원하는 날짜를 선택하세요. </p>
 
-                <Modal.Footer>
-                    <Button1 title="예" onClick={() => {
-                        handleYes();
-                    }} />
-                    <Button1 title="아니오" onClick={handleNo} />
-                </Modal.Footer>
-            </Modal>
-
-            <br />
-
-            <ContainerTmp>
-                <p>전문가에게 첨삭받을 자소서 항목을 입력해주세요.  </p>
-                <ButtonContainer>
-                    <Button justify-content='flex-end' onClick={handleAddItem}>항목 추가</Button>
-                </ButtonContainer>
-
-                {items.map((item, index) => (
-                    <div key={item.id} vertical gap={5}>
-                        <Row>
-                            <p>항목 {index + 1}</p>
-                            <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
-                        </Row>
-                        <Input
-                            placeholder="질문을 입력해주세요."
-                            name="question"
-                            value={item.question}
-                            onChange={(e) => handleQuestionChange(item.id, e.currentTarget.value)}
-
-                        />
-                        <TextArea
-                            showCount
-                            maxLength={item.numberOfCharacters}
-                            placeholder="내용을 입력해주세요."
-                            rows={6}
-                            name="content"
-                            value={item.content}
-                            onChange={(e) => handleContentChange(item.id, e.target.value)}
-                        />
-
-                        <Form
-                            layout="inline"
-                            style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
-                            onFinish={(values) => handleCharacterLimitChange(item.id, values.numberOfCharacters)} // 폼 제출 시 호출
-                            initialValues={{ numberOfCharacters: item.numberOfCharacters }}
-                        >
-                            <p>글자수: </p>
-                            <Form.Item
-                                name="numberOfCharacters"
-                                rules={[
-                                    { required: true, min: 0, message: '올바른 글자수를 입력해주세요!' },
-                                    {
-                                        validator: (_, value) =>
-                                            !isNaN(value) && value >= 0
-                                                ? Promise.resolve()
-                                                : Promise.reject(new Error('숫자만 입력 가능합니다.'))
-                                    }]}
-                            >
-                                <Input
-                                    style={{ width: 70 }}
-                                    placeholder="500" />
-                            </Form.Item>
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit">
-                                    변경
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </div>
-
-                ))}
-
-                <ButtonContainer>
-                    <Button onClick={handleTotalSubmit}>
-                        제출하기
-                    </Button>
-                </ButtonContainer>
-                <Modal show={showModal2} onHide={handleClose}>
+                        <Calendar onChange={handleDateChange} />
+                    </ContainerTmp>
+                )}
+                <Modal show={showModal} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>최종 제출 확인</Modal.Title>
+                        <Modal.Title>선택한 날짜 확인</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {`제출 하시겠습니까?`}
+                        {selectedDate ? `선택한 날짜는 ${selectedDate.toLocaleDateString()}입니다. 맞습니까?` : ''}
                     </Modal.Body>
+
                     <Modal.Footer>
-                        <Button onClick={() => {
-                            handleSubmitYes();
-                            navigate("/");
-                        }} >
-                            예
-                        </Button>
-                        <Button onClick={handleSubmitNo}>
-                            아니오
-                        </Button>
+                        <Button1 title="예" onClick={() => {
+                            handleYes();
+                        }} />
+                        <Button1 title="아니오" onClick={handleNo} />
                     </Modal.Footer>
                 </Modal>
 
+                <br />
+
                 <ContainerTmp>
-                    <Flex>
-                        <Button onClick={() => {
-                            navigate("/expert-info");
-                        }} >
-                            직접 작성할래요
+                    <p>전문가에게 첨삭받을 자소서 항목을 입력해주세요.  </p>
+                    <ButtonContainer>
+                        <Button justify-content='flex-end' onClick={handleAddItem}>항목 추가</Button>
+                    </ButtonContainer>
+
+                    {items.map((item, index) => (
+                        <div key={item.id} vertical gap={5}>
+                            <Row>
+                                <p>항목 {index + 1}</p>
+                                <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
+                            </Row>
+                            <Input
+                                placeholder="질문을 입력해주세요."
+                                name="question"
+                                value={item.question}
+                                onChange={(e) => handleQuestionChange(item.id, e.currentTarget.value)}
+
+                            />
+                            <TextArea
+                                showCount
+                                maxLength={item.numberOfCharacters}
+                                placeholder="내용을 입력해주세요."
+                                rows={6}
+                                name="content"
+                                value={item.content}
+                                onChange={(e) => handleContentChange(item.id, e.target.value)}
+                            />
+
+                            <Form
+                                layout="inline"
+                                style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
+                                onFinish={(values) => handleCharacterLimitChange(item.id, values.numberOfCharacters)} // 폼 제출 시 호출
+                                initialValues={{ numberOfCharacters: item.numberOfCharacters }}
+                            >
+                                <p>글자수: </p>
+                                <Form.Item
+                                    name="numberOfCharacters"
+                                    rules={[
+                                        { required: true, min: 0, message: '올바른 글자수를 입력해주세요!' },
+                                        {
+                                            validator: (_, value) =>
+                                                !isNaN(value) && value >= 0
+                                                    ? Promise.resolve()
+                                                    : Promise.reject(new Error('숫자만 입력 가능합니다.'))
+                                        }]}
+                                >
+                                    <Input
+                                        style={{ width: 70 }}
+                                        placeholder="500" />
+                                </Form.Item>
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit">
+                                        변경
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </div>
+
+                    ))}
+
+                    <ButtonContainer>
+                        <Button onClick={handleTotalSubmit}>
+                            제출하기
                         </Button>
+                    </ButtonContainer>
+                    <Modal show={showModal2} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>최종 제출 확인</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {`제출 하시겠습니까?`}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => {
+                                handleSubmitYes();
+                                navigate("/");
+                            }} >
+                                예
+                            </Button>
+                            <Button onClick={handleSubmitNo}>
+                                아니오
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                    <ContainerTmp>
+                        <Flex>
+                            <Button onClick={() => {
+                                navigate("/expert-info");
+                            }} >
+                                직접 작성할래요
+                            </Button>
 
 
-                        <Button onClick={() => {
-                            navigate("/expert-submit");
-                        }} >
-                            이미 작성해둔 파일이 있어요
-                        </Button>
+                            <Button onClick={() => {
+                                navigate("/expert-submit");
+                            }} >
+                                이미 작성해둔 파일이 있어요
+                            </Button>
 
-                    </Flex>
+                        </Flex>
+                    </ContainerTmp>
                 </ContainerTmp>
-            </ContainerTmp>
-            <br />
-            <br />
+                <br />
+                <br />
 
 
-        </Wrapper>
+            </Wrapper>
+        </>
 
     );
 
