@@ -6,13 +6,15 @@ import InfoPage from '../../pages/InfoPage';
 import SubmitPage from '../../pages/SubmitPage';
 import Mypage from '../../pages/Mypage';
 
+import { useNavigate } from "react-router-dom";
+
 function AI_Navbar() {
     const [active, setActive] = useState('');
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [subMenuStyle, setSubMenuStyle] = useState({});
     const menuRef = useRef(null);  // 메인 메뉴 아이템에 대한 ref
   
-    const menus = ['메뉴1', 'AI 기반 자소서 첨삭하기', '메뉴3', '메뉴4', '메뉴5', '메뉴6'];
+    const menus = ['전문가에게 첨삭요청', 'AI 기반 자소서 첨삭하기', '합격자소서 모음집', '첨삭 요청 현황'];
   
     const handleMenuMouseOver = (menu) => {
       setActive(menu);
@@ -39,6 +41,20 @@ function AI_Navbar() {
     const handleSubMenuMouseOut = () => {
       setShowSubMenu(false);
     };
+
+    const navigate = useNavigate();
+
+    const handleMenuClick = (menu) => {
+      if (menu === '전문가에게 첨삭요청') {
+        navigate('/request-expert');
+      } else if (menu === '합격자소서 모음집'){
+
+      } else if (menu === '첨삭 요청 현황'){
+        navigate('/request-status');
+
+      }
+
+    }
   
     const subMenus = [
       { name: '주요 정보 입력', path: '/info' },
@@ -54,6 +70,7 @@ function AI_Navbar() {
             className={`nav-button ${active === menu ? 'active' : ''}`}
             onMouseOver={() => handleMenuMouseOver(menu)}
             onMouseOut={handleMenuMouseOut}
+            onClick={() => handleMenuClick(menu)}
           >
             {menu}
           </button>

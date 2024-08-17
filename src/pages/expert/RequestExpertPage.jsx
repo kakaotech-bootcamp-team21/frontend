@@ -7,8 +7,10 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import styled from "styled-components";
 import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
-import Button1 from 'react-bootstrap/Button';
 
+
+import AI_Header from "../../components/headers/Header";
+import AI_Navbar from '../../components/navbars/AiNavbar';
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -134,8 +136,11 @@ function RequestExpert(props) {
     ];
 
     return (
-        <Wrapper>
-            <ContainerTmp>
+        <>
+            <AI_Header />
+            <AI_Navbar />
+            <Wrapper>
+                {/* <ContainerTmp>
                 <Navbar bg="light" expand="lg">
                     <Container>
                         <Navbar.Brand href="#">메뉴</Navbar.Brand>
@@ -149,51 +154,49 @@ function RequestExpert(props) {
                 </Navbar>
                 <br />
                 <br />
-            </ContainerTmp>
-            <Heading>내 분야 첨삭 가능 전문가 찾아보기</Heading>
-            <ContainerTmp>
-                
-                <>
-                    {/* <Form.Group className="mb-3">
+            </ContainerTmp> */}
+                <Heading>내 분야 첨삭 가능 전문가 찾아보기</Heading>
+                <ContainerTmp>
+
+                    <>
+                        {/* <Form.Group className="mb-3">
                         <Form.Label>Disabled input</Form.Label>
                         <Form.Control placeholder="Disabled input" disabled />
                     </Form.Group> */}
-                    <Form.Group className="mb-3">
-                        <Form.Label>전문가 산업 선택</Form.Label>
-                        <Form.Select disabled>
-                            <option>Disabled select</option>
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>전문가 직업군 선택</Form.Label>
-                        <Form.Select disabled>
-                            <option>Disabled select</option>
-                        </Form.Select>
-                    </Form.Group>
-                </>
-                <>
-                    <Container>
-                        <StyleRow>
-                            {dummyData.map((card, index) => (
-                                <Col md={2} key={index} className="mb-4">
-                                    <Card style={{ width: '100%' }}>
-                                        <Card.Img variant="top" src={card.imageUrl} alt={card.nickname} />
-                                        <Card.Body>
-                                            <Card.Title>{card.nickname}</Card.Title>
-                                            <Card.Text>{card.description}</Card.Text>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            ))}
-                        </StyleRow>
-                    </Container>
-                </>
-            </ContainerTmp>
-
-
-        </Wrapper>
+                        <Form.Group className="mb-3">
+                            <Form.Label>전문가 산업 선택</Form.Label>
+                            <Form.Select disabled>
+                                <option>Disabled select</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>전문가 직업군 선택</Form.Label>
+                            <Form.Select disabled>
+                                <option>Disabled select</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </>
+                    <>
+                        <Container>
+                            <StyleRow>
+                                {dummyData.map((card, index) => (
+                                    <Col md={2} key={index} className="mb-4">
+                                        <Card style={{ width: '100%' }}>
+                                            <Card.Img variant="top" src={card.imageUrl} alt={card.nickname} />
+                                            <Card.Body>
+                                                <Card.Title>{card.nickname}</Card.Title>
+                                                <Card.Text>{card.description}</Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </StyleRow>
+                        </Container>
+                    </>
+                </ContainerTmp>
+            </Wrapper>
+        </>
     );
-
 }
 
 export default RequestExpert;

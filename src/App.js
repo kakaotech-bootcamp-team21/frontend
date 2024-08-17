@@ -22,6 +22,8 @@ import RequestExpert from "./pages/expert/RequestExpertPage";
 import HowToEdit from "./pages/expert/HowToEditPage";
 import ExpertInfoPage from "./pages/expert/ExpertInfoPage";
 import ExpertSubmitPage from "./pages/expert/ExpertSubmitPage";
+import RequestStatusPage from "./pages/status/RequestStatusPage";
+
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
@@ -111,6 +113,9 @@ function App(props) {
                 <Route path="/ai-main" element={<AI_Main />} />
 
                 <Route path="/video-chat" element={<VideoChat />} />
+
+                {/*첨삭 요청 현황*/}
+                <Route path="/request-status" element={<RequestStatusPage />} />
 
           </Routes>
      </div>
