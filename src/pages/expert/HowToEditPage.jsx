@@ -86,8 +86,10 @@ function HowToEdit(props) {
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
     const [value, setValue] = useState(1);
-    const [items, setItems] = useState([{ id: 1 }]); // 기본적으로 하나의 항목을 포함함 
+    const [items, setItems] = useState([{ id: 1, numberOfCharacters: 500, question: '', content: '' }]); // 기본적으로 하나의 항목을 포함함 
+
     const [formData, setFormData] = useState({
         numberOfCharacters: 500,
     });
@@ -162,7 +164,7 @@ function HowToEdit(props) {
     };
 
     const handleAddItem = () => {
-        setItems([...items, { id: items.length + 1 }]); // 새로운 항목 추가 
+        setItems([...items, { id: items.length + 1, numberOfCharacters: 500, question: '', content: '' }]); // 새로운 항목 추가 
     }
 
     const handleRemoveItem = (id) => {
@@ -170,9 +172,59 @@ function HowToEdit(props) {
 
     }
 
+    const handleCharacterLimitChange = (id, newLimit) => {
+        setItems(items.map(item =>
+            item.id === id ? { ...item, numberOfCharacters: newLimit } : item
+        ));
+
+        console.log(items)
+
+    }
+
+    const handleQuestionChange = (id, value) => {
+        setItems(items.map(item =>
+            item.id === id ? { ...item, question: value } : item
+        ));
+        // 한글자라도 입력할 경우에 바로바로 바뀌는데 이게 맞나? 이렇게 하면 서버랑 db터지는거 아닌가 싶음 ;
+    }
+
+    const handleContentChange = (id, value) => {
+        setItems(items.map(item =>
+            item.id === id ? { ...item, content: value } : item
+        ));
+        // 한글자라도 입력할 경우에 바로바로 바뀌는데 이게 맞나? 이렇게 하면 서버랑 db터지는거 아닌가 싶음 ;
+    }
+
+
     const handleSubmit = (values) => {
         setFormData(values);
     };
+
+    const handleTotalSubmit = (values) => {
+        setShowModal2(true)
+        setFormData(values);
+    };
+
+    const handleSubmitYes = () => {
+        notification.success({
+            message: '제출이 완료되었습니다. ',
+            placement: 'topRight',
+            duration: 5,
+        });
+
+        setShowModal2(false);
+    };
+
+    const handleSubmitNo = () => {
+        notification.error({
+            message: '다시 작성 해주세요',
+            placement: 'topRight',
+            duration: 5,
+        });
+        setShowModal2(false);
+    };
+
+
 
 
     return (
@@ -232,7 +284,6 @@ function HowToEdit(props) {
                 <Modal.Footer>
                     <Button1 title="예" onClick={() => {
                         handleYes();
-                        navigate("/submit");
                     }} />
                     <Button1 title="아니오" onClick={handleNo} />
                 </Modal.Footer>
@@ -246,61 +297,106 @@ function HowToEdit(props) {
                     <Button justify-content='flex-end' onClick={handleAddItem}>항목 추가</Button>
                 </ButtonContainer>
 
-                <ContainerTmp>
+                {items.map((item, index) => (
+                    <div key={item.id} vertical gap={5}>
+                        <Row>
+                            <p>항목 {index + 1}</p>
+                            <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
+                        </Row>
+                        <Input
+                            placeholder="질문을 입력해주세요."
+                            name="question"
+                            value={item.question}
+                            onChange={(e) => handleQuestionChange(item.id, e.currentTarget.value)}
 
-                    {items.map((item, index) => (
-                        <Flex key={item.id} vertical gap={5}>
-                            <Row>
-                                <p>항목 {index + 1}</p>
-                                <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
-                            </Row>
-                            <Input placeholder="질문을 입력해주세요." />
-                            <TextArea showCount maxLength={formData.numberOfCharacters} placeholder="내용을 입력해주세요." rows={6} />
+                        />
+                        <TextArea
+                            showCount
+                            maxLength={item.numberOfCharacters}
+                            placeholder="내용을 입력해주세요."
+                            rows={6}
+                            name="content"
+                            value={item.content}
+                            onChange={(e) => handleContentChange(item.id, e.target.value)}
+                        />
 
-                            <Form
-                                layout="inline"
-                                style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
-                                onFinish={handleSubmit} // 폼 제출 시 호출
+                        <Form
+                            layout="inline"
+                            style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
+                            onFinish={(values) => handleCharacterLimitChange(item.id, values.numberOfCharacters)} // 폼 제출 시 호출
+                            initialValues={{ numberOfCharacters: item.numberOfCharacters }}
+                        >
+                            <p>글자수: </p>
+                            <Form.Item
+                                name="numberOfCharacters"
+                                rules={[
+                                    { required: true, min: 0, message: '올바른 글자수를 입력해주세요!' },
+                                    {
+                                        validator: (_, value) =>
+                                            !isNaN(value) && value >= 0
+                                                ? Promise.resolve()
+                                                : Promise.reject(new Error('숫자만 입력 가능합니다.'))
+                                    }]}
                             >
-                                <p>글자수: </p>
-                                <Form.Item
-                                    name="numberOfCharacters"
-                                    rules={[{ required: true, message: '올바른 글자수를 입력해주세요!' }]}
-                                >
-                                    <Input
-                                        name="numberOfCharacters"
-                                        value={formData.numberOfCharacters}
-                                        style={{ width: 70 }}
-                                        placeholder="500" />
-                                </Form.Item>
-                                <Form.Item label=" " colon={false}>
-                                    <Button
-                                        type="primary"
-                                        htmlType="submit"
-                                    //value={formData.numberOfCharacters}
-                                    >
-                                        변경
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </Flex>
+                                <Input
+                                    style={{ width: 70 }}
+                                    placeholder="500" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    변경
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
 
-                    ))}
+                ))}
+
+                <ButtonContainer>
+                    <Button onClick={handleTotalSubmit}>
+                        제출하기
+                    </Button>
+                </ButtonContainer>
+                <Modal show={showModal2} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>최종 제출 확인</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {`제출 하시겠습니까?`}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={() => {
+                            handleSubmitYes();
+                            navigate("/");
+                        }} >
+                            예
+                        </Button>
+                        <Button onClick={handleSubmitNo}>
+                            아니오
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <ContainerTmp>
+                    <Flex>
+                        <Button onClick={() => {
+                            navigate("/expert-info");
+                        }} >
+                            직접 작성할래요
+                        </Button>
+
+
+                        <Button onClick={() => {
+                            navigate("/expert-submit");
+                        }} >
+                            이미 작성해둔 파일이 있어요
+                        </Button>
+
+                    </Flex>
                 </ContainerTmp>
-
-
-                <Button1 title="직접 작성할래요" onClick={() => {
-                    navigate("/expert-info");
-                }} />
-
-                <Button1 title="이미 작성해둔 파일이 있어요" onClick={() => {
-                    navigate("/expert-submit");
-                }} />
             </ContainerTmp>
             <br />
             <br />
-
-
 
 
         </Wrapper>
