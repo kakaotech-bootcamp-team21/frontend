@@ -11,6 +11,7 @@ import { handleLogin, handleLogout } from '../../utils/auth';
 import { Link } from 'react-router-dom';
 import AI_Header from "../../components/headers/Header";
 import AI_Navbar from '../../components/navbars/AiNavbar';
+import { Avatar, List } from 'antd';
 
 
 const Wrapper = styled.div`
@@ -52,12 +53,32 @@ const ContainerTmp = styled.div`
     }
 `;
 
+const data = [
+    {
+        title: 'Ant Design Title 1',
+    },
+    {
+        title: 'Ant Design Title 2',
+    },
+    {
+        title: 'Ant Design Title 3',
+    },
+    {
+        title: 'Ant Design Title 4',
+    },
+];
+
 
 const ButtonWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
     margin-bottom: 16px; // 버튼 아래 여백 추가
+`;
+
+const Heading = styled.h2`
+    margin-top: 40px;
+    margin-bottom: 40px;
 `;
 
 
@@ -182,8 +203,10 @@ function MainPage(props) {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar> */}
+                    <Heading>관심 분야 전문가 찾기</Heading>
                     <Container>
                         <h3>관심 직업 태그</h3>
+                        <p>관심 있는 직업 태그를 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                         <Form>
                             <Row>
                                 {districts.map(district => (
@@ -209,19 +232,40 @@ function MainPage(props) {
                         </Card>
 
                     </Container>
+                    <Heading>이용자들이 들려주는 서비스 이용 후기</Heading>
                     <Container className="py-5">
-                        <h3>AI 첨삭 리뷰 모음집</h3>
-                        <Card>
-
-                        </Card>
+                        <h3>AI 첨삭 이용 후기</h3>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={(item, index) => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+                                        title={<a href="https://ant.design">{item.title}</a>}
+                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                    />
+                                </List.Item>
+                            )}
+                        />
 
                     </Container>
 
                     <Container className="py-5">
-                        <h3>전문가 첨삭 리뷰 모음집</h3>
-                        <Card>
-
-                        </Card>
+                        <h3>전문가 첨삭 이용 후기</h3>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={(item, index) => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+                                        title={<a href="https://ant.design">{item.title}</a>}
+                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                    />
+                                </List.Item>
+                            )}
+                        />
 
                     </Container>
 
