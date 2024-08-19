@@ -5,7 +5,7 @@ import {
     Route, Link, useNavigate, useLocation
 
 } from "react-router-dom";
-// import styled from "styled-components";
+import styled from "styled-components";
 //css
 import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
