@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import '../../pages/AI_Main.css';
+import '../../css_ai/AIMain.css';
 import '../../App.css';
-import InfoPage from '../../pages/InfoPage';
-import SubmitPage from '../../pages/SubmitPage';
-import Mypage from '../../pages/Mypage';
+import InfoPage from '../../pages/ai/InfoPage';
+import SubmitPage from '../../pages/ai/SubmitPage';
+import Mypage from '../../pages/ai/Mypage';
 
 import { useNavigate } from "react-router-dom";
 

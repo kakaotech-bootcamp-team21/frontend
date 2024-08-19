@@ -31,7 +31,6 @@ import UserInfoPage from "./pages/login/UserInfoPage";
 import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 
 // 앨리스가 만든 페이지들
-// import AI_Main from "./pages/AI_Main";
 import AIMain from "./pages/ai/AIMain";
 import Mypage from './pages/ai/Mypage';
 import EditingList from "./pages/ai/EditingList";
