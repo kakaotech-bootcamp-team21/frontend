@@ -9,46 +9,64 @@ import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
 import { handleLogin, handleLogout } from '../../utils/auth';
 import { Link } from 'react-router-dom';
+import AI_Header from "../../components/headers/Header";
+import AI_Navbar from '../../components/navbars/AiNavbar';
+import { Avatar, List } from 'antd';
 
 
-// const Wrapper = styled.div`
-//     padding: 16px;
-//     width: calc(100% - 32px);
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-// `;
+const Wrapper = styled.div`
+    padding: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
 
-// const ContainerTmp = styled.div`
-//     width: 100%;
-//
-//     @media (min-width: 576px) {
-//         max-width: 540px;
-//     }
-//
-//     @media (min-width: 768px) {
-//         max-width: 720px;
-//     }
-//
-//     @media (min-width: 992px) {
-//         max-width: 960px;
-//     }
-//
-//     @media (min-width: 1200px) {
-//         max-width: 1140px;
-//     }
-//
-//     @media (min-width: 1400px) {
-//         max-width: 1320px;
-//     }
-//
-//     & > * {
-//         :not(:last-child) {
-//             margin-bottom: 16px;
-//         }
-//     }
-// `;
+const ContainerTmp = styled.div`
+    width: 100%;
+    
+    @media (min-width: 576px) {
+        max-width: 540px;
+    }
+    
+    @media (min-width: 768px) {
+        max-width: 720px;
+    }
+    
+    @media (min-width: 992px) {
+        max-width: 960px;
+    }
+    
+    @media (min-width: 1200px) {
+        max-width: 1140px;
+    }
+
+    @media (min-width: 1400px) {
+        max-width: 1320px;
+    }
+    
+    & > * {
+        :not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+`;
+
+const data = [
+    {
+        title: 'Ant Design Title 1',
+    },
+    {
+        title: 'Ant Design Title 2',
+    },
+    {
+        title: 'Ant Design Title 3',
+    },
+    {
+        title: 'Ant Design Title 4',
+    },
+];
 
 
 const ButtonWrapper = styled.div`
@@ -56,6 +74,11 @@ const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-bottom: 16px; // 버튼 아래 여백 추가
+`;
+
+const Heading = styled.h2`
+    margin-top: 40px;
+    margin-bottom: 40px;
 `;
 
 
@@ -97,11 +120,11 @@ function MainPage(props) {
         if (userType === 'regular') {
             return (
                 <>
-                    <Nav.Link as={Link} to="/request-expert">전문가에게 첨삭요청하기</Nav.Link>
+                    <Nav.Link as={Link} to="/request-expert">전문가에게 첨삭요청</Nav.Link>
                     {/*이 버튼 누르면 앨리스가 만든 페이지로 이동 가능하게함*/}
-                    <Nav.Link as={Link} to="/ai-main">AI에게 첨삭요청하기</Nav.Link>
-                    <Nav.Link href="#pricing">합격자소서 모아보기</Nav.Link>
-                    <Nav.Link href="#pricing2">보낸 첨삭요청 목록 확인</Nav.Link>
+                    <Nav.Link as={Link} to="/ai-main">AI에게 첨삭요청</Nav.Link>
+                    <Nav.Link href="#pricing">합격자소서 모음집</Nav.Link>
+                    <Nav.Link href="#pricing2">보낸 요청</Nav.Link>
                     {/*일단 임시로 만든 항목이니 나중에 지워도 되니까 신경 안써도 됌*/}
                     <Nav.Link as={Link} to="/Mypage">마이페이지</Nav.Link>
                     <Nav.Link as={Link} to="/login">로그인하기</Nav.Link>
@@ -110,14 +133,14 @@ function MainPage(props) {
         } else if (userType === 'expert') {
             return (
                 <>
-                    <Nav.Link href="#pricing">합격자소서 모아보기</Nav.Link>
-                    <Nav.Link href="#home">받은 첨삭요청 목록 확인</Nav.Link>
+                    <Nav.Link href="#pricing">합격자소서 모음집</Nav.Link>
+                    <Nav.Link href="#home">받은 요청</Nav.Link>
                 </>
             );
         } else {
             return (
                 <>
-                    <Nav.Link href="#pricing">합격자소서 모아보기</Nav.Link>
+                    <Nav.Link href="#pricing">합격자소서 모음집</Nav.Link>
                 </>
             );
         }
@@ -126,46 +149,50 @@ function MainPage(props) {
     const navigate = useNavigate();
 
     return (
-        // <Wrapper>
-        <div>
-            <ButtonWrapper>
-                {userType === null ? (
-                    <>
-                        <Button
-                            title="로그인/회원가입"
-                            onClick={() => {
-                                handleLogin('regular',setUserType);
-                                navigate("/login");
-                            }}
-                        />
-                    </>
-                ) : userType === 'regular' ? (
-                    <>
-                        {/*이 버튼을 어떻게 처리할지 생각해야 할듯 이 버튼때문에 상단바가 깔끔하게 안보이고 위에 공백이 생김*/}
-                        <Button
+
+
+        <>
+            <AI_Header />
+            <AI_Navbar />
+            <Wrapper>
+                <ButtonWrapper>
+                    {userType === null ? (
+                        <>
+                            <Button
+                                title="로그인/회원가입"
+                                onClick={() => {
+                                    handleLogin('regular', setUserType);
+                                    navigate("/login");
+                                }}
+                            />
+                        </>
+                    ) : userType === 'regular' ? (
+                        <>
+                            {/*이 버튼을 어떻게 처리할지 생각해야 할듯 이 버튼때문에 상단바가 깔끔하게 안보이고 위에 공백이 생김*/}
+                            {/* <Button
                             title="마이페이지" // 마이페이지에서 로그아웃 하게 해야하는게 좋을듯? 
                             onClick={() => {
                                 navigate("/mypage");
                             }}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <Button
-                            title="전문가 페이지"
-                            onClick={() => {
-                                navigate("/expert");
-                            }}
-                        />
-                        <Button
-                            title="로그아웃"
-                            onClick={handleLogout}
-                        />
-                    </>
-                )}
-            </ButtonWrapper>
-            {/*<ContainerTmp>*/}
-                <Navbar bg="light" expand="lg">
+                        /> */}
+                        </>
+                    ) : (
+                        <>
+                            <Button
+                                title="전문가 페이지"
+                                onClick={() => {
+                                    navigate("/expert");
+                                }}
+                            />
+                            <Button
+                                title="로그아웃"
+                                onClick={handleLogout}
+                            />
+                        </>
+                    )}
+                </ButtonWrapper>
+                <ContainerTmp>
+                    {/* <Navbar bg="light" expand="lg">
                     <Container>
                         <Navbar.Brand as={Link} to="/">홈</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -175,49 +202,78 @@ function MainPage(props) {
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
-                </Navbar>
-                <br />
-                <br />
-                <Container>
-                    <h3>관심 직업 태그</h3>
-                    <Form>
-                        <Row>
-                            {districts.map(district => (
-                                <Col key={district.name} xs={6} md={4}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        label={district.name}
-                                        name={district.name}
-                                        onChange={handleCheckboxChange}
+                </Navbar> */}
+                    <Heading>관심 분야 전문가 찾기</Heading>
+                    <Container>
+                        <h3>관심 직업 태그</h3>
+                        <p>관심 있는 직업 태그를 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
+                        <Form>
+                            <Row>
+                                {districts.map(district => (
+                                    <Col key={district.name} xs={6} md={4}>
+                                        <Form.Check
+                                            type="checkbox"
+                                            label={district.name}
+                                            name={district.name}
+                                            onChange={handleCheckboxChange}
+                                        />
+                                    </Col>
+                                ))}
+                            </Row>
+                        </Form>
+                        <div style={{ marginTop: '20px' }}>
+                            {renderContent()}
+                        </div>
+                    </Container>
+                    <Container className="py-5">
+                        <h3>첨삭 가능 전문가</h3>
+                        <Card>
+
+                        </Card>
+
+                    </Container>
+                    <Heading>이용자들이 들려주는 서비스 이용 후기</Heading>
+                    <Container className="py-5">
+                        <h3>AI 첨삭 이용 후기</h3>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={(item, index) => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+                                        title={<a href="https://ant.design">{item.title}</a>}
+                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                                     />
-                                </Col>
-                            ))}
-                        </Row>
-                    </Form>
-                    <div style={{ marginTop: '20px' }}>
-                        {renderContent()}
-                    </div>
-                </Container>
-                <Container className="py-5">
-                    <h3>첨삭 가능 멘토 현황</h3>
-                    <Card>
+                                </List.Item>
+                            )}
+                        />
 
-                    </Card>
+                    </Container>
 
-                </Container>
-                <Container className="py-5">
-                    <h3>AI/전문가 첨삭 리뷰 모음집</h3>
-                    <Card>
+                    <Container className="py-5">
+                        <h3>전문가 첨삭 이용 후기</h3>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={(item, index) => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+                                        title={<a href="https://ant.design">{item.title}</a>}
+                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                    />
+                                </List.Item>
+                            )}
+                        />
 
-                    </Card>
-
-                </Container>
+                    </Container>
 
 
 
-        {/*    </ContainerTmp>*/}
-        {/*// </Wrapper>*/}
-</div>
+                </ContainerTmp>
+            </Wrapper>
+        </>
     );
 }
 
