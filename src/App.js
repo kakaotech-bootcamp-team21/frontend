@@ -5,11 +5,8 @@ import {
     Route, Link, useNavigate, useLocation
 
 } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 //css
-import './css_ai/AIMain.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
 //pages
@@ -23,7 +20,6 @@ import RequestExpert from "./pages/expert/RequestExpertPage";
 import HowToEdit from "./pages/expert/HowToEditPage";
 import ExpertInfoPage from "./pages/expert/ExpertInfoPage";
 import ExpertSubmitPage from "./pages/expert/ExpertSubmitPage";
-import RequestStatusPage from "./pages/status/RequestStatusPage";
 
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
@@ -42,6 +38,7 @@ import AILayout from "./pages/ai/AILayout";
 import Chatroom from "./pages/ai/Chatroom";
 import Chatting from "./pages/ai/Chatting";
 import PassList from "./pages/ai/PassList";
+import RequestStatusPage from "./pages/status/RequestStatusPage";
 
 
 const MainTitleText = styled.p`
