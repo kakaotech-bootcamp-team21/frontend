@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BellIcon, UserIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-// import '../../App.css';
+import '../../App.css';
 import InfoPage from '../../pages/ai/InfoPage';
 import SubmitPage from '../../pages/ai/SubmitPage';
 import Mypage from '../../pages/ai/Mypage';
@@ -15,7 +15,7 @@ function AI_Header() {
                 <HomeIcon className="icon" />
             </Link>
           <BellIcon className="icon" />
-          <Link to="/Mypage">
+          <Link to="/mypage">
             <UserIcon className="icon" />
           </Link>
         </div>
@@ -25,6 +25,5 @@ function AI_Header() {
       </header>
     );
   }
-  export default AI_Header;
 
-  
+  export default AI_Header;

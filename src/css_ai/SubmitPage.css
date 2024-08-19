@@ -1,9 +1,71 @@
 .submit-page-container
 {
     font-family: 'Gowun Batang', serif;
-    margin-top:50px;
+    margin: 0px auto;
+    padding: 30px;
+    /* border: 1px solid #ccc;
+    border-radius: 8px; */
+    position: relative;
+    width: 90%;
+}
+.submit-page-question-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+.submit-page-form-field {
+    color: #000000;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+}
+.submit-page-form-field input{
+    width: 100%;
+    padding: 9px;
+    margin-top: 2px;
+}
+.submit-page-form-field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333333;
+    border-radius: 0;
+    margin-bottom: 33px;
 }
 
+.submit-page-remove-button {
+    background-color: #e16868;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 85px;
+    height: 35px;
+    font-size: 15px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.submit-page-add-button {
+    background-color: #5b8cb7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 85px;
+    height: 35px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.submit-page-additional-title {
+    font-family: 'Gowun Batang', serif;
+    font-weight: bold;
+    color: red;
+    font-size: 20px;
+    text-align: left;
+    margin-top: 30px;
+}
 .submit-page-submit-title{
     font-weight: bold;
     text-align: center;

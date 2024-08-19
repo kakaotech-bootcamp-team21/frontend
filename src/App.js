@@ -5,7 +5,7 @@ import {
     Route, Link, useNavigate, useLocation
 
 } from "react-router-dom";
-// import styled from "styled-components";
+import styled from "styled-components";
 //css
 import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
@@ -16,11 +16,15 @@ import SignUpPage from "./pages/login/SignUpPage";
 import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
 import RedirectPage from "./pages/login/RedirectPage";
 
-import RequestExpert from "./pages/expert/RequestExpert";
-import HowToEdit from "./pages/expert/HowToEdit";
+import RequestExpert from "./pages/expert/RequestExpertPage";
+import HowToEdit from "./pages/expert/HowToEditPage";
+import ExpertInfoPage from "./pages/expert/ExpertInfoPage";
+import ExpertSubmitPage from "./pages/expert/ExpertSubmitPage";
+
 
 import AuthVerificationPage from "./pages/login/AuthVerificationPage";
 import UserInfoPage from "./pages/login/UserInfoPage";
+import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
 
 // 앨리스가 만든 페이지들
 import AIMain from "./pages/ai/AIMain";
@@ -34,6 +38,25 @@ import AILayout from "./pages/ai/AILayout";
 import Chatroom from "./pages/ai/Chatroom";
 import Chatting from "./pages/ai/Chatting";
 import PassList from "./pages/ai/PassList";
+import RequestStatusPage from "./pages/status/RequestStatusPage";
+
+
+const MainTitleText = styled.p`
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+`;
+
+const StyledButton = styled.button`
+    background-color: #4682B4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 5px;
+`;
 
 function App(props) {
     const [user, setUser] = useState(null);
@@ -70,11 +93,8 @@ function App(props) {
     };
 
     return (
-
-
-
+        <div>
             <Routes>
-
                 <Route path="/" element={<MainPage />} />
 
                 {/*로그인 및 회원가입*/}
@@ -89,6 +109,8 @@ function App(props) {
                 {/*전문가 첨삭*/}
                 <Route path="/request-expert" element={<RequestExpert />} />
                 <Route path="/how-to-edit" element={<HowToEdit />} />
+                <Route path="/expert-info" element={<ExpertInfoPage />} />
+                <Route path="/expert-submit" element={<ExpertSubmitPage />} />
 
                 {/*ai 패이지*/}
 
@@ -104,8 +126,11 @@ function App(props) {
                     <Route path="/chat-room" element={<Chatroom />} />
                     <Route path="/video-chat" element={<VideoChat />} />
 
-          </Routes>
+                {/*첨삭 요청 현황*/}
+                <Route path="/request-status" element={<RequestStatusPage />} />
 
+          </Routes>
+     </div>
   );
 }
 
