@@ -1,0 +1,155 @@
+.mypage-container {
+    font-family: 'Gowun Batang', serif; 
+    display: flex; 
+    justify-content: center; 
+    margin: 20px; 
+}
+
+.mypage-title {
+    margin-top: 20px;  
+    margin-bottom: 20px;  
+    font-size: 30px;  
+    font-weight: bold; 
+    width: 100%; 
+    text-align: center; 
+}  
+
+.mypage-sidebar {
+    width: 300px; 
+    border-right: 2px solid #ccc; 
+    padding: 20px; 
+    font-size: 17px; 
+}
+
+.mypage-menu-item {
+    margin-bottom: 15px; 
+    margin-top: 10px; 
+    cursor: pointer; 
+    text-align: left; 
+}
+
+.mypage-menu-subitem {
+    margin-bottom: 20px; 
+    cursor: pointer; 
+    text-align: left; 
+    margin-left: 20px;  
+}
+
+.mypage-profile-container {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    width: 100%; 
+    padding: 0 10px; 
+}
+
+.mypage-profile-picture {
+    position: left;  
+    top: 20px; 
+    margin-right:-50px; 
+    margin-left:-20px; 
+}
+  
+.mypage-profile-picture img {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 75px;  
+    object-fit: cover; 
+    margin-bottom: 10%; 
+}
+
+/* .profile-picture input {
+    display: block;
+}   */
+.mypage-profile-container {
+    flex-grow: 1; 
+    padding: 0 200px; 
+    text-align: center; 
+    gap:20%; 
+}
+
+.mypage-profile-form {
+    display: flex; 
+    flex-direction: column; 
+    width: 80%; 
+    margin-top: 100px; 
+}
+
+.mypage-profile-form label {
+    display: block; 
+    margin-bottom: 10px; 
+} 
+
+.mypage-profile-form input,
+.mypage-profile-form textarea {
+  width: 100%;  
+  padding: 8px;  
+  margin-top: 5px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+.mypage-profile-container h1 {
+    margin-bottom: 20px; 
+}
+  
+.mypage-profile-container form label {
+    display: block; 
+    margin-bottom: 10px; 
+}
+  
+.mypage-profile-container form input,
+.mypage-profile-container form textarea {
+    width: 100%; 
+    padding: 8px; 
+    margin-bottom:30px; 
+    margin-top: 5px; 
+}
+  
+.mypage-profile-container form .mypage-example label, label {
+    margin-right: 10px; 
+    text-align: left; 
+}
+  
+.profile-container form button {
+    padding: 10px 20px; 
+    background-color: #5b8cb7; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    margin-top: 20px; 
+}
+  
+.mypage-profile-container form button:hover {
+    background-color: #242d42; 
+}
+
+input[type="file"] {
+    border: 1px solid #ccc;  
+    padding: 5px; 
+    margin-bottom: 20px;  
+}
+
+.mypage-button-container {
+    text-align: center; 
+    margin-top: 20px; 
+    width:100%; 
+    justify-self: center; 
+}
+
+.mypage-submit-button {
+    background-color: #5b8cb7; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    padding: 8px 20px; 
+    font-size: 16px; 
+}
+
+.mypage-submit-button:hover {
+    background-color: #242d42; 
+    color : white; 
+}
+

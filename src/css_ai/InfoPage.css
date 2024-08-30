@@ -1,0 +1,136 @@
+.infopage-container {
+    font-family: 'Gowun Batang', serif;
+    margin: 0px auto;
+    padding: 30px;
+    /* border: 1px solid #ccc;
+    border-radius: 8px; */
+    position: relative;
+    width: 90%;
+}
+.infopage-question-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.infopage-title{
+    font-family: 'Gowun Batang', serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+.infopage-additional-title{
+    font-family: 'Gowun Batang', serif;
+    font-weight: bold;
+    color:red;
+    font-size:20px;
+    text-align: left;
+    margin-top: 30px;
+}
+.infopage-alert-message {
+    color:red;
+    font-weight: bold;
+    text-align: left;
+}
+.infopage-portfolio-field {
+    margin: 5fpx;
+    padding: 5%;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    text-align: center;
+}
+.infopage-portfolio-text {
+    margin-top:50px;
+    color:#000000;
+    font-weight: bold;
+    text-align: left;;
+}
+.infopage-form-field {
+    color:#000000;
+    width:100%;
+    margin-bottom: 10px;
+    text-align: left;
+    position: relative;
+}
+
+.infopage-form-field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333333;
+    border-radius: 0;
+    margin-bottom: 33px;
+}
+.infopage-form-field label {
+    font-weight: bold;
+    display: block; 
+    margin-bottom: 5px; 
+}
+.infopage-form-field input,
+.infopage-form-field button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 2px;
+}
+.infopage-buttons {
+    position: flex; 
+    justify-content: center;
+    display: flex;
+    align-items: center; 
+    margin-top:20px;
+    gap: 5px;
+}
+
+.infopage-add-button{
+    background-color: #5b8cb7;
+    color: white;
+    border: black;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 85px;
+    height: 35px;
+    font-size: 15px;
+}
+.infopage-submit-button {
+    background-color: #5b8cb7;
+    color: white;
+    border: black;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+    font-size: 20px;
+}
+.infopage-remove-button {
+    background-color: #e16868;
+    color: white;
+    border: black;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 85px;
+    height: 35px;
+    font-size: 15px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.infopage-save-button{
+    font-family: 'Gowun Batang', serif;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-color: rgb(81, 120, 151);
+    border-radius: 4px;
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+    font-size: 18px;
+}
+.infopage-save-button:hover, .submit-button:hover, .infopage-add-button:hover, .infopage-remove-button:hover{
+    background-color: #242d42;
+    color : white;
+}
+
+.infopage-form-field label {
+    font-weight: bold;
+}
