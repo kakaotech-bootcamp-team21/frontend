@@ -88,17 +88,37 @@ function MainPage(props) {
     });
 
     const [categories, setCategories] = useState([]);
+    const [industries, setIndustries] = useState([]);
 
-    const [selectedDistricts, setSelectedDistricts] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedIndustries, setSelectedIndustries] = useState([]);
+
+    const fetchIndustries = async (id) => {
+        try{
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get(`http://localhost:8080/api/categories/${id}/industries`, {
+            });
+            setIndustries(response.data.industries);
+            console.log('response industries: ', industries)
+        } catch (error) {
+            console.error("Error fetching industries: ", error);
+        }
+    }
 
     const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
+        console.log('event.target: ', event.target)
+        const { id, checked } = event.target;
         if (checked) {
-            setSelectedDistricts([...selectedDistricts, name]);
+            console.log('checked id: ', id)
+            fetchIndustries(id)
+            // setSelectedCategories([...selectedCategories, id]);
+            setSelectedIndustries([...selectedIndustries, id])
         } else {
-            setSelectedDistricts(selectedDistricts.filter(district => district !== name));
+            setSelectedIndustries(selectedIndustries.filter(industry => industry !== id));
         }
     };
+
+
 
     const fetchCategories = async () => {
         try {
@@ -106,7 +126,7 @@ function MainPage(props) {
             const response = await axios.get("http://localhost:8080/api/categories", {
             });
             setCategories(response.data.categories);
-            console.log('response: ', response.data.categories)
+            console.log('response categories: ', categories)
         } catch (error) {
             console.error("Error fetching categories: ", error);
         }
@@ -116,13 +136,15 @@ function MainPage(props) {
         fetchCategories();
     }, []);
 
+    
+
     const renderContent = () => {
-        return categories
-            .filter(district => selectedDistricts.includes(district.name))
-            .map(district => (
-                <div key={district.name}>
-                    <h3>{district.name}</h3>
-                    <p>{district.content}</p>
+        return industries
+            .filter(industry => selectedIndustries.includes(industry.id))
+            .map(industry => (
+                <div key={industry.id}>
+                    <h3>{industry.name}</h3>
+                    <p>{industry.content}</p>
                 </div>
             ));
     };
@@ -215,16 +237,18 @@ function MainPage(props) {
                     </Container>
                 </Navbar> */}
                     <Heading>관심 분야 전문가 찾기</Heading>
+                    <p>관심 있는 카테고리와 관련 산업을 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                     <Container>
-                        <h3>관심 산업</h3>
+                        <h3>관심 카테고리</h3>
                         <br></br>
-                        <p>관심 있는 산업을 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
+                        
                         <Form>
                             <Row>
                                 {categories.map(category => (
                                     <Col key={category.name} xs={6} md={4}>
                                         <Form.Check
                                             type="checkbox"
+                                            id = {category.id}
                                             label={category.name}
                                             name={category.name}
                                             onChange={handleCheckboxChange}
@@ -234,7 +258,27 @@ function MainPage(props) {
                             </Row>
                         </Form>
                         <div style={{ marginTop: '20px' }}>
-                            {renderContent()}
+                            <h3>카테고리 관련 산업</h3>
+                            {renderContent()
+                            
+                            }
+                             <Form>
+                                <Row>
+                                    {industries.map(industry=> (
+                                        <Col key={industry.name} xs={6} md={4}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                id = {industry.id}
+                                                label={industry.name}
+                                                name={industry.name}
+                                                // onChange={handleCheckboxChange}
+                                            />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Form>
+
+
                         </div>
                     </Container>
                     <Container className="py-5">
