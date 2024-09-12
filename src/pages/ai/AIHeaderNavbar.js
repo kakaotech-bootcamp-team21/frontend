@@ -13,7 +13,7 @@ function AI_Header() {
                     <UserIcon className="icon" />
                 </Link>
             </div>
-            <div class="nine">
+            <div className="nine">
                 <h1>Logo<span>Personal statement editing system</span></h1>
             </div>
         </header>
