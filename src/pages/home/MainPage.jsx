@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/buttons/Button";
 //import NavBar from "../ui/Navbar";
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
 import { handleLogin, handleLogout } from '../../utils/auth';
@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import AI_Header from "../../components/headers/Header";
 import AI_Navbar from '../../components/navbars/AiNavbar';
 import { Avatar, List } from 'antd';
+import axios from 'axios';
 
 
 const Wrapper = styled.div`
@@ -81,37 +82,69 @@ const Heading = styled.h2`
     margin-bottom: 40px;
 `;
 
-
-const districts = [
-    { name: 'IT/인ss터넷', content: 'IT/인터넷의 정보입니다.' },
-    { name: '연구개발/설계', content: '연구개발/설계의 정보입니다.' },
-    { name: '의료', content: '의료의 정보입니다.' },
-    { name: '전문/특수직', content: '전문/특수직의 정보입니다.' },
-];
-
 function MainPage(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
     });
 
-    const [selectedDistricts, setSelectedDistricts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [industries, setIndustries] = useState([]);
+
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedIndustries, setSelectedIndustries] = useState([]);
+
+    const fetchIndustries = async (id) => {
+        try{
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get(`http://localhost:8080/api/categories/${id}/industries`, {
+            });
+            setIndustries(response.data.industries);
+            console.log('response industries: ', industries)
+        } catch (error) {
+            console.error("Error fetching industries: ", error);
+        }
+    }
 
     const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
+        console.log('event.target: ', event.target)
+        const { id, checked } = event.target;
         if (checked) {
-            setSelectedDistricts([...selectedDistricts, name]);
+            console.log('checked id: ', id)
+            fetchIndustries(id)
+            // setSelectedCategories([...selectedCategories, id]);
+            setSelectedIndustries([...selectedIndustries, id])
         } else {
-            setSelectedDistricts(selectedDistricts.filter(district => district !== name));
+            setSelectedIndustries(selectedIndustries.filter(industry => industry !== id));
         }
     };
 
+
+
+    const fetchCategories = async () => {
+        try {
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get("http://localhost:8080/api/categories", {
+            });
+            setCategories(response.data.categories);
+            console.log('response categories: ', categories)
+        } catch (error) {
+            console.error("Error fetching categories: ", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
+    
+
     const renderContent = () => {
-        return districts
-            .filter(district => selectedDistricts.includes(district.name))
-            .map(district => (
-                <div key={district.name}>
-                    <h3>{district.name}</h3>
-                    <p>{district.content}</p>
+        return industries
+            .filter(industry => selectedIndustries.includes(industry.id))
+            .map(industry => (
+                <div key={industry.id}>
+                    <h3>{industry.name}</h3>
+                    <p>{industry.content}</p>
                 </div>
             ));
     };
@@ -204,17 +237,20 @@ function MainPage(props) {
                     </Container>
                 </Navbar> */}
                     <Heading>관심 분야 전문가 찾기</Heading>
+                    <p>관심 있는 카테고리와 관련 산업을 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                     <Container>
-                        <h3>관심 직업 태그</h3>
-                        <p>관심 있는 직업 태그를 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
+                        <h3>관심 카테고리</h3>
+                        <br></br>
+                        
                         <Form>
                             <Row>
-                                {districts.map(district => (
-                                    <Col key={district.name} xs={6} md={4}>
+                                {categories.map(category => (
+                                    <Col key={category.name} xs={6} md={4}>
                                         <Form.Check
                                             type="checkbox"
-                                            label={district.name}
-                                            name={district.name}
+                                            id = {category.id}
+                                            label={category.name}
+                                            name={category.name}
                                             onChange={handleCheckboxChange}
                                         />
                                     </Col>
@@ -222,7 +258,27 @@ function MainPage(props) {
                             </Row>
                         </Form>
                         <div style={{ marginTop: '20px' }}>
-                            {renderContent()}
+                            <h3>카테고리 관련 산업</h3>
+                            {renderContent()
+                            
+                            }
+                             <Form>
+                                <Row>
+                                    {industries.map(industry=> (
+                                        <Col key={industry.name} xs={6} md={4}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                id = {industry.id}
+                                                label={industry.name}
+                                                name={industry.name}
+                                                // onChange={handleCheckboxChange}
+                                            />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Form>
+
+
                         </div>
                     </Container>
                     <Container className="py-5">

@@ -18,9 +18,9 @@ function CardExample({ props }) {
                 <ListGroup.Item>전문가 분야/직업군</ListGroup.Item>
             </ListGroup>
             <Card.Body>
-                <p>채팅 평균 응답 시간</p>
-                <Card.Link as={Link} to="/how-to-edit">첨삭 요청하기</Card.Link>
-                <Card.Link as={Link} to="/how-to-edit">채팅</Card.Link>
+                {/* <p>채팅 평균 응답 시간</p> */}
+                <Card.Link as={Link} to="/how-to-edit">첨삭요청하기</Card.Link>
+                <Card.Link as={Link} to="/how-to-edit">채팅하기</Card.Link>
             </Card.Body>
         </Card>
         
