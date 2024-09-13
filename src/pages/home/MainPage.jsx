@@ -13,6 +13,7 @@ import AI_Header from "../../components/headers/Header";
 import AI_Navbar from '../../components/navbars/AiNavbar';
 import { Avatar, List } from 'antd';
 import axios from 'axios';
+import CardExample from "../../components/Card";
 
 
 const Wrapper = styled.div`
@@ -89,9 +90,11 @@ function MainPage(props) {
 
     const [categories, setCategories] = useState([]);
     const [industries, setIndustries] = useState([]);
+    const [experts, setExperts] = useState([]);
 
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedIndustries, setSelectedIndustries] = useState([]);
+    const [selectedExperts, setSelectedExperts] = useState([]);
 
     const fetchIndustries = async (id) => {
         try{
@@ -105,6 +108,18 @@ function MainPage(props) {
         }
     }
 
+    const fetchExperts = async (id) => {
+        console.log('되긴하니?: ',id)
+        try{
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get(`http://localhost:8080/api/industries/${id}/specialUsers`, {
+            });
+            setExperts(response.data.specialists);
+        } catch (error) {
+            console.error("Error fetching experts: ", error);
+        }
+    }
+
     const handleCheckboxChange = (event) => {
         console.log('event.target: ', event.target)
         const { id, checked } = event.target;
@@ -115,6 +130,18 @@ function MainPage(props) {
             setSelectedIndustries([...selectedIndustries, id])
         } else {
             setSelectedIndustries(selectedIndustries.filter(industry => industry !== id));
+        }
+    };
+
+    const handleCheckboxChangeIndustry = (event) => {
+        console.log('event.target: ', event.target)
+        const { id, checked } = event.target;
+        if (checked) {
+            console.log('checked id: ', id)
+            fetchExperts(id)
+            setExperts([...selectedExperts, id])
+        } else {
+            setExperts(selectedExperts.filter(expert => expert !== id));
         }
     };
 
@@ -136,18 +163,14 @@ function MainPage(props) {
         fetchCategories();
     }, []);
 
-    
+    useEffect(() => {
+        console.log('Updated experts: ', industries);
+    }, [industries]);
 
-    const renderContent = () => {
-        return industries
-            .filter(industry => selectedIndustries.includes(industry.id))
-            .map(industry => (
-                <div key={industry.id}>
-                    <h3>{industry.name}</h3>
-                    <p>{industry.content}</p>
-                </div>
-            ));
-    };
+
+    useEffect(() => {
+        console.log('Updated experts: ', experts);
+    }, [experts]);
 
     const renderNavLinks = () => {
         if (userType === 'regular') {
@@ -259,9 +282,6 @@ function MainPage(props) {
                         </Form>
                         <div style={{ marginTop: '20px' }}>
                             <h3>카테고리 관련 산업</h3>
-                            {renderContent()
-                            
-                            }
                              <Form>
                                 <Row>
                                     {industries.map(industry=> (
@@ -271,7 +291,7 @@ function MainPage(props) {
                                                 id = {industry.id}
                                                 label={industry.name}
                                                 name={industry.name}
-                                                // onChange={handleCheckboxChange}
+                                                onChange={handleCheckboxChangeIndustry}
                                             />
                                         </Col>
                                     ))}
@@ -283,10 +303,20 @@ function MainPage(props) {
                     </Container>
                     <Container className="py-5">
                         <h3>첨삭 가능 전문가</h3>
-                        <Card>
-
-                        </Card>
-
+                        {experts.length > 0 ? (
+                            experts.map((expert, index) => (
+                                <CardExample 
+                                    key = {index} 
+                                    nickname={expert.nickname}
+                                    profile={expert.profile}
+                                    industries={expert.industry}
+                                    occupation={expert.occupation}
+                                >
+                                </CardExample>
+                            ))
+                        ) : (
+                            <p>선택된 산업에 전문가가 없습니다. </p>
+                        )}
                     </Container>
                     <Heading>이용자들이 들려주는 서비스 이용 후기</Heading>
                     <Container className="py-5">

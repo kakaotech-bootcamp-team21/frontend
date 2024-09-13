@@ -20,7 +20,7 @@ function AI_Header() {
           </Link>
         </div>
         <div class="nine">
-          <h1>Logo<span>Personal statement editing system</span></h1>
+          <h1>Cover Letter<span>Personal statement editing system</span></h1>
         </div>
       </header>
     );
