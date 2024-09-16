@@ -83,6 +83,10 @@ const Heading = styled.h2`
     margin-bottom: 40px;
 `;
 
+const StyleRow = styled(Row)`
+    gap: 16px;
+`;
+
 function MainPage(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
@@ -90,11 +94,11 @@ function MainPage(props) {
 
     const [categories, setCategories] = useState([]);
     const [industries, setIndustries] = useState([]);
-    const [experts, setExperts] = useState([]);
+    const [experts, setExperts] = useState({});
 
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedIndustries, setSelectedIndustries] = useState([]);
-    const [selectedExperts, setSelectedExperts] = useState([]);
+    const [selectedExperts, setSelectedExperts] = useState();
 
     const fetchIndustries = async (id) => {
         try{
@@ -109,24 +113,25 @@ function MainPage(props) {
     }
 
     const fetchExperts = async (id) => {
-        console.log('되긴하니?: ',id)
         try{
-            // axios 사용해 백엔드 API 호출
             const response = await axios.get(`http://localhost:8080/api/industries/${id}/specialUsers`, {
             });
-            setExperts(response.data.specialists);
+            // setExperts((prevExperts) => [...prevExperts, ...response.data.specialists]);
+            setExperts((prevExperts) => ({
+                ...prevExperts, // 기존의 다른 산업의 전문가들을 유지
+                [id]: response.data.specialists, // 새로운 산업 전문가들 추가
+            }));
         } catch (error) {
             console.error("Error fetching experts: ", error);
         }
     }
 
-    const handleCheckboxChange = (event) => {
+    const handleCheckboxChangeCategory = (event) => {
         console.log('event.target: ', event.target)
         const { id, checked } = event.target;
         if (checked) {
             console.log('checked id: ', id)
             fetchIndustries(id)
-            // setSelectedCategories([...selectedCategories, id]);
             setSelectedIndustries([...selectedIndustries, id])
         } else {
             setSelectedIndustries(selectedIndustries.filter(industry => industry !== id));
@@ -134,14 +139,21 @@ function MainPage(props) {
     };
 
     const handleCheckboxChangeIndustry = (event) => {
-        console.log('event.target: ', event.target)
-        const { id, checked } = event.target;
+        // HTML의 data- 속성을 사용하여 커스텀 데이터를 가져오는 방식
+        // JavaScript를 통해 쉽게 접근할 수 있음
+        const industryId = event.target.getAttribute('data-industry-id');
+        const checked = event.target.checked;
+
         if (checked) {
-            console.log('checked id: ', id)
-            fetchExperts(id)
-            setExperts([...selectedExperts, id])
+            console.log('checked industry id: ', industryId);
+            fetchExperts(industryId);
         } else {
-            setExperts(selectedExperts.filter(expert => expert !== id));
+            // 체크 해제 시 해당 산업의 전문가를 삭제함
+            setExperts((prevExperts) => {
+                // industryId를 키로 가지는 항목을 추출하여 _에 할당
+                const { [industryId]: _, ...restExperts } = prevExperts;
+                return restExperts;
+            });
         }
     };
 
@@ -164,7 +176,7 @@ function MainPage(props) {
     }, []);
 
     useEffect(() => {
-        console.log('Updated experts: ', industries);
+        console.log('Updated industries: ', industries);
     }, [industries]);
 
 
@@ -274,7 +286,7 @@ function MainPage(props) {
                                             id = {category.id}
                                             label={category.name}
                                             name={category.name}
-                                            onChange={handleCheckboxChange}
+                                            onChange={handleCheckboxChangeCategory}
                                         />
                                     </Col>
                                 ))}
@@ -288,7 +300,8 @@ function MainPage(props) {
                                         <Col key={industry.name} xs={6} md={4}>
                                             <Form.Check
                                                 type="checkbox"
-                                                id = {industry.id}
+                                                // {industry.id} 값을 커스텀 속성으로 저장
+                                                data-industry-id = {industry.id}
                                                 label={industry.name}
                                                 name={industry.name}
                                                 onChange={handleCheckboxChangeIndustry}
@@ -303,20 +316,20 @@ function MainPage(props) {
                     </Container>
                     <Container className="py-5">
                         <h3>첨삭 가능 전문가</h3>
-                        {experts.length > 0 ? (
-                            experts.map((expert, index) => (
-                                <CardExample 
-                                    key = {index} 
-                                    nickname={expert.nickname}
-                                    profile={expert.profile}
-                                    industries={expert.industry}
-                                    occupation={expert.occupation}
-                                >
-                                </CardExample>
-                            ))
-                        ) : (
-                            <p>선택된 산업에 전문가가 없습니다. </p>
-                        )}
+                        <StyleRow>
+                            {Object.keys(experts).map((industryId) => (
+                                experts[industryId].map((expert) => (
+                                    <CardExample 
+                                        key = {expert.id} 
+                                        nickname={expert.nickname}
+                                        profile={expert.profile}
+                                        industries={expert.industry}
+                                        occupation={expert.occupation}
+                                    >
+                                    </CardExample>
+                                ))
+                            ))}
+                        </StyleRow>
                     </Container>
                     <Heading>이용자들이 들려주는 서비스 이용 후기</Heading>
                     <Container className="py-5">
