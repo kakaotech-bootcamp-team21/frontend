@@ -106,6 +106,7 @@ function MainPage(props) {
             const response = await axios.get(`http://localhost:8080/api/categories/${id}/industries`, {
             });
             setIndustries(response.data.industries);
+            
             console.log('response industries: ', industries)
         } catch (error) {
             console.error("Error fetching industries: ", error);
