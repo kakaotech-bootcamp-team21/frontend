@@ -11,6 +11,7 @@ import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
 //pages
 import MainPage from './pages/home/MainPage';
+import MainPage2 from './pages/home/MainPage2';
 import LoginPage from "./pages/login/LoginPage";
 import SignUpPage from "./pages/login/SignUpPage";
 import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
@@ -95,7 +96,7 @@ function App(props) {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<MainPage />} />
+                <Route path="/" element={<MainPage2 />} />
 
                 {/*로그인 및 회원가입*/}
                 <Route path="/login" element={<LoginPage />} />
