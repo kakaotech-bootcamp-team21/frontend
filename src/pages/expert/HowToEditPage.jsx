@@ -235,8 +235,6 @@ function HowToEdit(props) {
     return (
 
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
                 {/* <ContainerTmp>
                     <Navbar bg="light" expand="lg">
