@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, Button, Row, Col} from 'react-bootstrap';
 import styled from "styled-components";
+import axios from "axios";
 
 const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
 const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 const kakaolink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const StyledContainer = styled(Container)`
   background-color: #FFFFFF;
@@ -39,21 +42,28 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // 추가: 폼 제출 기본 동작 방지
-        // 로컬 스토리지에서 사용자 정보 가져오기, 추후 서버구현 해야함
-        const storedUserInfo = JSON.parse(localStorage.getItem('tempUserInfo'));
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        if (storedUserInfo && storedUserInfo.name === name && storedUserInfo.password === password) {
-            console.log('Login successful');
-            // 수정: 전체 사용자 정보를 그대로 유지
-            localStorage.setItem('userInfo', JSON.stringify(storedUserInfo));
-            localStorage.removeItem('tempUserInfo');
-            navigate('/');
-        } else {
+        try {
+            // 백엔드 로그인 API 호출
+            const response = await axios.post(`${API_BASE_URL}/api/users/login`, {
+                email: name,
+                password: password
+            });
+
+            if (response.status === 200) {
+                console.log('Login successful');
+                // 실제 서버에서 받은 유저 정보를 로컬 스토리지에 저장
+                localStorage.setItem('userInfo', JSON.stringify(response.data));
+                navigate('/');
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
             alert('로그인 정보가 일치하지 않습니다.');
         }
     };
+
 
     const handleKakaoLogin = () => {
         window.location.href = kakaolink;
