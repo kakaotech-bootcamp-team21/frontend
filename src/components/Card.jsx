@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function CardExample({ nickname, profile, industries, occupation }) {
     return (
-        <Card style={{ width: '12rem' }}>
+        <Card style={{ width: '17rem' }}>
             <Card.Img variant="top" src="/man.png" />
             <Card.Body>
                 <Card.Title>{nickname || "닉네임"}</Card.Title>
