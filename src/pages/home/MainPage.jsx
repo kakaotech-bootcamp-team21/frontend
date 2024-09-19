@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/buttons/Button";
 //import NavBar from "../ui/Navbar";
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
 import { handleLogin, handleLogout } from '../../utils/auth';
@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import AI_Header from "../../components/headers/Header";
 import AI_Navbar from '../../components/navbars/AiNavbar';
 import { Avatar, List } from 'antd';
-import axios from 'axios';
 
 
 const Wrapper = styled.div`
@@ -106,11 +105,7 @@ function MainPage(props) {
         }
     };
 
-
-
-
     const renderContent = () => {
-        // 원래 industries 였음
         return districts
             .filter(district => selectedDistricts.includes(district.name))
             .map(district => (
@@ -120,17 +115,6 @@ function MainPage(props) {
                 </div>
             ));
     };
-    //기존버전
-    // const renderContent = () => {
-    //     return industries
-    //         .filter(industry => selectedIndustries.includes(industry.id))
-    //         .map(industry => (
-    //             <div key={industry.id}>
-    //                 <h3>{industry.name}</h3>
-    //                 <p>{industry.content}</p>
-    //             </div>
-    //         ));
-    // };
 
     const renderNavLinks = () => {
         if (userType === 'regular') {
@@ -225,7 +209,6 @@ function MainPage(props) {
                         <p>관심 있는 직업 태그를 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                         <Form>
                             <Row>
-                                {/*categories 가 districts 로 바뀜*/}
                                 {districts.map(district => (
                                     <Col key={district.name} xs={6} md={4}>
                                         <Form.Check
