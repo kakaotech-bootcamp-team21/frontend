@@ -82,39 +82,27 @@ const Heading = styled.h2`
     margin-bottom: 40px;
 `;
 
+
+const districts = [
+    { name: 'IT/인ss터넷', content: 'IT/인터넷의 정보입니다.' },
+    { name: '연구개발/설계', content: '연구개발/설계의 정보입니다.' },
+    { name: '의료', content: '의료의 정보입니다.' },
+    { name: '전문/특수직', content: '전문/특수직의 정보입니다.' },
+];
+
 function MainPage(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
     });
 
-    const [categories, setCategories] = useState([]);
-    const [industries, setIndustries] = useState([]);
-
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedIndustries, setSelectedIndustries] = useState([]);
-
-    const fetchIndustries = async (id) => {
-        try{
-            // axios 사용해 백엔드 API 호출
-            const response = await axios.get(`http://localhost:8080/api/categories/${id}/industries`, {
-            });
-            setIndustries(response.data.industries);
-            console.log('response industries: ', industries)
-        } catch (error) {
-            console.error("Error fetching industries: ", error);
-        }
-    }
+    const [selectedDistricts, setSelectedDistricts] = useState([]);
 
     const handleCheckboxChange = (event) => {
-        console.log('event.target: ', event.target)
-        const { id, checked } = event.target;
+        const { name, checked } = event.target;
         if (checked) {
-            console.log('checked id: ', id)
-            fetchIndustries(id)
-            // setSelectedCategories([...selectedCategories, id]);
-            setSelectedIndustries([...selectedIndustries, id])
+            setSelectedDistricts([...selectedDistricts, name]);
         } else {
-            setSelectedIndustries(selectedIndustries.filter(industry => industry !== id));
+            setSelectedDistricts(selectedDistricts.filter(district => district !== name));
         }
     };
 
@@ -136,18 +124,30 @@ function MainPage(props) {
         fetchCategories();
     }, []);
 
-    
+
 
     const renderContent = () => {
-        return industries
-            .filter(industry => selectedIndustries.includes(industry.id))
-            .map(industry => (
-                <div key={industry.id}>
-                    <h3>{industry.name}</h3>
-                    <p>{industry.content}</p>
+        // 원래 industries 였음
+        return districts
+            .filter(district => selectedDistricts.includes(district.name))
+            .map(district => (
+                <div key={district.name}>
+                    <h3>{district.name}</h3>
+                    <p>{district.content}</p>
                 </div>
             ));
     };
+    //기존버전
+    // const renderContent = () => {
+    //     return industries
+    //         .filter(industry => selectedIndustries.includes(industry.id))
+    //         .map(industry => (
+    //             <div key={industry.id}>
+    //                 <h3>{industry.name}</h3>
+    //                 <p>{industry.content}</p>
+    //             </div>
+    //         ));
+    // };
 
     const renderNavLinks = () => {
         if (userType === 'regular') {
@@ -237,20 +237,18 @@ function MainPage(props) {
                     </Container>
                 </Navbar> */}
                     <Heading>관심 분야 전문가 찾기</Heading>
-                    <p>관심 있는 카테고리와 관련 산업을 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                     <Container>
-                        <h3>관심 카테고리</h3>
-                        <br></br>
-                        
+                        <h3>관심 직업 태그</h3>
+                        <p>관심 있는 직업 태그를 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                         <Form>
                             <Row>
-                                {categories.map(category => (
-                                    <Col key={category.name} xs={6} md={4}>
+                                {/*categories 가 districts 로 바뀜*/}
+                                {districts.map(district => (
+                                    <Col key={district.name} xs={6} md={4}>
                                         <Form.Check
                                             type="checkbox"
-                                            id = {category.id}
-                                            label={category.name}
-                                            name={category.name}
+                                            label={district.name}
+                                            name={district.name}
                                             onChange={handleCheckboxChange}
                                         />
                                     </Col>
@@ -258,27 +256,7 @@ function MainPage(props) {
                             </Row>
                         </Form>
                         <div style={{ marginTop: '20px' }}>
-                            <h3>카테고리 관련 산업</h3>
-                            {renderContent()
-                            
-                            }
-                             <Form>
-                                <Row>
-                                    {industries.map(industry=> (
-                                        <Col key={industry.name} xs={6} md={4}>
-                                            <Form.Check
-                                                type="checkbox"
-                                                id = {industry.id}
-                                                label={industry.name}
-                                                name={industry.name}
-                                                // onChange={handleCheckboxChange}
-                                            />
-                                        </Col>
-                                    ))}
-                                </Row>
-                            </Form>
-
-
+                            {renderContent()}
                         </div>
                     </Container>
                     <Container className="py-5">
