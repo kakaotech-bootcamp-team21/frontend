@@ -108,23 +108,6 @@ function MainPage(props) {
 
 
 
-    const fetchCategories = async () => {
-        try {
-            // axios 사용해 백엔드 API 호출
-            const response = await axios.get("http://localhost:8080/api/categories", {
-            });
-            setCategories(response.data.categories);
-            console.log('response categories: ', categories)
-        } catch (error) {
-            console.error("Error fetching categories: ", error);
-        }
-    }
-
-    useEffect(() => {
-        fetchCategories();
-    }, []);
-
-
 
     const renderContent = () => {
         // 원래 industries 였음
