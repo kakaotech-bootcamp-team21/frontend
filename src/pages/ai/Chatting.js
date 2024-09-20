@@ -15,7 +15,6 @@ const Chatting = () => {
 
   return (
       <div>
-        <AIHeaderNavbar></AIHeaderNavbar>
     <div className="chatting-container">
       <div className="chatting-info">
         <h1 className="chatting-title">전문가에게 첨삭요청하기(채팅)</h1>

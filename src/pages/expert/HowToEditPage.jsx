@@ -274,8 +274,6 @@ function HowToEdit(props) {
     return (
 
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
                 <Heading>전문가에게 첨삭 요청하기</Heading>
                 <ContainerTmp>

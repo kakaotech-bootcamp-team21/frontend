@@ -231,8 +231,6 @@ function RequestExpert(props) {
 
     return (
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
                 <Heading>내 분야 첨삭 가능 전문가 찾아보기</Heading>
                 <ContainerTmp>
