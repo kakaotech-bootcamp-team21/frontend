@@ -10,6 +10,9 @@ import Button1 from "../../components/buttons/Button";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Message, notification, Radio } from "antd";
 import { Input, Flex, Button, Form } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
+import { message, Upload } from 'antd';
+
 
 
 import AI_Header from "../../components/headers/Header";
@@ -89,11 +92,39 @@ function HowToEdit(props) {
         return localStorage.getItem('userType') || null;
     });
     const [showCalendar, setShowCalendar] = useState(false);
+    const [showLetter, setShowLetter] = useState(true);
+    const [showInputFile, setInputFile] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
     const [value, setValue] = useState(1);
     const [items, setItems] = useState([{ id: 1, numberOfCharacters: 500, question: '', content: '' }]); // 기본적으로 하나의 항목을 포함함 
+
+    // 각 라디오 그룹에 대한 상태를 개별적으로 관리
+    const [calendarOption, setCalendarOption] = useState(1); // 첫 번째 라디오 그룹
+    const [editTargetOption, setEditTargetOption] = useState(1); // 두 번째 라디오 그룹
+
+    const { Dragger } = Upload;
+
+    const uploadProps = {
+        name: 'file',
+        multiple: true,
+        action: 'https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload',
+        onChange(info) {
+          const { status } = info.file;
+          if (status !== 'uploading') {
+            console.log(info.file, info.fileList);
+          }
+          if (status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully.`);
+          } else if (status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+          }
+        },
+        onDrop(e) {
+          console.log('Dropped files', e.dataTransfer.files);
+        },
+      };
 
     const [formData, setFormData] = useState({
         numberOfCharacters: 500,
@@ -158,12 +189,24 @@ function HowToEdit(props) {
         setShowModal(false);
     };
 
-    const onChange = (e) => {
-        setValue(e.target.value);
-        if (value === 1) {
-            setShowCalendar(true);
-        } else {
+    const onCalendarOptionChange = (e) => {
+        setCalendarOption(e.target.value);
+        if (e.target.value === 1) {
             setShowCalendar(false);
+        } else {
+            setShowCalendar(true);
+        }
+
+    };
+
+    const onEditTargetOptionChange = (e) => {
+        setEditTargetOption(e.target.value);
+        if (e.target.value === 1) {
+            setShowLetter(true);
+            setInputFile(false);
+        } else {
+            setShowLetter(false);
+            setInputFile(true);
         }
 
     };
@@ -200,7 +243,6 @@ function HowToEdit(props) {
         // 한글자라도 입력할 경우에 바로바로 바뀌는데 이게 맞나? 이렇게 하면 서버랑 db터지는거 아닌가 싶음 ;
     }
 
-
     const handleSubmit = (values) => {
         setFormData(values);
     };
@@ -229,45 +271,25 @@ function HowToEdit(props) {
         setShowModal2(false);
     };
 
-
-
-
     return (
 
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
-                {/* <ContainerTmp>
-                    <Navbar bg="light" expand="lg">
-                        <Container>
-                            <Navbar.Brand as={Link} to="/">홈</Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto" >
-                                    {renderNavLinks()}
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
-                    <br />
-                    <br />
-                </ContainerTmp> */}
                 <Heading>전문가에게 첨삭 요청하기</Heading>
                 <ContainerTmp>
-                    <p>선택하신 전문가는 게시글, 채팅/영상통화 첨삭을 제공합니다.</p>
+                    <p>선택하신 전문가는 게시글, 영상통화 첨삭을 제공합니다.</p>
                 </ContainerTmp>
                 <ContainerTmp>
                     <>
                         <br />
                         <br />
                         <p>어떤 방식을 선호하시나요?</p>
-                        <Radio.Group onChange={onChange} value={value}>
+                        <Radio.Group onChange={onCalendarOptionChange} value={calendarOption}>
                             <Radio value={1}>
                                 게시글을 통해 첨삭 받기
                             </Radio>
                             <Radio value={2}>
-                                채팅/영상통화를 통해 첨삭받기
+                                영상통화를 통해 첨삭받기
                             </Radio>
                         </Radio.Group>
                         <br />
@@ -277,7 +299,7 @@ function HowToEdit(props) {
                     <ContainerTmp>
                         <br />
                         <br />
-                        <p>아래의 캘린더에서 전문가와 채팅/영상통화 첨삭을 원하는 날짜를 선택하세요. </p>
+                        <p>아래의 캘린더에서 전문가와 영상통화 첨삭을 원하는 날짜를 선택하세요. </p>
 
                         <Calendar onChange={handleDateChange} />
                     </ContainerTmp>
@@ -299,65 +321,77 @@ function HowToEdit(props) {
                 </Modal>
 
                 <br />
-
                 <ContainerTmp>
-                    <p>전문가에게 첨삭받을 자소서 항목을 입력해주세요.  </p>
-                    <ButtonContainer>
-                        <Button justify-content='flex-end' onClick={handleAddItem}>항목 추가</Button>
-                    </ButtonContainer>
+                    <p>첨삭 받을 대상을 선택해주세요  </p>
+                    <Radio.Group onChange={onEditTargetOptionChange} value={editTargetOption}>
+                        <Radio value={1}>
+                            자소서 첨삭 받기
+                        </Radio>
+                        <Radio value={2}>
+                            포트폴리오 첨삭 받기
+                        </Radio>
+                    </Radio.Group>
+                </ContainerTmp>
+                <br />
+                {showLetter && (
+                    <ContainerTmp>
+                        <p>전문가에게 첨삭받을 자소서 항목을 입력해주세요.  </p>
+                        <ButtonContainer>
+                            <Button justify-content='flex-end' onClick={handleAddItem}>항목 추가</Button>
+                        </ButtonContainer>
 
-                    {items.map((item, index) => (
-                        <div key={item.id} vertical gap={5}>
-                            <Row>
-                                <p>항목 {index + 1}</p>
-                                <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
-                            </Row>
-                            <Input
-                                placeholder="질문을 입력해주세요."
-                                name="question"
-                                value={item.question}
-                                onChange={(e) => handleQuestionChange(item.id, e.currentTarget.value)}
+                        {items.map((item, index) => (
+                            <div key={item.id} vertical gap={5}>
+                                <Row>
+                                    <p>항목 {index + 1}</p>
+                                    <Button onClick={() => handleRemoveItem(item.id)}>항목 삭제</Button>
+                                </Row>
+                                <Input
+                                    placeholder="질문을 입력해주세요."
+                                    name="question"
+                                    value={item.question}
+                                    onChange={(e) => handleQuestionChange(item.id, e.currentTarget.value)}
 
-                            />
-                            <TextArea
-                                showCount
-                                maxLength={item.numberOfCharacters}
-                                placeholder="내용을 입력해주세요."
-                                rows={6}
-                                name="content"
-                                value={item.content}
-                                onChange={(e) => handleContentChange(item.id, e.target.value)}
-                            />
+                                />
+                                <TextArea
+                                    showCount
+                                    maxLength={item.numberOfCharacters}
+                                    placeholder="내용을 입력해주세요."
+                                    rows={6}
+                                    name="content"
+                                    value={item.content}
+                                    onChange={(e) => handleContentChange(item.id, e.target.value)}
+                                />
 
-                            <Form
-                                layout="inline"
-                                style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
-                                onFinish={(values) => handleCharacterLimitChange(item.id, values.numberOfCharacters)} // 폼 제출 시 호출
-                                initialValues={{ numberOfCharacters: item.numberOfCharacters }}
-                            >
-                                <p>글자수: </p>
-                                <Form.Item
-                                    name="numberOfCharacters"
-                                    rules={[
-                                        { required: true, min: 0, message: '올바른 글자수를 입력해주세요!' },
-                                        {
-                                            validator: (_, value) =>
-                                                !isNaN(value) && value >= 0
-                                                    ? Promise.resolve()
-                                                    : Promise.reject(new Error('숫자만 입력 가능합니다.'))
-                                        }]}
+                                <Form
+                                    layout="inline"
+                                    style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', }} /* Flexbox 속성 추가 */
+                                    onFinish={(values) => handleCharacterLimitChange(item.id, values.numberOfCharacters)} // 폼 제출 시 호출
+                                    initialValues={{ numberOfCharacters: item.numberOfCharacters }}
                                 >
-                                    <Input
-                                        style={{ width: 70 }}
-                                        placeholder="500" />
-                                </Form.Item>
-                                <Form.Item>
-                                    <Button type="primary" htmlType="submit">
-                                        변경
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </div>
+                                    <p>글자수: </p>
+                                    <Form.Item
+                                        name="numberOfCharacters"
+                                        rules={[
+                                            { required: true, min: 0, message: '올바른 글자수를 입력해주세요!' },
+                                            {
+                                                validator: (_, value) =>
+                                                    !isNaN(value) && value >= 0
+                                                        ? Promise.resolve()
+                                                        : Promise.reject(new Error('숫자만 입력 가능합니다.'))
+                                            }]}
+                                    >
+                                        <Input
+                                            style={{ width: 70 }}
+                                            placeholder="500" />
+                                    </Form.Item>
+                                    <Form.Item>
+                                        <Button type="primary" htmlType="submit">
+                                            변경
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+                            </div>
 
                     ))}
 
@@ -366,8 +400,9 @@ function HowToEdit(props) {
                             제출하기
                         </Button>
                     </ButtonContainer>
+                    
                     <Modal show={showModal2} onHide={handleClose}>
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                             <Modal.Title>최종 제출 확인</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -385,25 +420,50 @@ function HowToEdit(props) {
                             </Button>
                         </Modal.Footer>
                     </Modal>
-
-                    <ContainerTmp>
-                        <Flex>
-                            <Button onClick={() => {
-                                navigate("/expert-info");
-                            }} >
-                                직접 작성할래요
-                            </Button>
-
-
-                            <Button onClick={() => {
-                                navigate("/expert-submit");
-                            }} >
-                                이미 작성해둔 파일이 있어요
-                            </Button>
-
-                        </Flex>
-                    </ContainerTmp>
                 </ContainerTmp>
+            )}    
+            {showInputFile && (
+                <ContainerTmp>
+                    <p>전문가에게 첨삭받을 포트폴리오를 제출해주세요.  </p>
+                    <Dragger {...uploadProps}>
+                        <p className="ant-upload-drag-icon">
+                        <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-hint">
+                        Support for a single or bulk upload. Strictly prohibited from uploading company data or other
+                        banned files.
+                        </p>
+                    </Dragger>
+                    <ButtonContainer>
+                        <Button onClick={handleTotalSubmit}>
+                            제출하기
+                        </Button>
+                    </ButtonContainer>
+                    
+                    <Modal show={showModal2} onHide={handleClose}>
+                        <Modal.Header>
+                            <Modal.Title>최종 제출 확인</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {`제출 하시겠습니까?`}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => {
+                                handleSubmitYes();
+                                navigate("/");
+                            }} >
+                                예
+                            </Button>
+                            <Button onClick={handleSubmitNo}>
+                                아니오
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    
+
+                </ContainerTmp>
+            )}
                 <br />
                 <br />
 

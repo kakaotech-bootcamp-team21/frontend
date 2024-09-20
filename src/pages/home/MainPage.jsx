@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/buttons/Button";
 //import NavBar from "../ui/Navbar";
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
 import { handleLogin, handleLogout } from '../../utils/auth';
@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import AI_Header from "../../components/headers/Header";
 import AI_Navbar from '../../components/navbars/AiNavbar';
 import { Avatar, List } from 'antd';
+import axios from 'axios';
+import CardExample from "../../components/Card";
 
 
 const Wrapper = styled.div`
@@ -81,40 +83,107 @@ const Heading = styled.h2`
     margin-bottom: 40px;
 `;
 
-
-const districts = [
-    { name: 'IT/인ss터넷', content: 'IT/인터넷의 정보입니다.' },
-    { name: '연구개발/설계', content: '연구개발/설계의 정보입니다.' },
-    { name: '의료', content: '의료의 정보입니다.' },
-    { name: '전문/특수직', content: '전문/특수직의 정보입니다.' },
-];
+const StyleRow = styled(Row)`
+    gap: 16px;
+`;
 
 function MainPage(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
     });
+    
 
-    const [selectedDistricts, setSelectedDistricts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [industries, setIndustries] = useState([]);
+    const [experts, setExperts] = useState({});
 
-    const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedIndustries, setSelectedIndustries] = useState([]);
+    const [selectedExperts, setSelectedExperts] = useState();
+
+    const fetchIndustries = async (id) => {
+        try{
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get(`http://localhost:8080/api/categories/${id}/industries`, {
+            });
+            setIndustries(response.data.industries);
+            console.log('response industries: ', industries)
+        } catch (error) {
+            console.error("Error fetching industries: ", error);
+        }
+    }
+
+    const fetchExperts = async (id) => {
+        try{
+            const response = await axios.get(`http://localhost:8080/api/industries/${id}/specialUsers`, {
+            });
+            // setExperts((prevExperts) => [...prevExperts, ...response.data.specialists]);
+            setExperts((prevExperts) => ({
+                ...prevExperts, // 기존의 다른 산업의 전문가들을 유지
+                [id]: response.data.specialists, // 새로운 산업 전문가들 추가
+            }));
+        } catch (error) {
+            console.error("Error fetching experts: ", error);
+        }
+    }
+
+    const handleCheckboxChangeCategory = (event) => {
+        console.log('event.target: ', event.target)
+        const { id, checked } = event.target;
         if (checked) {
-            setSelectedDistricts([...selectedDistricts, name]);
+            console.log('checked id: ', id)
+            fetchIndustries(id)
+            setSelectedIndustries([...selectedIndustries, id])
         } else {
-            setSelectedDistricts(selectedDistricts.filter(district => district !== name));
+            setSelectedIndustries(selectedIndustries.filter(industry => industry !== id));
         }
     };
 
-    const renderContent = () => {
-        return districts
-            .filter(district => selectedDistricts.includes(district.name))
-            .map(district => (
-                <div key={district.name}>
-                    <h3>{district.name}</h3>
-                    <p>{district.content}</p>
-                </div>
-            ));
+    const handleCheckboxChangeIndustry = (event) => {
+        // HTML의 data- 속성을 사용하여 커스텀 데이터를 가져오는 방식
+        // JavaScript를 통해 쉽게 접근할 수 있음
+        const industryId = event.target.getAttribute('data-industry-id');
+        const checked = event.target.checked;
+
+        if (checked) {
+            console.log('checked industry id: ', industryId);
+            fetchExperts(industryId);
+        } else {
+            // 체크 해제 시 해당 산업의 전문가를 삭제함
+            setExperts((prevExperts) => {
+                // industryId를 키로 가지는 항목을 추출하여 _에 할당
+                const { [industryId]: _, ...restExperts } = prevExperts;
+                return restExperts;
+            });
+        }
     };
+
+
+
+    const fetchCategories = async () => {
+        try {
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get("http://localhost:8080/api/categories", {
+            });
+            setCategories(response.data.categories);
+            console.log('response categories: ', categories)
+        } catch (error) {
+            console.error("Error fetching categories: ", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
+    useEffect(() => {
+        console.log('Updated industries: ', industries);
+    }, [industries]);
+
+
+    useEffect(() => {
+        console.log('Updated experts: ', experts);
+    }, [experts]);
 
     const renderNavLinks = () => {
         if (userType === 'regular') {
@@ -152,45 +221,7 @@ function MainPage(props) {
 
 
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
-                <ButtonWrapper>
-                    {userType === null ? (
-                        <>
-                            <Button
-                                title="로그인/회원가입"
-                                onClick={() => {
-                                    handleLogin('regular', setUserType);
-                                    navigate("/login");
-                                }}
-                            />
-                        </>
-                    ) : userType === 'regular' ? (
-                        <>
-                            {/*이 버튼을 어떻게 처리할지 생각해야 할듯 이 버튼때문에 상단바가 깔끔하게 안보이고 위에 공백이 생김*/}
-                            {/* <Button
-                            title="마이페이지" // 마이페이지에서 로그아웃 하게 해야하는게 좋을듯? 
-                            onClick={() => {
-                                navigate("/mypage");
-                            }}
-                        /> */}
-                        </>
-                    ) : (
-                        <>
-                            <Button
-                                title="전문가 페이지"
-                                onClick={() => {
-                                    navigate("/expert");
-                                }}
-                            />
-                            <Button
-                                title="로그아웃"
-                                onClick={handleLogout}
-                            />
-                        </>
-                    )}
-                </ButtonWrapper>
                 <ContainerTmp>
                     {/* <Navbar bg="light" expand="lg">
                     <Container>
@@ -204,33 +235,64 @@ function MainPage(props) {
                     </Container>
                 </Navbar> */}
                     <Heading>관심 분야 전문가 찾기</Heading>
+                    <p>관심 있는 카테고리와 관련 산업을 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
                     <Container>
-                        <h3>관심 직업 태그</h3>
-                        <p>관심 있는 직업 태그를 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
+                        <h3>관심 카테고리</h3>
+                        <br></br>
+                        
                         <Form>
                             <Row>
-                                {districts.map(district => (
-                                    <Col key={district.name} xs={6} md={4}>
+                                {categories.map(category => (
+                                    <Col key={category.name} xs={6} md={4}>
                                         <Form.Check
                                             type="checkbox"
-                                            label={district.name}
-                                            name={district.name}
-                                            onChange={handleCheckboxChange}
+                                            id = {category.id}
+                                            label={category.name}
+                                            name={category.name}
+                                            onChange={handleCheckboxChangeCategory}
                                         />
                                     </Col>
                                 ))}
                             </Row>
                         </Form>
                         <div style={{ marginTop: '20px' }}>
-                            {renderContent()}
+                            <h3>카테고리 관련 산업</h3>
+                             <Form>
+                                <Row>
+                                    {industries.map(industry=> (
+                                        <Col key={industry.name} xs={6} md={4}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                // {industry.id} 값을 커스텀 속성으로 저장
+                                                data-industry-id = {industry.id}
+                                                label={industry.name}
+                                                name={industry.name}
+                                                onChange={handleCheckboxChangeIndustry}
+                                            />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Form>
+
+
                         </div>
                     </Container>
                     <Container className="py-5">
                         <h3>첨삭 가능 전문가</h3>
-                        <Card>
-
-                        </Card>
-
+                        <StyleRow>
+                            {Object.keys(experts).map((industryId) => (
+                                experts[industryId].map((expert) => (
+                                    <CardExample 
+                                        key = {expert.id} 
+                                        nickname={expert.nickname}
+                                        profile={expert.profile}
+                                        industries={expert.industry}
+                                        occupation={expert.occupation}
+                                    >
+                                    </CardExample>
+                                ))
+                            ))}
+                        </StyleRow>
                     </Container>
                     <Heading>이용자들이 들려주는 서비스 이용 후기</Heading>
                     <Container className="py-5">

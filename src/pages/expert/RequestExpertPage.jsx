@@ -3,14 +3,18 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { useEffect } from 'react';
 
 import styled from "styled-components";
 import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
-
+import CardExample from "../../components/Card";
 
 import AI_Header from "../../components/headers/Header";
 import AI_Navbar from '../../components/navbars/AiNavbar';
+
+import axios from 'axios';
+import { Select, Space } from 'antd';
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -61,11 +65,100 @@ const Heading = styled.h1`
 `;
 
 
+
+
 function RequestExpert(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
     });
 
+    const [categories, setCategories] = useState([]);
+    const [industries, setIndustries] = useState([]);
+    const [experts, setExperts] = useState({});
+
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedIndustries, setSelectedIndustries] = useState([]);
+    const [selectedExperts, setSelectedExperts] = useState();
+
+    const fetchCategories = async () => {
+        try {
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get("http://localhost:8080/api/categories", {
+            });
+            setCategories(response.data.categories);
+        } catch (error) {
+            console.error("Error fetching categories: ", error);
+        }
+    }
+
+    const fetchIndustries = async (id) => {
+        try{
+            // axios 사용해 백엔드 API 호출
+            const response = await axios.get(`http://localhost:8080/api/categories/${id}/industries`, {
+            });
+            setIndustries(response.data.industries);
+            console.log('response industries: ', industries)
+        } catch (error) {
+            console.error("Error fetching industries: ", error);
+        }
+    }
+
+    const fetchExperts = async (id) => {
+        try{
+            const response = await axios.get(`http://localhost:8080/api/industries/${id}/specialUsers`, {
+            });
+            setExperts(response.data.specialists);
+            // setExperts((prevExperts) => [...prevExperts, ...response.data.specialists]);
+            // setExperts((prevExperts) => ({
+            //     ...prevExperts, // 기존의 다른 산업의 전문가들을 유지
+            //     [id]: response.data.specialists, // 새로운 산업 전문가들 추가
+            // }));
+        } catch (error) {
+            console.error("Error fetching experts: ", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
+    useEffect(() => {
+        console.log('Updated categories: ', categories);
+    }, [categories]);
+
+    useEffect(() => {
+        console.log('Updated industries: ', industries);
+    }, [industries]);
+
+
+    useEffect(() => {
+        console.log('Updated experts: ', experts);
+    }, [experts]);
+
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
+      };
+
+    const handleChangeCategory = (value) => {
+        console.log('event.target: ', value)
+        if (value) {
+            console.log('checked id: ', value)
+            fetchIndustries(value)
+            setSelectedIndustries([...selectedIndustries, value])
+        } else {
+            setSelectedIndustries(selectedIndustries.filter(industry => industry !== value));
+        }
+    };
+
+    const handleChangeIndustry = (value) => {
+        console.log('event handleChangeIndustry', value)
+
+        if (value) {
+            console.log('checked industry id: ', value);
+            fetchExperts(value);
+        } 
+    };
+    
     const renderNavLinks = () => {
         if (userType === 'regular') {
             return (
@@ -138,59 +231,58 @@ function RequestExpert(props) {
 
     return (
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
-                {/* <ContainerTmp>
-                <Navbar bg="light" expand="lg">
-                    <Container>
-                        <Navbar.Brand href="#">메뉴</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto" >
-                                {renderNavLinks()}
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-                <br />
-                <br />
-            </ContainerTmp> */}
                 <Heading>내 분야 첨삭 가능 전문가 찾아보기</Heading>
                 <ContainerTmp>
-
                     <>
-                        {/* <Form.Group className="mb-3">
-                        <Form.Label>Disabled input</Form.Label>
-                        <Form.Control placeholder="Disabled input" disabled />
-                    </Form.Group> */}
-                        <Form.Group className="mb-3">
-                            <Form.Label>전문가 산업 선택</Form.Label>
-                            <Form.Select disabled>
-                                <option>Disabled select</option>
-                            </Form.Select>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>전문가 직업군 선택</Form.Label>
-                            <Form.Select disabled>
-                                <option>Disabled select</option>
-                            </Form.Select>
-                        </Form.Group>
+                        <Container className="py-5">
+                            <p>관심 있는 카테고리와 관련 산업을 선택하여 첨삭 가능 전문가를 확인해 보세요.</p>
+                            <h3>관심 카테고리</h3>
+                            <Select
+                                defaultValue="전문가 산업"
+                                style={{
+                                    width: 500,
+                                }}
+                                onChange={handleChangeCategory}
+                                options={categories.map(category => ({
+                                    value: category.id,
+                                    label: category.name,
+                                }))}
+                            />
+                        </Container>
+                        <Container className="py-5">
+                            <h3>카테고리 관련 산업</h3>
+                            <Select
+                                defaultValue="전문가 산업"
+                                style={{
+                                    width: 500,
+                                }}
+                                onChange={handleChangeIndustry}
+                                options={industries.map(industry => ({
+                                    value: industry.id,
+                                    label: industry.name,
+                                }))}
+                            />
+                        </Container>
                     </>
                     <>
-                        <Container>
+                        <Container className="py-5">
+                            <h3>첨삭 가능 전문가</h3>
                             <StyleRow>
-                                {dummyData.map((card, index) => (
-                                    <Col md={2} key={index} className="mb-4">
-                                        <Card style={{ width: '100%' }}>
-                                            <Card.Img variant="top" src={card.imageUrl} alt={card.nickname} />
-                                            <Card.Body>
-                                                <Card.Title>{card.nickname}</Card.Title>
-                                                <Card.Text>{card.description}</Card.Text>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                ))}
+                                {Object.values(experts).length > 0 ? (
+                                    Object.values(experts).map((expert) => (
+                                        <CardExample 
+                                            key = {expert.id} 
+                                            nickname={expert.nickname}
+                                            profile={expert.profile}
+                                            industries={expert.industry}
+                                            occupation={expert.occupation}
+                                        >
+                                        </CardExample>
+                                ))
+                            ) : (
+                                <p>관련 산업에 등록된 전문가가 없습니다. </p>
+                            )}
                             </StyleRow>
                         </Container>
                     </>

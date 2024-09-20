@@ -77,7 +77,7 @@ function InfoPage() {
 
   return (
     <div>
-      <AIHeaderNavbar/>
+      
       <div className="infopage-container">
         <h1 className="infopage-title">주요 정보 입력하기</h1>
         <p className="infopage-alert-message">**모든 질문에 최대한 상세하게 답변해주세요.**</p>
@@ -107,12 +107,12 @@ function InfoPage() {
                   placeholder={`추가 질문 ${index + 1}`}
                   required
                 />
-                <textarea
+                {/* <textarea
                   value={item.answer}
                   onChange={(e) => handleAdditionalQuestionChange(index, 'answer', e.target.value)}
                   placeholder="여기에 답변을 입력하세요."
                   required
-                />
+                /> */}
               </div>
               {infopageformData.additionalQuestions.length > 1 && (
               <button

@@ -121,7 +121,6 @@ const VideoChat = () => {
 
     return (
         <div>
-            <AIHeaderNavbar></AIHeaderNavbar>
         <div className="video-chat-container">
             <div className="video-area">
                 <video ref={videoRef} autoPlay playsInline muted={isMuted} className={isVideoOff ? 'video-off' : ''}></video>
