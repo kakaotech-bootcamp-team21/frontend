@@ -107,12 +107,12 @@ function InfoPage() {
                   placeholder={`추가 질문 ${index + 1}`}
                   required
                 />
-                <textarea
+                {/* <textarea
                   value={item.answer}
                   onChange={(e) => handleAdditionalQuestionChange(index, 'answer', e.target.value)}
                   placeholder="여기에 답변을 입력하세요."
                   required
-                />
+                /> */}
               </div>
               {infopageformData.additionalQuestions.length > 1 && (
               <button
