@@ -89,7 +89,7 @@ function AI_Navbar() {
             )}
             {showSubMenu === 'expert' && (
                 <div className="ai-sub-menu" style={subMenuStyle}>
-                    <Link to="/post" className="ai-nav-button">게시글</Link>
+                    <Link to="/post" className="ai-nav-button">게시글 </Link>
                     <Link to="/Chatting" className="ai-nav-button">채팅</Link>
                     <Link to="/video-chat" className="ai-nav-button">영상 통화</Link>
                 </div>
