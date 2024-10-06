@@ -11,6 +11,7 @@ import AIHeaderNavbar from "./pages/ai/AIHeaderNavbar";
 
 //pages
 import MainPage from './pages/home/MainPage';
+import MainPage2 from './pages/home/MainPage2';
 import LoginPage from "./pages/login/LoginPage";
 import SignUpPage from "./pages/login/SignUpPage";
 import PrivacyPolicyPage from "./pages/login/PrivacyPolicyPage";
@@ -40,6 +41,8 @@ import Chatting from "./pages/ai/Chatting";
 import PassList from "./pages/ai/PassList";
 import RequestStatusPage from "./pages/status/RequestStatusPage";
 import Layout from "./components/layout/Layout";
+
+import WriteReviewPage from "./pages/expert/WriteReviewPage";
 
 
 const MainTitleText = styled.p`
@@ -104,46 +107,88 @@ function App(props) {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Layout/>}>
-                    <Route index element={<MainPage/>}/>
-                    {/*로그인 및 회원가입*/}
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/signup" element={<SignUpPage/>}/>
-                    <Route path="/privacy-policy" element={<PrivacyPolicyPage/>}/>
-                    <Route path="/auth" element={<RedirectPage/>}/>
+// <<<<<<< feature/ivy
+                <Route path="/" element={<MainPage2 />} />
 
-                    <Route path="/auth-verification-page" element={<AuthVerificationPage/>}/>
-                    <Route path="/user-info" element={<UserInfoPage/>}/>
+                {/*로그인 및 회원가입*/}
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/auth" element={<RedirectPage />} />
 
-                    {/*전문가 첨삭*/}
-                    <Route path="/request-expert" element={<RequestExpert/>}/>
-                    <Route path="/how-to-edit" element={<HowToEdit/>}/>
-                    <Route path="/expert-info" element={<ExpertInfoPage/>}/>
-                    <Route path="/expert-submit" element={<ExpertSubmitPage/>}/>
+                <Route path="/auth-verification-page" element={<AuthVerificationPage />} />
+                <Route path="/user-info" element={<UserInfoPage />} />
 
-                    {/*ai 패이지*/}
+                {/*전문가 첨삭*/}
+                <Route path="/request-expert" element={<RequestExpert />} />
+                <Route path="/how-to-edit" element={<HowToEdit />} />
+                <Route path="/expert-info" element={<ExpertInfoPage />} />
+                <Route path="/expert-submit" element={<ExpertSubmitPage />} />
 
-                    {/*이 밑에 있는 페이지들은 return 문 들어가서 제일 처음에 <AIHeaderNavbar></AIHeaderNavbar> 컴포넌트를 집어넣음.(앨리스가 만든 상단바)*/}
-                    <Route path="/ai-main" element={<AIMain/>}/>
-                    <Route path="/info" element={<InfoPage/>}/>
-                    <Route path="/submit" element={<SubmitPage/>}/>
-                    <Route path="/pass-list" element={<PassList/>}/>
-                    <Route path="/chatting" element={<Chatting/>}/>
-                    <Route path="/chat-room" element={<Chatroom/>}/>
-                    <Route path="/video-chat" element={<VideoChat/>}/>
+                {/*ai 패이지*/}
 
-                    {/* my 페이지 */}
-                    <Route path="/mypage" element={<Mypage/>}/>
-                    <Route path="/editing-list" element={<EditingList/>}/>
-                    <Route path="/edited-list" element={<EditedList/>}/>
+                {/*이 밑에 있는 페이지들은 return 문 들어가서 제일 처음에 <AIHeaderNavbar></AIHeaderNavbar> 컴포넌트를 집어넣음.(앨리스가 만든 상단바)*/}
+                <Route path="/ai-main" element={<AIMain />} />
+                    <Route path="/info" element={<InfoPage />} />
+                    <Route path="/submit" element={<SubmitPage />} />
+                    <Route path="/mypage" element={<Mypage />} />
+                    <Route path="/editing-list" element={<EditingList />} />
+                    <Route path="/edited-list" element={<EditedList />} />
+                    <Route path="/pass-list" element={<PassList />} />
+                    <Route path="/chatting" element={<Chatting />} />
+                    <Route path="/chat-room" element={<Chatroom />} />
+                    <Route path="/video-chat" element={<VideoChat />} />
 
-                    {/*첨삭 요청 현황*/}
-                    <Route path="/request-status" element={<RequestStatusPage/>}/>
-                </Route>
+                {/*첨삭 요청 현황*/}
+                <Route path="/request-status" element={<RequestStatusPage />} />
+                {/*첨삭 후기 작성*/}
+                <Route path="/write-review" element={<WriteReviewPage />} />
 
-            </Routes>
-        </div>
-    );
+          </Routes>
+     </div>
+  );
+// =======
+//                 <Route path="/" element={<Layout/>}>
+//                     <Route index element={<MainPage/>}/>
+//                     {/*로그인 및 회원가입*/}
+//                     <Route path="/login" element={<LoginPage/>}/>
+//                     <Route path="/signup" element={<SignUpPage/>}/>
+//                     <Route path="/privacy-policy" element={<PrivacyPolicyPage/>}/>
+//                     <Route path="/auth" element={<RedirectPage/>}/>
+
+//                     <Route path="/auth-verification-page" element={<AuthVerificationPage/>}/>
+//                     <Route path="/user-info" element={<UserInfoPage/>}/>
+
+//                     {/*전문가 첨삭*/}
+//                     <Route path="/request-expert" element={<RequestExpert/>}/>
+//                     <Route path="/how-to-edit" element={<HowToEdit/>}/>
+//                     <Route path="/expert-info" element={<ExpertInfoPage/>}/>
+//                     <Route path="/expert-submit" element={<ExpertSubmitPage/>}/>
+
+//                     {/*ai 패이지*/}
+
+//                     {/*이 밑에 있는 페이지들은 return 문 들어가서 제일 처음에 <AIHeaderNavbar></AIHeaderNavbar> 컴포넌트를 집어넣음.(앨리스가 만든 상단바)*/}
+//                     <Route path="/ai-main" element={<AIMain/>}/>
+//                     <Route path="/info" element={<InfoPage/>}/>
+//                     <Route path="/submit" element={<SubmitPage/>}/>
+//                     <Route path="/pass-list" element={<PassList/>}/>
+//                     <Route path="/chatting" element={<Chatting/>}/>
+//                     <Route path="/chat-room" element={<Chatroom/>}/>
+//                     <Route path="/video-chat" element={<VideoChat/>}/>
+
+//                     {/* my 페이지 */}
+//                     <Route path="/mypage" element={<Mypage/>}/>
+//                     <Route path="/editing-list" element={<EditingList/>}/>
+//                     <Route path="/edited-list" element={<EditedList/>}/>
+
+//                     {/*첨삭 요청 현황*/}
+//                     <Route path="/request-status" element={<RequestStatusPage/>}/>
+//                 </Route>
+
+//             </Routes>
+//         </div>
+//     );
+// >>>>>>> develop
 }
 
 export default App;

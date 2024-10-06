@@ -171,11 +171,16 @@ header div:first-child {
 }
 
 .nine h1 span:after,.nine h1 span:before {
-    content: " ";
+    content: "";
     display: block;
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
     height: 5px;
     background-color:#f8f8f8;
+}
+
+.logo-link {
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 텍스트 색상 상속 */
 }
 

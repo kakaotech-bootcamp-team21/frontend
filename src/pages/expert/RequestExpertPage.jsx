@@ -9,9 +9,10 @@ import styled from "styled-components";
 import { Form, Row, Col } from 'react-bootstrap';
 import Card from "../../components/Card";
 import CardExample from "../../components/Card";
+import AIHeaderNavbar from "../ai/AIHeaderNavbar";
 
-import AI_Header from "../../components/headers/Header";
-import AI_Navbar from '../../components/navbars/AiNavbar';
+import axios from 'axios';
+import { Select, Space } from 'antd';
 
 import axios from 'axios';
 import { Select, Space } from 'antd';
@@ -231,6 +232,7 @@ function RequestExpert(props) {
 
     return (
         <>
+            <AIHeaderNavbar></AIHeaderNavbar>
             <Wrapper>
                 <Heading>내 분야 첨삭 가능 전문가 찾아보기</Heading>
                 <ContainerTmp>

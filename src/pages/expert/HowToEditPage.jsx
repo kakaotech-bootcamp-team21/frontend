@@ -13,11 +13,7 @@ import { Input, Flex, Button, Form } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 
-
-
-import AI_Header from "../../components/headers/Header";
-import AI_Navbar from '../../components/navbars/AiNavbar';
-
+import AIHeaderNavbar from "../ai/AIHeaderNavbar";
 
 
 import styled from "styled-components";
@@ -274,6 +270,7 @@ function HowToEdit(props) {
     return (
 
         <>
+            <AIHeaderNavbar></AIHeaderNavbar>
             <Wrapper>
                 <Heading>전문가에게 첨삭 요청하기</Heading>
                 <ContainerTmp>
