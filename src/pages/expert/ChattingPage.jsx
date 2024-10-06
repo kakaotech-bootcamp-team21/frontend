@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import './ExpertInfoPage.css';
 import { notification } from 'antd';
 import AIHeaderNavbar from "../ai/AIHeaderNavbar";
-function WriteReviewPage() {
+function ChattingPage() {
 
 
 
@@ -12,11 +12,11 @@ function WriteReviewPage() {
     <>
       <AIHeaderNavbar></AIHeaderNavbar>
       <div className="container">
-        <h1>첨삭 후기 작성하기</h1>
+        <h1>채팅하기</h1>
         
       </div>
     </>
   );
 }
 
-export default WriteReviewPage;
+export default ChattingPage;

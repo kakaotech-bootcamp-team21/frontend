@@ -2,11 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from 'react';
-import AI_Header from "../../components/headers/Header";
-import AI_Navbar from '../../components/navbars/AiNavbar';
 import { Avatar } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { Collapse, theme } from 'antd';
+import AIHeaderNavbar from "../ai/AIHeaderNavbar";
 
 import { List, Card, Badge, Button } from 'antd';
 
@@ -119,8 +118,9 @@ function RequestStatusPage(props) {
 
     return (
         <>
-            <AI_Header />
-            <AI_Navbar />
+            {/* <AI_Header />
+            <AI_Navbar /> */}
+            <AIHeaderNavbar></AIHeaderNavbar>
             <Wrapper>
                 <Heading>첨삭 요청 현황</Heading>
                 <ContainerRight>

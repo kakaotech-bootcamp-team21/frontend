@@ -8,7 +8,9 @@ function AI_Header() {
     return (
         <header className="header">
             <div className="icons">
-                <BellIcon className="icon" />
+                <Link to="/request-status">
+                    <BellIcon className="icon" />
+                </Link>    
                 <Link to="/Mypage">
                     <UserIcon className="icon" />
                 </Link>

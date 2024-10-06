@@ -19,7 +19,7 @@ function CardExample({ nickname, profile, industries, occupation }) {
             <Card.Body>
                 {/* <p>채팅 평균 응답 시간</p> */}
                 <Card.Link as={Link} to="/how-to-edit">첨삭요청하기</Card.Link>
-                <Card.Link as={Link} to="/how-to-edit">채팅하기</Card.Link>
+                <Card.Link as={Link} to="/chat-room">채팅하기</Card.Link>
             </Card.Body>
         </Card>
     );
