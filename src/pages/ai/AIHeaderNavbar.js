@@ -13,8 +13,11 @@ function AI_Header() {
                     <UserIcon className="icon" />
                 </Link>
             </div>
-            <div className="nine">
-                <h1>Logo<span>Personal statement editing system</span></h1>
+            <div to="/" className="nine">
+                <h1>
+                    <Link to="/" className="logo-link">자소서 첨삭서비스</Link>
+                    <span>Personal statement editing system</span>
+                </h1>
             </div>
         </header>
     );
@@ -26,7 +29,7 @@ function AI_Navbar() {
     const [subMenuStyle, setSubMenuStyle] = useState({});
     const menuRef = useRef(null);
     const expertMenuRef = useRef(null);
-    const menus = ['전문가에게 첨삭 요청하기', 'AI 기반 자소서 첨삭하기', '합격 자소서 모아보기', '메뉴4', '메뉴5', '메뉴6'];
+    const menus = ['전문가에게 첨삭 요청하기', 'AI 기반 자소서 첨삭하기', '합격 자소서 모아보기', '첨삭 요청 현황', '후기 작성'];
 
     const handleMenuMouseOver = (menu) => {
         setActive(menu);
