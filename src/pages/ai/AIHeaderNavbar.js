@@ -107,6 +107,7 @@ function AI_Navbar() {
                     <Link to="/submit" className="ai-nav-button">자기소개서 제출</Link>
                 </div>
             )}
+
         </nav>
     );
 }

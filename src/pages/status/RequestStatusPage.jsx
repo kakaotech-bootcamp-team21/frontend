@@ -118,8 +118,6 @@ function RequestStatusPage(props) {
 
     return (
         <>
-            {/* <AI_Header />
-            <AI_Navbar /> */}
             <AIHeaderNavbar></AIHeaderNavbar>
             <Wrapper>
                 <Heading>첨삭 요청 현황</Heading>

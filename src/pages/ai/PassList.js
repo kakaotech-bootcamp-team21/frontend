@@ -86,7 +86,6 @@ const PassList = () => {
 
   return (
       <div>
-        <AIHeaderNavbar></AIHeaderNavbar>
     <div className="passlist-essays-container">
       <h1 className="passlist-page-title">합격자소서 모아보기</h1>
       

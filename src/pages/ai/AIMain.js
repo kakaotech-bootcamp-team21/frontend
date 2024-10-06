@@ -7,7 +7,7 @@ import AIHeaderNavbar from "./AIHeaderNavbar";
 function AIMain() {
   return (
     <div>
-<AIHeaderNavbar></AIHeaderNavbar>
+
     </div>
   );
 }

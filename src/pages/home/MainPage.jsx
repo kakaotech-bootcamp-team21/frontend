@@ -91,6 +91,7 @@ function MainPage(props) {
     const [userType, setUserType] = useState(() => {
         return localStorage.getItem('userType') || null;
     });
+    
 
     const [categories, setCategories] = useState([]);
     const [industries, setIndustries] = useState([]);
@@ -220,45 +221,7 @@ function MainPage(props) {
 
 
         <>
-            <AI_Header />
-            <AI_Navbar />
             <Wrapper>
-                <ButtonWrapper>
-                    {userType === null ? (
-                        <>
-                            <Button
-                                title="로그인/회원가입"
-                                onClick={() => {
-                                    handleLogin('regular', setUserType);
-                                    navigate("/login");
-                                }}
-                            />
-                        </>
-                    ) : userType === 'regular' ? (
-                        <>
-                            {/*이 버튼을 어떻게 처리할지 생각해야 할듯 이 버튼때문에 상단바가 깔끔하게 안보이고 위에 공백이 생김*/}
-                            {/* <Button
-                            title="마이페이지" // 마이페이지에서 로그아웃 하게 해야하는게 좋을듯? 
-                            onClick={() => {
-                                navigate("/mypage");
-                            }}
-                        /> */}
-                        </>
-                    ) : (
-                        <>
-                            <Button
-                                title="전문가 페이지"
-                                onClick={() => {
-                                    navigate("/expert");
-                                }}
-                            />
-                            <Button
-                                title="로그아웃"
-                                onClick={handleLogout}
-                            />
-                        </>
-                    )}
-                </ButtonWrapper>
                 <ContainerTmp>
                     {/* <Navbar bg="light" expand="lg">
                     <Container>
