@@ -77,7 +77,7 @@ function InfoPage() {
 
   return (
     <div>
-      <AIHeaderNavbar/>
+      
       <div className="infopage-container">
         <h1 className="infopage-title">주요 정보 입력하기</h1>
         <p className="infopage-alert-message">**모든 질문에 최대한 상세하게 답변해주세요.**</p>

@@ -3,6 +3,7 @@ import AIHeaderNavbar from "./AIHeaderNavbar";
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css_ai/EditedList.css';
 import '../../css_ai/Mypage.css'
+import Mypage_sidebar from "../../components/Mypage_sidebar";
 
 function EditedList() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -44,20 +45,20 @@ function EditedList() {
 
   return (
     <div>
-      <AIHeaderNavbar></AIHeaderNavbar>
       <div className="mypage-container">
-        <div className="mypage-sidebar">
-          <div className="mypage-menu-item" onClick={() => navigate('/mypage')}>∙ 홈</div>
-          <div className="mypage-menu-item" onClick={() => setShowSubmenu(!showSubmenu)}>∙ 나의 자기소개서</div>
-          {showSubmenu && (
-            <>
-              <div className={`mypage-menu-subitem ${isActive('/editing-list')}`} onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>
-              <div className={`mypage-menu-subitem ${isActive('/edited-list')}`} onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>
-            </>
-          )}
-          <div className="mypage-menu-item">∙ 메뉴 추가1</div>
-          <div className="mypage-menu-item">∙ 메뉴 추가2</div>
-        </div>
+        {/*<div className="mypage-sidebar">*/}
+        {/*  <div className="mypage-menu-item" onClick={() => navigate('/mypage')}>∙ 홈</div>*/}
+        {/*  <div className="mypage-menu-item" onClick={() => setShowSubmenu(!showSubmenu)}>∙ 나의 자기소개서</div>*/}
+        {/*  {showSubmenu && (*/}
+        {/*    <>*/}
+        {/*      <div className={`mypage-menu-subitem ${isActive('/editing-list')}`} onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>*/}
+        {/*      <div className={`mypage-menu-subitem ${isActive('/edited-list')}`} onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>*/}
+        {/*    </>*/}
+        {/*  )}*/}
+        {/*  <div className="mypage-menu-item">∙ 메뉴 추가1</div>*/}
+        {/*  <div className="mypage-menu-item">∙ 메뉴 추가2</div>*/}
+        {/*</div>*/}
+        <Mypage_sidebar/>
 
         <div className="editedlist-content">
           <h2 className="editedlist-correction-subtitle">첨삭 완료된 자기소개서</h2>

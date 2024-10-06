@@ -9,6 +9,7 @@ export const handleLogin = (type, setUserType) => {
 export const handleLogout = (setUserType) => {
     setUserType(null); // 로그아웃 상태로 전환
     localStorage.removeItem('userType'); // 로컬 스토리지에서 사용자 유형 제거 
+    localStorage.removeItem('userInfo'); // 로컬 스토리지에서 사용자 제거
 };
 
 export const getUserType = () => {

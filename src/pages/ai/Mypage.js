@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css_ai/Mypage.css';
 import AIHeaderNavbar from "./AIHeaderNavbar";
+import Mypage_sidebar from '../../components/Mypage_sidebar';
 
 function Mypage() {
   const [user, setUser] = useState({
@@ -15,7 +16,6 @@ function Mypage() {
   });
   const navigate = useNavigate();
   const [profileImage, setProfileImage] = useState(null);
-  const [showSubmenu, setShowSubmenu] = useState(false);
   const [portfolioFile, setPortfolioFile] = useState(null);
 
   const handleChange = (event) => {
@@ -38,9 +38,7 @@ function Mypage() {
       setPortfolioFile(file);
     }
   };
-  const toggleSubmenu = () => {
-    setShowSubmenu(!showSubmenu);
-  };
+  
   const openFilePicker = () => {
     document.getElementById('file-input').click();
   };
@@ -51,21 +49,9 @@ function Mypage() {
   };
 
   return (
-      <div>
-        <AIHeaderNavbar></AIHeaderNavbar>
+      <div> 
     <div className="mypage-container">
-      <div className="mypage-sidebar">
-        <div className="mypage-menu-item">∙ 홈</div>
-        <div className="mypage-menu-item" onClick={toggleSubmenu}>∙ 나의 자기소개서</div>
-        {showSubmenu && (
-          <>
-            <div className="mypage-menu-subitem" onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>
-            <div className="mypage-menu-subitem" onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>
-          </>
-        )}
-        <div className="mypage-menu-item">∙ 메뉴 추가1</div>
-        <div className="mypage-menu-item">∙ 메뉴 추가2</div>
-      </div>
+      <Mypage_sidebar/>
       
       <div className="mypage-profile-container">
         <div className="mypage-profile-picture">
