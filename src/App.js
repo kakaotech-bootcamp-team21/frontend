@@ -41,6 +41,8 @@ import Chatting from "./pages/ai/Chatting";
 import PassList from "./pages/ai/PassList";
 import RequestStatusPage from "./pages/status/RequestStatusPage";
 
+import WriteReviewPage from "./pages/expert/WriteReviewPage";
+
 
 const MainTitleText = styled.p`
     font-size: 24px;
@@ -129,6 +131,8 @@ function App(props) {
 
                 {/*첨삭 요청 현황*/}
                 <Route path="/request-status" element={<RequestStatusPage />} />
+                {/*첨삭 후기 작성*/}
+                <Route path="/write-review" element={<WriteReviewPage />} />
 
           </Routes>
      </div>
