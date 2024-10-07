@@ -16,7 +16,7 @@ function Mypage_sidebar(){
         <div className="mypage-sidebar">
             <div className="mypage-menu-item" onClick={() => navigate('/mypage')}>∙ 홈</div>
             <div className="mypage-menu-item" onClick={() => navigate('/edited-list')}>∙ 나의 첨삭 기록</div>
-            <div className="mypage-menu-item">∙ 나의 후기</div>
+            <div className="mypage-menu-item" onClick={() => navigate('/my-reviews')}>∙ 나의 후기</div>
             {/*<div className="mypage-menu-item" onClick={toggleSubmenu}>∙ 나의 자기소개서</div>*/}
             {/*{showSubmenu && (*/}
             {/*  <>*/}

@@ -33,12 +33,10 @@ import EditedList from "./pages/ai/EditedList";
 import InfoPage from './pages/ai/InfoPage';
 import SubmitPage from './pages/ai/SubmitPage';
 import VideoChat from "./pages/ai/VideoChat";
-import AILayout from "./pages/ai/AILayout";
 import Chatroom from "./pages/ai/Chatroom";
 import Chatting from "./pages/ai/Chatting";
 import PassList from "./pages/ai/PassList";
 import RequestStatusPage from "./pages/status/RequestStatusPage";
-import Layout from "./components/layout/Layout";
 
 import WriteReviewPage from "./pages/expert/WriteReviewPage";
 import EditingProgressStatusPage from "./pages/status/EditingProgressStatusPage";

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './VideoChat.css';
 import { useNavigate } from 'react-router-dom';
 import AIHeaderNavbar from "./AIHeaderNavbar";
+import ReviewPopUp from "../../components/Alerts/ReviewPopUp";
 
 const VideoChat = () => {
     const [isMuted, setIsMuted] = useState(true);
@@ -16,6 +17,15 @@ const VideoChat = () => {
     const dataArrayRef = useRef(null);
     const chatInputRef = useRef(null);
     const navigate = useNavigate();
+
+    //  팝업창 상태함수
+    const [showReviewPopUp, setShowReviewPopUp] = useState(false);
+    const [pendingNavigation, setPendingNavigation] = useState(null);
+
+    const handleClosePopup = () => {
+        setShowReviewPopUp(false); // 팝업을 닫고 다시 나타나지 않도록 설정
+    };
+
 
     useEffect(() => {
         return () => {
@@ -117,6 +127,25 @@ const VideoChat = () => {
             setChatMessages([...chatMessages, `사용자: ${message}`]);
             chatInputRef.current.value = '';
         }
+    };
+
+    const handleNavigation = (path) => {
+        setPendingNavigation(path);
+        setShowReviewPopUp(true);
+    };
+
+    const handleSubmitReview = () => {
+        // 후기 작성 로직
+        setShowReviewPopUp(false);
+        if (pendingNavigation) {
+            navigate(pendingNavigation);
+        }
+    };
+
+    const handleCancelReview = () => {
+        // 취소 로직
+        setShowReviewPopUp(false);
+        // 이동을 취소하고 현재 페이지에 머무릅니다.
     };
 
     return (

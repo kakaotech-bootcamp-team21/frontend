@@ -1,0 +1,94 @@
+.write-review-container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+.write-review-container h1 {
+    margin-top: 50px;
+    text-align: center;
+    color: #333;
+}
+
+.write-review-description {
+    color: #303030;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.write-review-connection-type {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.write-review-connection-type p {
+    margin-bottom: 10px;
+}
+
+.write-review-connection-type button {
+    background-color: #87CEEB; /* 하늘색 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.write-review-connection-type button:hover {
+    background-color: #5b8cb7; /* 조금 더 진한 파란색 */
+    color: white;
+}
+
+.write-review-form {
+    margin-top: 20px;
+}
+
+.write-review-form-group {
+    margin-bottom: 20px;
+}
+
+.write-review-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.write-review-input,
+.write-review-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.write-review-textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.write-review-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.write-review-submit-button,
+.write-review-cancel-button {
+    background-color: #87CEEB; /* 하늘색 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.write-review-submit-button:hover,
+.write-review-cancel-button:hover {
+    background-color: #5b8cb7; /* 조금 더 진한 파란색 */
+    color: white;
+}
