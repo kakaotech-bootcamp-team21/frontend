@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './VideoChat.css';
 import { useNavigate } from 'react-router-dom';
 import AIHeaderNavbar from "./AIHeaderNavbar";
+import ReviewPopUp from "../../components/Alerts/ReviewPopUp";
 
 const VideoChat = () => {
     const [isMuted, setIsMuted] = useState(true);
@@ -16,6 +17,15 @@ const VideoChat = () => {
     const dataArrayRef = useRef(null);
     const chatInputRef = useRef(null);
     const navigate = useNavigate();
+
+    //  팝업창 상태함수
+    const [showReviewPopUp, setShowReviewPopUp] = useState(false);
+    const [pendingNavigation, setPendingNavigation] = useState(null);
+
+    const handleClosePopup = () => {
+        setShowReviewPopUp(false); // 팝업을 닫고 다시 나타나지 않도록 설정
+    };
+
 
     useEffect(() => {
         return () => {
@@ -119,59 +129,84 @@ const VideoChat = () => {
         }
     };
 
+    const handleNavigation = (path) => {
+        setPendingNavigation(path);
+        setShowReviewPopUp(true);
+    };
+
+    const handleSubmitReview = () => {
+        // 후기 작성 로직
+        setShowReviewPopUp(false);
+        if (pendingNavigation) {
+            navigate(pendingNavigation);
+        }
+    };
+
+    const handleCancelReview = () => {
+        // 취소 로직
+        setShowReviewPopUp(false);
+        // 이동을 취소하고 현재 페이지에 머무릅니다.
+    };
+
     return (
         <div>
-        <div className="video-chat-container">
-            <div className="video-area">
-                <video ref={videoRef} autoPlay playsInline muted={isMuted} className={isVideoOff ? 'video-off' : ''}></video>
-                {isVideoOff && <div className="video-off-overlay"></div>}
-                {!isMuted && (
-                    <div className="volume-meter">
-                        <div
-                            className="volume-bar"
-                            style={{
-                                height: `${volumeLevel}%`,
-                                backgroundColor: `rgba(255, ${165 - volumeLevel}, 0, 1)`
+            <AIHeaderNavbar />
+            <div className="video-chat-container">
+                <div className="video-area">
+                    <video ref={videoRef} autoPlay playsInline muted={isMuted} className={isVideoOff ? 'video-off' : ''}></video>
+                    {isVideoOff && <div className="video-off-overlay"></div>}
+                    {!isMuted && (
+                        <div className="volume-meter">
+                            <div
+                                className="volume-bar"
+                                style={{
+                                    height: `${volumeLevel}%`,
+                                    backgroundColor: `rgba(255, ${165 - volumeLevel}, 0, 1)`
+                                }}
+                            ></div>
+                        </div>
+                    )}
+                </div>
+                <div className="controls">
+                    <button onClick={toggleMute} className="control-button">
+                        {isMuted ? '마이크 켜기' : '마이크 끄기'}
+                    </button>
+                    <button onClick={toggleVideo} className="control-button">
+                        {isVideoOff ? '비디오 시작' : '비디오 중지'}
+                    </button>
+                    <button onClick={toggleChat} className="control-button">
+                        {isChatOpen ? '채팅 닫기' : '채팅 열기'}
+                    </button>
+                    {/*<button onClick={() => handleNavigation('/')} className="control-button">*/}
+                    <button onClick={() => setShowReviewPopUp(true)} className="control-button">
+                        홈으로
+                    </button>
+                </div>
+                {isChatOpen && (
+                    <div className="chat-area">
+                        <div className="chat-messages">
+                            {chatMessages.map((msg, index) => (
+                                <div key={index}>{msg}</div>
+                            ))}
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="메시지를 입력하세요..."
+                            className="chat-input"
+                            ref={chatInputRef}
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                    sendMessage();
+                                }
                             }}
-                        ></div>
+                        />
                     </div>
                 )}
             </div>
-            <div className="controls">
-                <button onClick={toggleMute} className="control-button">
-                    {isMuted ? '마이크 켜기' : '마이크 끄기'}
-                </button>
-                <button onClick={toggleVideo} className="control-button">
-                    {isVideoOff ? '비디오 시작' : '비디오 중지'}
-                </button>
-                <button onClick={toggleChat} className="control-button">
-                    {isChatOpen ? '채팅 닫기' : '채팅 열기'}
-                </button>
-                <button onClick={() => navigate('/')} className="control-button">
-                    홈으로
-                </button>
-            </div>
-            {isChatOpen && (
-                <div className="chat-area">
-                    <div className="chat-messages">
-                        {chatMessages.map((msg, index) => (
-                            <div key={index}>{msg}</div>
-                        ))}
-                    </div>
-                    <input
-                        type="text"
-                        placeholder="메시지를 입력하세요..."
-                        className="chat-input"
-                        ref={chatInputRef}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                sendMessage();
-                            }
-                        }}
-                    />
-                </div>
+            {showReviewPopUp && (
+                // <ReviewPopUp onSubmit={handleSubmitReview} onCancel={handleCancelReview} />
+                <ReviewPopUp onCancel={handleClosePopup} />
             )}
-        </div>
         </div>
     );
 };
