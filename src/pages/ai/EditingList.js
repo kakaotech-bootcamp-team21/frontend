@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import AIHeaderNavbar from "./AIHeaderNavbar";
-import { useNavigate, useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css_ai/EditingList.css';
 import '../../css_ai/Mypage.css'
 
 function EditingList() {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [showSubmenu, setShowSubmenu] = useState(true); 
+  const [showSubmenu, setShowSubmenu] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,7 +33,7 @@ function EditingList() {
     // 파일을 열거나 다운로드하는 로직 여기에 추가
     window.open(`../sample_resumes/${file}`, '_blank');
   };
-  
+
   const toggleSubmenu = () => {
     setShowSubmenu(!showSubmenu);
   };
@@ -43,54 +43,58 @@ function EditingList() {
   };
 
   return (
-    <div>
-      <div className="mypage-container">
-        <div className="mypage-sidebar">
-          <div className="mypage-menu-item" onClick={() => navigate('/mypage')}>∙ 홈</div>
-          <div className="mypage-menu-item"onClick={() => setShowSubmenu(!showSubmenu)}>∙ 나의 자기소개서</div>
-          {showSubmenu && (
-            <>
-              <div className={`mypage-menu-subitem ${isActive('/editing-list')}`} onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>
-              <div className={`mypage-menu-subitem ${isActive('/edited-list')}`} onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>
-            </>
-          )}
-          <div className="mypage-menu-item">∙ 메뉴 추가1</div>
-          <div className="mypage-menu-item">∙ 메뉴 추가2</div>
-        </div>
+    <>
+      <AIHeaderNavbar></AIHeaderNavbar>
+      <div>
 
-        <div className="editinglist-content">
-          <h2 className="editinglist-correction-subtitle">첨삭 진행중인 자기소개서</h2>
-          <div className="editinglist-table-container">
-            <table className="editinglist-correction-table">
-              <thead>
-                <tr>
-                  <th>번호</th>
-                  <th>기업</th>
-                  <th>직무</th>
-                  <th>파일</th>
-                  <th>첨삭방식(나중에 링크 연결)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {resumeList.map(resume => (
-                  <tr key={resume.id}>
-                    <td>{resume.id}</td>
-                    <td>{resume.company}</td>
-                    <td>{resume.position}</td>
-                    <td>
-                      <button onClick={() => handleFileClick(resume.file)}>
-                        자기소개서 보기
-                      </button>
-                    </td>
-                    <td>{resume.method}</td>
+        <div className="mypage-container">
+          <div className="mypage-sidebar">
+            <div className="mypage-menu-item" onClick={() => navigate('/mypage')}>∙ 홈</div>
+            <div className="mypage-menu-item" onClick={() => setShowSubmenu(!showSubmenu)}>∙ 나의 자기소개서</div>
+            {showSubmenu && (
+              <>
+                <div className={`mypage-menu-subitem ${isActive('/editing-list')}`} onClick={() => navigate('/editing-list')}>∙ 자기소개서[첨삭 중]</div>
+                <div className={`mypage-menu-subitem ${isActive('/edited-list')}`} onClick={() => navigate('/edited-list')}>∙ 자기소개서[첨삭 완료]</div>
+              </>
+            )}
+            <div className="mypage-menu-item">∙ 메뉴 추가1</div>
+            <div className="mypage-menu-item">∙ 메뉴 추가2</div>
+          </div>
+
+          <div className="editinglist-content">
+            <h2 className="editinglist-correction-subtitle">첨삭 진행중인 자기소개서</h2>
+            <div className="editinglist-table-container">
+              <table className="editinglist-correction-table">
+                <thead>
+                  <tr>
+                    <th>번호</th>
+                    <th>기업</th>
+                    <th>직무</th>
+                    <th>파일</th>
+                    <th>첨삭방식(나중에 링크 연결)</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {resumeList.map(resume => (
+                    <tr key={resume.id}>
+                      <td>{resume.id}</td>
+                      <td>{resume.company}</td>
+                      <td>{resume.position}</td>
+                      <td>
+                        <button onClick={() => handleFileClick(resume.file)}>
+                          자기소개서 보기
+                        </button>
+                      </td>
+                      <td>{resume.method}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

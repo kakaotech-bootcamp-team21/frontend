@@ -42,6 +42,7 @@ import Layout from "./components/layout/Layout";
 
 import WriteReviewPage from "./pages/expert/WriteReviewPage";
 import EditingProgressStatusPage from "./pages/status/EditingProgressStatusPage";
+import EditingProgressStatusUserPage from "./pages/status/EditingProgressStatusUserPage";
 
 
 const MainTitleText = styled.p`
@@ -145,6 +146,8 @@ function App(props) {
                 {/*첨삭 요청 현황*/}
                 <Route path="/request-status" element={<RequestStatusPage />} />
                 <Route path="/editing-progress-status" element={<EditingProgressStatusPage />} />
+                <Route path="/editing-progress-status-user" element={<EditingProgressStatusUserPage />} />
+
                 {/*첨삭 후기 작성*/}
                 <Route path="/write-review" element={<WriteReviewPage />} />
                 

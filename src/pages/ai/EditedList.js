@@ -45,6 +45,7 @@ function EditedList() {
 
   return (
     <div>
+      <AIHeaderNavbar></AIHeaderNavbar>
       <div className="mypage-container">
         {/*<div className="mypage-sidebar">*/}
         {/*  <div className="mypage-menu-item" onClick={() => navigate('/mypage')}>∙ 홈</div>*/}
