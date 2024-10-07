@@ -107,7 +107,6 @@ function App(props) {
     return (
         <div>
             <Routes>
-// <<<<<<< feature/ivy
                 <Route path="/" element={<MainPage2 />} />
 
                 {/*로그인 및 회원가입*/}

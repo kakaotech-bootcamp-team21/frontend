@@ -14,9 +14,6 @@ import AIHeaderNavbar from "../ai/AIHeaderNavbar";
 import axios from 'axios';
 import { Select, Space } from 'antd';
 
-import axios from 'axios';
-import { Select, Space } from 'antd';
-
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
