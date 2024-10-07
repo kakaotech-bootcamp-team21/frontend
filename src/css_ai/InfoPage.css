@@ -31,6 +31,10 @@
     color:red;
     font-weight: bold;
     text-align: left;
+}.infopage-message {
+    color:black;
+    font-weight: bold;
+    text-align: left;
 }
 .infopage-portfolio-field {
     margin: 5fpx;
@@ -134,3 +138,11 @@
 .infopage-form-field label {
     font-weight: bold;
 }
+
+.containerAI {
+    display: flex; /* 수평 정렬 */
+  }
+  .box1, .box2 {
+    width: 50%; /* 각 요소의 너비 설정 */
+  }
+  

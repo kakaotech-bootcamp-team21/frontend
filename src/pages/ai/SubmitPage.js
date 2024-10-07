@@ -59,7 +59,7 @@ function SubmitPage() {
     };
     return (
         <div>
-            
+        <AIHeaderNavbar></AIHeaderNavbar>    
         <div className="submit-page-container">
             <h1 className="submit-page-submit-title">자기소개서 제출</h1>
             <p className="submit-page-description">**작성한 자기소개서 파일을 제출해주세요**</p>
