@@ -1,0 +1,77 @@
+.my-reviews-container {
+    font-family: 'Gowun Batang', serif;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.my-reviews-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.my-reviews-sidebar {
+    width: 300px;
+    border-right: 2px solid #ccc;
+    padding: 20px;
+    font-size: 17px;
+}
+
+.my-reviews-menu-item {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.my-reviews-menu-subitem {
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.my-reviews-content {
+    flex-grow: 1;
+    padding: 0 50px;
+}
+
+.my-reviews-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.my-reviews-card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.my-reviews-card-content {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.my-reviews-button-group {
+    text-align: right;
+}
+
+.my-reviews-button {
+    background-color: #5b8cb7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.my-reviews-button:hover {
+    background-color: #242d42;
+    color: white;
+}
