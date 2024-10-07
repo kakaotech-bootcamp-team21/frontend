@@ -92,11 +92,12 @@ video {
 }
 
 .chat-messages {
-    height: 200px;
+    height: 600px;
     overflow-y: auto;
     padding: 10px;
     border-bottom: 1px solid #B9D7EA;
     background-color: #F7FBFC;
+    margin: 1px 0;
 }
 
 .chat-input {
