@@ -8,6 +8,7 @@ import { Collapse, theme } from 'antd';
 import AIHeaderNavbar from "../ai/AIHeaderNavbar";
 
 import { List, Card, Badge, Button } from 'antd';
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -65,35 +66,13 @@ function RequestStatusPage(props) {
     const navigate = useNavigate();
 
     const { Panel } = Collapse;
-
-    //     const data = [
-    //         {
-    //             title: '삼평동 백엔드 개발자',
-    //         },
-    //         {
-    //             title: '성수동 웹 디자이너',
-    //         },
-    //         {
-    //             title: '시청역 중고 기획자',
-    //         },
-    //         {
-    //             title: '강남역 서버 개발자',
-    //         },
-    //     ];
-    //     const question =  `OOOO를 지원한 이유와 입사 후 회사에서 이루고 싶은 꿈을 기술하십시오. 
-    // `
-    //     const content = `
-    //   A dog is a type of domesticated animal.
-    //   Known for its loyalty and faithfulness,
-    //   it can be found as a welcome guest in many households across the world.
-    // `;
     const data = [
         {
             id: 1,
             expertInfo: "한세계",
             requestDate: "2024-07-01 14:00",
             type: "게시글",
-            status: "첨삭 중",
+            status: "첨삭 하기",
             essayQuestion: "OOOO를 지원한 이유와 입사 후 회사에서 이루고 싶은 꿈을 기술하십시오.",
             essayContent: "여기에 자소서 내용이 들어갑니다...",
         },
@@ -102,7 +81,7 @@ function RequestStatusPage(props) {
             expertInfo: "두세계",
             requestDate: "2024-08-03 10:30",
             type: "영상통화",
-            status: "첨삭 대기중",
+            status: "후기 작성 대기중",
             acceptDate: "2024-08-18 10:30",
             essayQuestion: "OOOO를 지원한 이유와 입사 후 회사에서 이루고 싶은 꿈을 기술하십시오.",
             essayContent: "여기에 자소서 내용이 들어갑니다...",
@@ -119,22 +98,70 @@ function RequestStatusPage(props) {
     return (
         <>
             <AIHeaderNavbar></AIHeaderNavbar>
+            <div style={{ paddingTop: '50px', paddingRight: '30px', display: 'flex', justifyContent: 'flex-end' }}>
+                <Button>내 첨삭 보관함 가기</Button>
+            </div>
+            <div style={{ paddingLeft: '30px' }}>
+                <Heading>요청 사항</Heading>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                    ?건의 요청 사항이 있습니다.
+                </div>
+                <Card style={{ width: '30%', paddingTop: '16px', marginTop: '16px' }}>
+                    <div style={{ display: 'flex' }}>
+                        <img
+                            src="/man.png"
+                            alt="circle image"
+                            style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                        />
+                        <h3>요청자 닉네임</h3>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <p>요청일자: 2024년 0월 0일</p>
+                    </div>
+                    <div>
+                        <text> 취업준비 2트째 입니다. 잘 부탁드립니다. </text>
+                    </div>
+                    <div style={{ display: 'flex', paddingTop: '10px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexGrow: 1 }}>
+                            <Button>자세히 보기</Button>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <Button>수락</Button>
+                            <Button>거절</Button>
+                        </div>
+                    </div>
+                </Card>
+
+            </div >
+            <div style={{ paddingLeft: '30px' }}>
+                <Heading>첨삭 진행 현황</Heading>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                    ?건의 첨삭이 진행중입니다.
+                </div>
+            </div >
             <Wrapper>
-                <Heading>첨삭 요청 현황</Heading>
-                <Button onClick={() => navigate("/editing-progress-status")}>임시버튼-전문가 입장 첨삭 요청 현황</Button>
-                <ContainerRight>
-                    총 {requestCnt}건
-                </ContainerRight>
+
                 <ContainerTmp>
+                    <ContainerRight>
+                        총 {requestCnt}건
+                    </ContainerRight>
                     <List
                         dataSource={data}
                         renderItem={(item, index) => (
                             <List.Item>
                                 <Card
-
                                     title={`전문가: ${item.expertInfo}`}
-                                    extra={<Badge status="processing" text={item.status} />}
-                                    style={{ width: '100%' }}
+                                    extra={
+                                        <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                                            <Badge status="processing" />
+                                            <span style={{ marginLeft: '8px', lineHeight: '1.2' }}>{item.status}</span>
+                                        </div>
+                                    }
+                                    style={{ width: '100%', paddingTop: '16px' }}
+                                    actions={[
+                                        <Button onClick={() => navigate("/video-chat")}>온라인 피드백룸</Button>,
+                                        <Button onClick={() => navigate("/chat-room")}>채팅으로 상담하기</Button>
+                                    ]}
                                 >
                                     <p>요청일시: {item.requestDate}</p>
                                     <p>종류: {item.type}</p>
@@ -150,7 +177,6 @@ function RequestStatusPage(props) {
                                             <p>내용: {item.essayContent}</p>
                                         </Panel>
                                     </Collapse>
-                                    <Button onClick={() => navigate("/video-chat")}>온라인 피드백룸</Button>
 
                                 </Card>
                             </List.Item>
