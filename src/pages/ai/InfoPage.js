@@ -21,6 +21,7 @@ const ButtonContainer = styled.div`
 
 
 function InfoPage() {
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [items, setItems] = useState([{ id: 1, numberOfCharacters: 500, question: '', content: '' }]); // 기본적으로 하나의 항목을 포함함 
 
@@ -47,6 +48,8 @@ function InfoPage() {
   useEffect(() => {
     localStorage.setItem("infopageformData", JSON.stringify(infopageformData));
   }, [infopageformData]);
+
+
 
   const { TextArea } = Input;
   const handleInputChange = (event) => {
