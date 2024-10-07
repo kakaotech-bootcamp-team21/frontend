@@ -36,8 +36,8 @@ function AI_Navbar() {
     const handleMenuMouseOver = (menu) => {
         setActive(menu);
         if (menu === 'AI 기반 자소서 첨삭하기' && menuRef.current) {
-            setShowSubMenu('AI');
-            updateSubmenuStyle(menuRef);
+            // setShowSubMenu('AI');
+            // updateSubmenuStyle(menuRef);
         } else if (menu === '전문가에게 첨삭 요청하기' && expertMenuRef.current) {
             // setShowSubMenu('expert');
             // updateSubmenuStyle(expertMenuRef);
@@ -89,6 +89,7 @@ function AI_Navbar() {
                             menu === '전문가에게 첨삭 요청하기' ? "/request-expert" :
                             menu === '첨삭 요청 현황' ? "/request-status" :
                             menu === '후기 작성' ? "/write-review" :
+                            menu === 'AI 기반 자소서 첨삭하기' ? "/info" :
                              "#"
                             } // 클릭 시 이동할 경로 지정
                         ref={menu === 'AI 기반 자소서 첨삭하기' ? menuRef : (menu === '전문가에게 첨삭 요청하기' ? expertMenuRef : null)}

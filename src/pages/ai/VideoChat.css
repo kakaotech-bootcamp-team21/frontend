@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    padding-top: 20%;
+    /* height: 100vh; */
     background-color: #F7FBFC;
 }
 
@@ -62,7 +63,7 @@ video {
 
 .controls {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 10px;
 }
 

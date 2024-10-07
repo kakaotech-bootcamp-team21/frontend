@@ -121,57 +121,71 @@ const VideoChat = () => {
 
     return (
         <div>
-        <div className="video-chat-container">
-            <div className="video-area">
-                <video ref={videoRef} autoPlay playsInline muted={isMuted} className={isVideoOff ? 'video-off' : ''}></video>
-                {isVideoOff && <div className="video-off-overlay"></div>}
-                {!isMuted && (
-                    <div className="volume-meter">
-                        <div
-                            className="volume-bar"
-                            style={{
-                                height: `${volumeLevel}%`,
-                                backgroundColor: `rgba(255, ${165 - volumeLevel}, 0, 1)`
-                            }}
-                        ></div>
-                    </div>
-                )}
-            </div>
-            <div className="controls">
-                <button onClick={toggleMute} className="control-button">
-                    {isMuted ? '마이크 켜기' : '마이크 끄기'}
-                </button>
-                <button onClick={toggleVideo} className="control-button">
-                    {isVideoOff ? '비디오 시작' : '비디오 중지'}
-                </button>
-                <button onClick={toggleChat} className="control-button">
+            <AIHeaderNavbar></AIHeaderNavbar>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ width: '50%' }}>
+                    <div className="video-chat-container">
+                        <div className="video-area">
+                            <video ref={videoRef} autoPlay playsInline muted={isMuted} className={isVideoOff ? 'video-off' : ''}></video>
+                            {isVideoOff && <div className="video-off-overlay"></div>}
+                            {!isMuted && (
+                                <div className="volume-meter">
+                                    <div
+                                        className="volume-bar"
+                                        style={{
+                                            height: `${volumeLevel}%`,
+                                            backgroundColor: `rgba(255, ${165 - volumeLevel}, 0, 1)`
+                                        }}
+                                    ></div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="controls">
+                            <button onClick={toggleMute} className="control-button">
+                                {isMuted ? '마이크 켜기' : '마이크 끄기'}
+                            </button>
+                            <button onClick={toggleVideo} className="control-button">
+                                {isVideoOff ? '비디오 시작' : '비디오 중지'}
+                            </button>
+                            {/* <button onClick={toggleChat} className="control-button">
                     {isChatOpen ? '채팅 닫기' : '채팅 열기'}
-                </button>
-                <button onClick={() => navigate('/')} className="control-button">
-                    홈으로
-                </button>
-            </div>
-            {isChatOpen && (
-                <div className="chat-area">
-                    <div className="chat-messages">
-                        {chatMessages.map((msg, index) => (
-                            <div key={index}>{msg}</div>
-                        ))}
+                </button> */}
+                            <button onClick={() => navigate('/')} className="control-button">
+                                홈으로
+                            </button>
+                        </div>
+                        {isChatOpen && (
+                            <div className="chat-area">
+                                <div className="chat-messages">
+                                    {chatMessages.map((msg, index) => (
+                                        <div key={index}>{msg}</div>
+                                    ))}
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="메시지를 입력하세요..."
+                                    className="chat-input"
+                                    ref={chatInputRef}
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter') {
+                                            sendMessage();
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )}
+
                     </div>
-                    <input
-                        type="text"
-                        placeholder="메시지를 입력하세요..."
-                        className="chat-input"
-                        ref={chatInputRef}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                                sendMessage();
-                            }
-                        }}
-                    />
+                    <div>
+                        <p>new 자소서</p>
+                    </div>
                 </div>
-            )}
-        </div>
+                <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffffff' }}>
+                    <span style={{ backgroundColor: 'gray', display: 'inline-block', alignItems: 'center', justifyContent: 'center', width:'50%', minHeight:'700px' }}>
+                        요청한 자소서
+                    </span>
+                </div>
+            </div>
         </div>
     );
 };
